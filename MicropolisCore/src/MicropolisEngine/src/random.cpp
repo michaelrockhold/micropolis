@@ -159,7 +159,7 @@ void Micropolis::randomlySeedRandom()
 #else
     struct timeval time;
     gettimeofday(&time, NULL);
-    seedRandom(time.tv_usec ^ time.tv_sec);
+    seedRandom((UQuad)(time.tv_usec ^ time.tv_sec));
 #endif
 }
 
@@ -168,7 +168,7 @@ void Micropolis::randomlySeedRandom()
  * Set seed of the random number generator.
  * @param seed New seed.
  */
-void Micropolis::seedRandom(int seed)
+void Micropolis::seedRandom(UQuad seed)
 {
     nextRandom = seed;
 }

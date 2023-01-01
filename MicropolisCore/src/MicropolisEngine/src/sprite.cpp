@@ -100,10 +100,10 @@ SimSprite *Micropolis::newSprite(const char *name, int type, int x, int y)
         sprite = freeSprites;
         freeSprites = sprite->next;
     } else {
-        sprite = (SimSprite *)newPtr(sizeof (SimSprite));
+        sprite = (SimSprite *)malloc(sizeof (SimSprite));
     }
 
-    sprite->name = (char *)newPtr((int)strlen(name) + 1);
+    sprite->name = (char *)malloc((int)strlen(name) + 1);
     strcpy(sprite->name, name);
     sprite->type = type;
 
@@ -309,7 +309,7 @@ void Micropolis::destroySprite(SimSprite *sprite)
     }
 
     if (sprite->name != NULL) {
-        freePtr(sprite->name);
+        free(sprite->name);
         sprite->name = NULL;
     }
 
@@ -1235,7 +1235,7 @@ void Micropolis::doTornadoSprite(SimSprite *sprite)
 {
     static const short CDx[9] = {  2,  3,  2,  0, -2, -3 };
     static const short CDy[9] = { -2,  0,  2,  3,  2,  0 };
-    register short z;
+    short z;
 
     z = sprite->frame;
 

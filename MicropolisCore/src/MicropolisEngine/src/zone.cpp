@@ -351,26 +351,23 @@ void Micropolis::incRateOfGrowth(const Position &pos, int amount)
  */
 bool Micropolis::zonePlop(const Position &pos, int base)
 {
-    short z, x;
     static const short Zx[9] = {-1, 0, 1,-1, 0, 1,-1, 0, 1};
     static const short Zy[9] = {-1,-1,-1, 0, 0, 0, 1, 1, 1};
 
-    for (z = 0; z < 9; z++) {             /* check for fire  */
+    for (short z = 0; z < 9; z++) {             /* check for fire  */
         int xx = pos.posX + Zx[z];
         int yy = pos.posY + Zy[z];
 
         if (testBounds(xx, yy)) {
-            x = map[xx][yy] & LOMASK;
+            short x = map[xx][yy] & LOMASK;
 
             if ((x >= FLOOD) && (x < ROADBASE)) {
                 return false;
             }
-
         }
-
     }
 
-    for (z = 0; z < 9; z++) {
+    for (short z = 0; z < 9; z++) {
         int xx = pos.posX + Zx[z];
         int yy = pos.posY + Zy[z];
 
@@ -529,7 +526,7 @@ short Micropolis::evalLot(int x, int y)
 /**
  * Handle residential zone.
  * @param pos Center tile of the residential zone.
- * @param zonePwrFlg Does the zone have power?
+ * @param zonePower Does the zone have power?
  */
 void Micropolis::doResidential(const Position &pos, bool zonePower)
 {
@@ -745,7 +742,7 @@ short Micropolis::evalRes(const Position &pos, int traf)
 /**
  * Handle commercial zone.
  * @param pos        Position of the commercial zone.
- * @param zonePwrFlg Does the zone have power?
+ * @param zonePower Does the zone have power?
  * @todo Make zonePwrFlg a boolean.
  */
 void Micropolis::doCommercial(const Position &pos, bool zonePower)
@@ -897,7 +894,7 @@ short Micropolis::evalCom(const Position &pos, int traf)
 /**
  * Handle industrial zone.
  * @param pos Position of the industrial zone.
- * @param zonePwrFlg Does the zone have power?
+ * @param zonePower Does the zone have power?
  * @todo Make zonePwrFlg a boolean.
  */
 void Micropolis::doIndustrial(const Position &pos, bool zonePower)
@@ -947,7 +944,6 @@ void Micropolis::doIndustrial(const Position &pos, bool zonePower)
 /**
  * Handle immigration of industrial zone.
  * @param pos   Position of the center tile of the industrial tile.
- * @param pos   Population value of the industrial zone.
  * @param value Random land value (it seems).
  */
 void Micropolis::doIndIn(const Position &pos, int pop, int value)
@@ -961,7 +957,6 @@ void Micropolis::doIndIn(const Position &pos, int pop, int value)
 /**
  * Handle industrial zone emigration.
  * @param pos   Position of the center tile of the industrial tile.
- * @param pos   Population value of the industrial zone.
  * @param value Random land value (it seems).
  */
 void Micropolis::doIndOut(const Position &pos, int pop, int value)

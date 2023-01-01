@@ -198,7 +198,6 @@ inline MapValue ToolEffects::getMapValue(int x, int y) const
 
 /**
  * Set a new map value.
- * @param pos    Position to set.
  * @param x      Horizontal coordinate of position to set.
  * @param y      Vertical coordinate of position to set.
  * @param mapVal Value to set.

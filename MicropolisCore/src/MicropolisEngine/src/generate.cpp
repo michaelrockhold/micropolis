@@ -494,7 +494,6 @@ void Micropolis::doRivers(const Position &terrainPos)
 
 /**
  * Make a big river.
- * @param pos        Start position of making a river.
  * @param riverDir   Global direction of the river.
  * @param terrainDir Local direction of the terrain.
  * @return Last used local terrain direction.
@@ -534,7 +533,6 @@ Direction2 Micropolis::doBRiver(const Position &riverPos,
 
 /**
  * Make a small river.
- * @param pos        Start position of making a river.
  * @param riverDir   Global direction of the river.
  * @param terrainDir Local direction of the terrain.
  * @return Last used local terrain direction.

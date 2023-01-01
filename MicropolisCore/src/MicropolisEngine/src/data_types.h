@@ -65,12 +65,12 @@
 #ifndef H_DATA_TYPES
 #define H_DATA_TYPES
 
-typedef unsigned char Byte;
+typedef uint8_t Byte;
 
-typedef Byte *Ptr;
+typedef Byte *BytePtr;
 
-typedef long Quad;
+typedef int32_t Quad;
 
-typedef unsigned long UQuad;
+typedef int32_t UQuad;
 
 #endif

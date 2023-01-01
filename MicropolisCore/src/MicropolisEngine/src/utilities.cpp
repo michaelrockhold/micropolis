@@ -76,13 +76,13 @@
              drawActualBox updateFunds updateCurrentCost */
 void Micropolis::makeDollarDecimalStr(char *numStr, char *dollarStr)
 {
-    register short leftMostSet;
+    short leftMostSet;
     short numOfDigits;
     short numOfChars;
-    register short numOfCommas;
-    register short dollarIndex = 0;
-    register short numIndex = 0;
-    register short x;
+    short numOfCommas;
+    short dollarIndex = 0;
+    short numIndex = 0;
+    short x;
 
     numOfDigits = (short)strlen(numStr);
 
@@ -243,9 +243,8 @@ void Micropolis::setCityName(const std::string &name)
 {
     std::string cleanName;
 
-    int i;
-    int n = name.length();
-    for (i = 0; i < n; i++) {
+    size_t n = name.length();
+    for (int i = 0; i < n; i++) {
         char ch = name[i];
         if (!isalnum(ch)) {
             ch = '_';

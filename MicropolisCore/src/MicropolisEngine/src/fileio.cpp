@@ -67,7 +67,7 @@
 
 #include "stdafx.h"
 #include "micropolis.h"
-
+#include <string>
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -110,16 +110,14 @@ static void swap_shorts(short *buf, int len)
  * @param buf Array with longs.
  * @param len Number of long values in the array.
  */
-static void half_swap_longs(long *buf, int len)
+static void half_swap_longs(Quad *buf, int len)
 {
     int i;
 
     /* Flip bytes in each long! */
     for (i = 0; i < len; i++) {
-        long l = *buf;
-        *buf =
-            ((l & 0x0000ffff) << 16) |
-            ((l & 0xffff0000) >> 16);
+        Quad l = *buf;
+        *buf = ((l & 0x0000ffff) << 16) | ((l & 0xffff0000) >> 16);
         buf++;
     }
 }
@@ -208,8 +206,9 @@ bool Micropolis::loadFileDir(const char *filename, const char *dir)
 
     // If needed, construct a path to the file.
     if (dir != NULL) {
-        path = (char *)malloc(strlen(dir) + 1 + strlen(filename) + 1);
-        sprintf(path, "%s/%s", dir, filename);
+        size_t pathSize = strlen(dir) + 1 + strlen(filename) + 1;
+        path = (char *)malloc(pathSize);
+        snprintf(path, pathSize, "%s/%s", dir, filename);
         filename = path;
     }
 
@@ -227,7 +226,7 @@ bool Micropolis::loadFileDir(const char *filename, const char *dir)
     }
 
     fseek(f, 0L, SEEK_END);
-    size = ftell(f);
+    size = (Quad)ftell(f);
     fseek(f, 0L, SEEK_SET);
 
     bool result =
@@ -253,7 +252,7 @@ bool Micropolis::loadFileDir(const char *filename, const char *dir)
  */
 bool Micropolis::loadFile(const char *filename)
 {
-    long n;
+    Quad n;
 
     if (!loadFileDir(filename, NULL)) {
         return false;
@@ -339,7 +338,7 @@ bool Micropolis::loadFile(const char *filename)
  */
 bool Micropolis::saveFile(const char *filename)
 {
-    long n;
+    Quad n;
     FILE *f;
 
     if ((f = fopen(filename, "wb")) == NULL) {
@@ -516,11 +515,11 @@ bool Micropolis::loadCity(const char *filename)
 
         cityFileName = filename;
 
-        unsigned int lastSlash = cityFileName.find_last_of('/');
-        unsigned int pos = (lastSlash == std::string::npos) ? 0 : lastSlash + 1;
+        std::string::size_type lastSlash = cityFileName.find_last_of('/');
+        std::string::size_type pos = (lastSlash == std::string::npos) ? 0 : lastSlash + 1;
 
-        unsigned int lastDot = cityFileName.find_last_of('.');
-        unsigned int last =
+        std::string::size_type lastDot = cityFileName.find_last_of('.');
+        std::string::size_type last =
             (lastDot == std::string::npos) ? cityFileName.length() : lastDot;
 
         std::string newCityName = cityFileName.substr(pos, last - pos);
@@ -618,17 +617,13 @@ void Micropolis::saveCityAs(const char *filename)
 
     if (saveFile(cityFileName.c_str())) {
 
-        unsigned int lastDot = cityFileName.find_last_of('.');
-        unsigned int lastSlash = cityFileName.find_last_of('/');
+        std::string::size_type lastDot = cityFileName.find_last_of('.');
+        std::string::size_type lastSlash = cityFileName.find_last_of('/');
 
-        unsigned int pos =
-            (lastSlash == std::string::npos) ? 0 : lastSlash + 1;
-        unsigned int last =
-            (lastDot == std::string::npos) ? cityFileName.length() : lastDot;
-        unsigned int len =
-            last - pos;
-        std::string newCityName =
-            cityFileName.substr(pos, len);
+        std::string::size_type pos = (lastSlash == std::string::npos) ? 0 : lastSlash + 1;
+        std::string::size_type last = (lastDot == std::string::npos) ? cityFileName.length() : lastDot;
+        std::string::size_type len = last - pos;
+        std::string newCityName = cityFileName.substr(pos, len);
 
         setCityName(newCityName);
 

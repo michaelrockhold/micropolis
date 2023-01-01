@@ -182,7 +182,7 @@ bool Position::move(Direction2 dir)
             }
             break;
 
-        case DIR2_SOUTH_WEST: this->posX--; this->posY++; break;
+        case DIR2_SOUTH_WEST: //this->posX--; this->posY++; break;
             if (this->posX > 0 && this->posY < WORLD_H - 1) {
                 this->posX--;
                 this->posY++;

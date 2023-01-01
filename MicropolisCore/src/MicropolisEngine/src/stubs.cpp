@@ -87,7 +87,6 @@ FrontendMessage::~FrontendMessage()
 /**
  * @fn void FrontendMessage::sendMessage(Micropolis *sim)
  * @brief Send the message to the front-end.
- * @param sim Simulator instance to use.
  */
 
 
@@ -175,27 +174,6 @@ Quad Micropolis::tickCount()
     gettimeofday(&time, 0);
     return (Quad)((time.tv_sec * 60) + (time.tv_usec * 60) / 1000000);
 #endif
-}
-
-
-/**
- * Claim \a size bytes of memory.
- * @param size Number of bytes to claim.
- * @return Pointer to the claimed memory.
- */
-Ptr Micropolis::newPtr(int size)
-{
-    return (Ptr)malloc(size);
-}
-
-
-/**
- * Release claimed memory.
- * @param data Pointer to previously claimed memory.
- */
-void Micropolis::freePtr(void *data)
-{
-    free(data);
 }
 
 
@@ -728,6 +706,3 @@ void *Micropolis::getPoliceCoverageMapBuffer()
 {
     return (void *)policeStationEffectMap.getBase();
 }
-
-
-////////////////////////////////////////////////////////////////////////

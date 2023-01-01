@@ -337,18 +337,16 @@ void Micropolis::makeFlood()
 {
     static const short Dx[4] = {  0,  1,  0,  -1 };
     static const short Dy[4] = { -1,  0,  1,   0 };
-    short xx, yy, c;
-    short z, t, x, y;
 
-    for (z = 0; z < 300; z++) {
-        x = getRandom(WORLD_W - 1);
-        y = getRandom(WORLD_H - 1);
-        c = map[x][y] & LOMASK;
+    for (short z = 0; z < 300; z++) {
+        short x = getRandom(WORLD_W - 1);
+        short y = getRandom(WORLD_H - 1);
+        short c = map[x][y] & LOMASK;
 
         if (c > CHANNEL && c <= WATER_HIGH) { /* if riveredge  */
-            for (t = 0; t < 4; t++) {
-                xx = x + Dx[t];
-                yy = y + Dy[t];
+            for (short t = 0; t < 4; t++) {
+                short xx = x + Dx[t];
+                short yy = y + Dy[t];
                 if (testBounds(xx, yy)) {
                     c = map[xx][yy];
 

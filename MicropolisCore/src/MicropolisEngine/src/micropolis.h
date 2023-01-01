@@ -912,7 +912,7 @@ static inline T absoluteValue(const T val)
  * Give a fatal error and exit the program.
  * @param line  Source line number of the fatal error.
  * @param fname Filename of the source file.
- * @return Does not return to the caller.
+ * @noreturn Does not return to the caller.
  * @todo Generalize error handling/exiting of the simulator.
  */
 static inline void not_reached(int line, const char *fname)
@@ -1023,25 +1023,9 @@ class Micropolis {
 
 public:
 
-
-    ////////////////////////////////////////////////////////////////////////
-
-
     Micropolis();
 
     ~Micropolis();
-
-private:
-
-    void init();
-
-    void destroy();
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // allocate.cpp
-
-public:
 
 
     /**
@@ -1485,27 +1469,11 @@ private:
      */
     unsigned short *mapBase;
 
-
-    void initMapArrays();
-
-    void destroyMapArrays();
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // animate.cpp
-
 public:
-
 
     void animateTiles();
 
     static int getNextAnimatedTile(int index);
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // budget.cpp
-
-public:
 
 
     /**
@@ -1567,12 +1535,7 @@ public:
 
     void setCityTax(short tax);
 
-
-    ////////////////////////////////////////////////////////////////////////
-    // connect.cpp
-
 private:
-
 
     ToolResult connectTile(short x, short y,
                            ConnectTileCommand cmd, ToolEffects *effects);
@@ -1590,11 +1553,7 @@ private:
     void fixSingle(int x, int y, ToolEffects *effects);
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // disasters.cpp
-
 public:
-
 
     /**
      * Size of flooding disaster.
@@ -1880,11 +1839,7 @@ private:
 
     //@}
 
-    ////////////////////////////////////////////////////////////////////////
-    // graph.cpp
-
 public:
-
 
     /**
      * @todo Nobody uses this variable. Can it be removed?
@@ -2021,8 +1976,6 @@ private:
 
 
     void environmentInit();
-
-    void simInit();
 
     void simHeat();
 
@@ -2571,10 +2524,6 @@ public:
     void setFunds(int dollars);
 
     Quad tickCount();
-
-    Ptr newPtr(int size);
-
-    void freePtr(void *data);
 
     void doPlayNewCity();
 

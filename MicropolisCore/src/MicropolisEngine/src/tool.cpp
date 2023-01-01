@@ -106,7 +106,6 @@ void ToolEffects::clear()
 
 /**
  * Perform the effects stored in the object to the simulator world.
- * @param sim Simulator object to modify.
  * @post Effects have been copied to the simulator world, and the #ToolEffects
  *       object is ready for the next use.
  */
@@ -927,9 +926,9 @@ void Micropolis::putRubble(int x, int y, int size, ToolEffects *effects)
 
 /**
  * Report to the front-end that a tool was used.
- * @param name: Name of the tool.
- * @param x     X coordinate of where the tool was applied.
- * @param y     Y coordinate of where the tool was applied.
+ * @param name  Name of the tool.
+ * @param x         X coordinate of where the tool was applied.
+ * @param y         Y coordinate of where the tool was applied.
  */
 void Micropolis::didTool(const char *name, short x, short y)
 {
@@ -1590,6 +1589,3 @@ void Micropolis::toolDrag(EditingTool tool,
     simPass = 0;
     invalidateMaps();
 }
-
-
-////////////////////////////////////////////////////////////////////////

@@ -85,7 +85,8 @@
 Resource *Micropolis::getResource(const char *name, Quad id)
 {
     Resource *r = resources;
-    char fname[4096];
+    const size_t fname_size = 4096;
+    char fname[fname_size];
 
     while (r != NULL) {
         if (r->id == id && strncmp(r->name, name, 4) == 0) {
@@ -97,7 +98,7 @@ Resource *Micropolis::getResource(const char *name, Quad id)
     // Resource not found, load it from disk
 
     // Allocate memory for the resource administration itself
-    r = (Resource *)newPtr(sizeof(Resource));
+    r = (Resource *)malloc(sizeof(Resource));
     assert(r != NULL);
 
     /// @bug Not safe!
@@ -110,12 +111,8 @@ Resource *Micropolis::getResource(const char *name, Quad id)
     // Load the file into memory
 
     /// @bug Not safe (overflow, non-printable chars)
-    sprintf(
-        fname,
-        "%s/%c%c%c%c.%d",
-        resourceDir.c_str(),
-        r->name[0], r->name[1], r->name[2], r->name[3],
-        (int)r->id);
+    snprintf(fname, fname_size, "%s/%c%c%c%c.%d",
+        resourceDir.c_str(), r->name[0], r->name[1], r->name[2], r->name[3], (int)r->id);
 
     struct stat st;
     FILE *fp = NULL;
@@ -128,8 +125,8 @@ Resource *Micropolis::getResource(const char *name, Quad id)
         goto loadFailed;
     }
 
-    r->size = st.st_size;
-    r->buf = (char *)newPtr(r->size);
+    r->size = (Quad)st.st_size; // TODO: revisit use of Quad & off_t here
+    r->buf = (char *)malloc(r->size);
     if (r->buf == NULL) { // No memory allocated
         goto loadFailed;
     }
@@ -195,7 +192,7 @@ void Micropolis::getIndString(char *str, int id, short num)
         // String table is not loaded yet -> get it
 
         // Create new string table
-        st = (StringTable *)newPtr(sizeof(StringTable));
+        st = (StringTable *)malloc(sizeof(StringTable));
         assert(st != NULL);
 
         st->id = id;
@@ -215,7 +212,7 @@ void Micropolis::getIndString(char *str, int id, short num)
         // XXX What about termination of last line?
 
         st->lines = lines;
-        st->strings = (char **)newPtr(size * sizeof(char *));
+        st->strings = (char **)malloc(size * sizeof(char *));
         assert(st->strings != NULL);
 
         // Store starting points of texts in st->strings array
@@ -233,7 +230,3 @@ void Micropolis::getIndString(char *str, int id, short num)
 
     strcpy(str, st->strings[num - 1]);
 }
-
-
-////////////////////////////////////////////////////////////////////////
-

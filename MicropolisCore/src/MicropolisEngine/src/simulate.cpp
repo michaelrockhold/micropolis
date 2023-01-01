@@ -863,10 +863,10 @@ void Micropolis::collectTax()
 
         cityTaxAverage = 0;
 
-        policeFund = (long)policeStationPop * 100;
-        fireFund = (long)fireStationPop * 100;
-        roadFund = (long)((roadTotal + (railTotal * 2)) * RLevels[gameLevel]);
-        taxFund = (long)((((Quad)totalPop * landValueAverage) / 120) * cityTax * FLevels[gameLevel]);
+        policeFund = policeStationPop * 100;
+        fireFund = fireStationPop * 100;
+        roadFund = ((roadTotal + (railTotal * 2)) * RLevels[gameLevel]);
+        taxFund = ((((Quad)totalPop * landValueAverage) / 120) * cityTax * FLevels[gameLevel]);
 
         if (totalPop > 0) {
             /* There are people to tax. */
