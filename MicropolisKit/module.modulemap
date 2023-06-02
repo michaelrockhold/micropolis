@@ -1,0 +1,4 @@
+module MicropolisKit [framework] {
+  header *
+  export *
+}

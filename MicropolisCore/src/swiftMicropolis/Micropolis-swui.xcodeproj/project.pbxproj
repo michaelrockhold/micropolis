@@ -1,0 +1,549 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2ED86C462962B13900DA21C4 /* Micropolis_swuiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C452962B13900DA21C4 /* Micropolis_swuiApp.swift */; };
+		2ED86C482962B13900DA21C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C472962B13900DA21C4 /* ContentView.swift */; };
+		2ED86C4A2962B13D00DA21C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C492962B13D00DA21C4 /* Assets.xcassets */; };
+		2ED86C4D2962B13D00DA21C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C4C2962B13D00DA21C4 /* Preview Assets.xcassets */; };
+		2ED86C832962B2A900DA21C4 /* GTKEngine.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C552962B2A900DA21C4 /* GTKEngine.py */; };
+		2ED86C842962B2A900DA21C4 /* maincell.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C562962B2A900DA21C4 /* maincell.py */; };
+		2ED86C852962B2A900DA21C4 /* main.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C572962B2A900DA21C4 /* main.py */; };
+		2ED86C862962B2A900DA21C4 /* __init__.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C592962B2A900DA21C4 /* __init__.py */; };
+		2ED86C872962B2A900DA21C4 /* pie.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C5A2962B2A900DA21C4 /* pie.py */; };
+		2ED86C882962B2A900DA21C4 /* piemenu.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C5B2962B2A900DA21C4 /* piemenu.py */; };
+		2ED86C892962B2A900DA21C4 /* DisastersPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C5D2962B2A900DA21C4 /* DisastersPanel.swift */; };
+		2ED86C8A2962B2A900DA21C4 /* HistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C5E2962B2A900DA21C4 /* HistoryPanel.swift */; };
+		2ED86C8B2962B2A900DA21C4 /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C5F2962B2A900DA21C4 /* GaugeView.swift */; };
+		2ED86C8C2962B2A900DA21C4 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C602962B2A900DA21C4 /* Tool.swift */; };
+		2ED86C8D2962B2A900DA21C4 /* BudgetPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C612962B2A900DA21C4 /* BudgetPanel.swift */; };
+		2ED86C8E2962B2A900DA21C4 /* GenericEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C622962B2A900DA21C4 /* GenericEngine.swift */; };
+		2ED86C8F2962B2A900DA21C4 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C632962B2A900DA21C4 /* NoticeView.swift */; };
+		2ED86C902962B2A900DA21C4 /* PieMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C642962B2A900DA21C4 /* PieMenus.swift */; };
+		2ED86C912962B2A900DA21C4 /* NoticePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C652962B2A900DA21C4 /* NoticePanel.swift */; };
+		2ED86C922962B2A900DA21C4 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C662962B2A900DA21C4 /* ControlPanel.swift */; };
+		2ED86C932962B2A900DA21C4 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C672962B2A900DA21C4 /* Zone.swift */; };
+		2ED86C942962B2A900DA21C4 /* MapPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C682962B2A900DA21C4 /* MapPanel.swift */; };
+		2ED86C952962B2A900DA21C4 /* EvaluationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C692962B2A900DA21C4 /* EvaluationPanel.swift */; };
+		2ED86C962962B2AA00DA21C4 /* Notebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C6A2962B2A900DA21C4 /* Notebook.swift */; };
+		2ED86C972962B2AA00DA21C4 /* StartPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C6B2962B2A900DA21C4 /* StartPanel.swift */; };
+		2ED86C982962B2AA00DA21C4 /* MicropolisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C6C2962B2A900DA21C4 /* MicropolisView.swift */; };
+		2ED86C992962B2AA00DA21C4 /* XMLUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C6D2962B2A900DA21C4 /* XMLUtilities.swift */; };
+		2ED86C9A2962B2AA00DA21C4 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C6E2962B2A900DA21C4 /* HistoryView.swift */; };
+		2ED86C9B2962B2AA00DA21C4 /* EvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C6F2962B2A900DA21C4 /* EvaluationView.swift */; };
+		2ED86C9C2962B2AA00DA21C4 /* MessagesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C702962B2A900DA21C4 /* MessagesPanel.swift */; };
+		2ED86C9D2962B2AA00DA21C4 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C712962B2A900DA21C4 /* Robot.swift */; };
+		2ED86C9E2962B2AA00DA21C4 /* DrawingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C722962B2A900DA21C4 /* DrawingArea.swift */; };
+		2ED86C9F2962B2AA00DA21C4 /* MicropolisWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED86C732962B2A900DA21C4 /* MicropolisWindow.swift */; };
+		2ED86CA02962B2AA00DA21C4 /* cellconfigurations.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C752962B2A900DA21C4 /* cellconfigurations.py */; };
+		2ED86CA12962B2AA00DA21C4 /* cellmodel.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C762962B2A900DA21C4 /* cellmodel.py */; };
+		2ED86CA22962B2AA00DA21C4 /* cellwindow.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C772962B2A900DA21C4 /* cellwindow.py */; };
+		2ED86CA32962B2AA00DA21C4 /* __init__.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C782962B2A900DA21C4 /* __init__.py */; };
+		2ED86CA42962B2AA00DA21C4 /* celltool.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C792962B2A900DA21C4 /* celltool.py */; };
+		2ED86CA52962B2AA00DA21C4 /* celldrawingarea.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C7A2962B2A900DA21C4 /* celldrawingarea.py */; };
+		2ED86CA62962B2AA00DA21C4 /* cellpiemenus.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C7B2962B2A900DA21C4 /* cellpiemenus.py */; };
+		2ED86CA72962B2AA00DA21C4 /* cellrulecompiler.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C7C2962B2A900DA21C4 /* cellrulecompiler.py */; };
+		2ED86CA82962B2AA00DA21C4 /* cellengine.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C7D2962B2A900DA21C4 /* cellengine.py */; };
+		2ED86CA92962B2AA00DA21C4 /* __init__.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C7F2962B2A900DA21C4 /* __init__.py */; };
+		2ED86CAA2962B2AA00DA21C4 /* tiledrawingarea.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C802962B2A900DA21C4 /* tiledrawingarea.py */; };
+		2ED86CAB2962B2AA00DA21C4 /* tiletool.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C812962B2A900DA21C4 /* tiletool.py */; };
+		2ED86CAC2962B2AA00DA21C4 /* tilewindow.py in Resources */ = {isa = PBXBuildFile; fileRef = 2ED86C822962B2A900DA21C4 /* tilewindow.py */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2ED86C422962B13900DA21C4 /* Micropolis-swui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Micropolis-swui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED86C452962B13900DA21C4 /* Micropolis_swuiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Micropolis_swuiApp.swift; sourceTree = "<group>"; };
+		2ED86C472962B13900DA21C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2ED86C492962B13D00DA21C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2ED86C4C2962B13D00DA21C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2ED86C4E2962B13D00DA21C4 /* Micropolis_swui.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Micropolis_swui.entitlements; sourceTree = "<group>"; };
+		2ED86C552962B2A900DA21C4 /* GTKEngine.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = GTKEngine.py; sourceTree = "<group>"; };
+		2ED86C562962B2A900DA21C4 /* maincell.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = maincell.py; sourceTree = "<group>"; };
+		2ED86C572962B2A900DA21C4 /* main.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = main.py; sourceTree = "<group>"; };
+		2ED86C592962B2A900DA21C4 /* __init__.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		2ED86C5A2962B2A900DA21C4 /* pie.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = pie.py; sourceTree = "<group>"; };
+		2ED86C5B2962B2A900DA21C4 /* piemenu.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = piemenu.py; sourceTree = "<group>"; };
+		2ED86C5D2962B2A900DA21C4 /* DisastersPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisastersPanel.swift; sourceTree = "<group>"; };
+		2ED86C5E2962B2A900DA21C4 /* HistoryPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryPanel.swift; sourceTree = "<group>"; };
+		2ED86C5F2962B2A900DA21C4 /* GaugeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
+		2ED86C602962B2A900DA21C4 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		2ED86C612962B2A900DA21C4 /* BudgetPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetPanel.swift; sourceTree = "<group>"; };
+		2ED86C622962B2A900DA21C4 /* GenericEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericEngine.swift; sourceTree = "<group>"; };
+		2ED86C632962B2A900DA21C4 /* NoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
+		2ED86C642962B2A900DA21C4 /* PieMenus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieMenus.swift; sourceTree = "<group>"; };
+		2ED86C652962B2A900DA21C4 /* NoticePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticePanel.swift; sourceTree = "<group>"; };
+		2ED86C662962B2A900DA21C4 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
+		2ED86C672962B2A900DA21C4 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
+		2ED86C682962B2A900DA21C4 /* MapPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPanel.swift; sourceTree = "<group>"; };
+		2ED86C692962B2A900DA21C4 /* EvaluationPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationPanel.swift; sourceTree = "<group>"; };
+		2ED86C6A2962B2A900DA21C4 /* Notebook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notebook.swift; sourceTree = "<group>"; };
+		2ED86C6B2962B2A900DA21C4 /* StartPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPanel.swift; sourceTree = "<group>"; };
+		2ED86C6C2962B2A900DA21C4 /* MicropolisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicropolisView.swift; sourceTree = "<group>"; };
+		2ED86C6D2962B2A900DA21C4 /* XMLUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLUtilities.swift; sourceTree = "<group>"; };
+		2ED86C6E2962B2A900DA21C4 /* HistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		2ED86C6F2962B2A900DA21C4 /* EvaluationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationView.swift; sourceTree = "<group>"; };
+		2ED86C702962B2A900DA21C4 /* MessagesPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesPanel.swift; sourceTree = "<group>"; };
+		2ED86C712962B2A900DA21C4 /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		2ED86C722962B2A900DA21C4 /* DrawingArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingArea.swift; sourceTree = "<group>"; };
+		2ED86C732962B2A900DA21C4 /* MicropolisWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicropolisWindow.swift; sourceTree = "<group>"; };
+		2ED86C752962B2A900DA21C4 /* cellconfigurations.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = cellconfigurations.py; sourceTree = "<group>"; };
+		2ED86C762962B2A900DA21C4 /* cellmodel.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = cellmodel.py; sourceTree = "<group>"; };
+		2ED86C772962B2A900DA21C4 /* cellwindow.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = cellwindow.py; sourceTree = "<group>"; };
+		2ED86C782962B2A900DA21C4 /* __init__.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		2ED86C792962B2A900DA21C4 /* celltool.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = celltool.py; sourceTree = "<group>"; };
+		2ED86C7A2962B2A900DA21C4 /* celldrawingarea.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = celldrawingarea.py; sourceTree = "<group>"; };
+		2ED86C7B2962B2A900DA21C4 /* cellpiemenus.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = cellpiemenus.py; sourceTree = "<group>"; };
+		2ED86C7C2962B2A900DA21C4 /* cellrulecompiler.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = cellrulecompiler.py; sourceTree = "<group>"; };
+		2ED86C7D2962B2A900DA21C4 /* cellengine.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = cellengine.py; sourceTree = "<group>"; };
+		2ED86C7F2962B2A900DA21C4 /* __init__.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		2ED86C802962B2A900DA21C4 /* tiledrawingarea.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = tiledrawingarea.py; sourceTree = "<group>"; };
+		2ED86C812962B2A900DA21C4 /* tiletool.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = tiletool.py; sourceTree = "<group>"; };
+		2ED86C822962B2A900DA21C4 /* tilewindow.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = tilewindow.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2ED86C3F2962B13900DA21C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2ED86C392962B13800DA21C4 = {
+			isa = PBXGroup;
+			children = (
+				2ED86C5C2962B2A900DA21C4 /* BaseApp */,
+				2ED86C742962B2A900DA21C4 /* CellEngine */,
+				2ED86C542962B2A800DA21C4 /* GTKApp */,
+				2ED86C582962B2A900DA21C4 /* PieMenu */,
+				2ED86C7E2962B2A900DA21C4 /* TileEngine */,
+				2ED86C442962B13900DA21C4 /* Micropolis-swui */,
+				2ED86C432962B13900DA21C4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2ED86C432962B13900DA21C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C422962B13900DA21C4 /* Micropolis-swui.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2ED86C442962B13900DA21C4 /* Micropolis-swui */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C452962B13900DA21C4 /* Micropolis_swuiApp.swift */,
+				2ED86C472962B13900DA21C4 /* ContentView.swift */,
+				2ED86C492962B13D00DA21C4 /* Assets.xcassets */,
+				2ED86C4E2962B13D00DA21C4 /* Micropolis_swui.entitlements */,
+				2ED86C4B2962B13D00DA21C4 /* Preview Content */,
+			);
+			path = "Micropolis-swui";
+			sourceTree = "<group>";
+		};
+		2ED86C4B2962B13D00DA21C4 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C4C2962B13D00DA21C4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2ED86C542962B2A800DA21C4 /* GTKApp */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C552962B2A900DA21C4 /* GTKEngine.py */,
+				2ED86C562962B2A900DA21C4 /* maincell.py */,
+				2ED86C572962B2A900DA21C4 /* main.py */,
+			);
+			path = GTKApp;
+			sourceTree = "<group>";
+		};
+		2ED86C582962B2A900DA21C4 /* PieMenu */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C592962B2A900DA21C4 /* __init__.py */,
+				2ED86C5A2962B2A900DA21C4 /* pie.py */,
+				2ED86C5B2962B2A900DA21C4 /* piemenu.py */,
+			);
+			path = PieMenu;
+			sourceTree = "<group>";
+		};
+		2ED86C5C2962B2A900DA21C4 /* BaseApp */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C5D2962B2A900DA21C4 /* DisastersPanel.swift */,
+				2ED86C5E2962B2A900DA21C4 /* HistoryPanel.swift */,
+				2ED86C5F2962B2A900DA21C4 /* GaugeView.swift */,
+				2ED86C602962B2A900DA21C4 /* Tool.swift */,
+				2ED86C612962B2A900DA21C4 /* BudgetPanel.swift */,
+				2ED86C622962B2A900DA21C4 /* GenericEngine.swift */,
+				2ED86C632962B2A900DA21C4 /* NoticeView.swift */,
+				2ED86C642962B2A900DA21C4 /* PieMenus.swift */,
+				2ED86C652962B2A900DA21C4 /* NoticePanel.swift */,
+				2ED86C662962B2A900DA21C4 /* ControlPanel.swift */,
+				2ED86C672962B2A900DA21C4 /* Zone.swift */,
+				2ED86C682962B2A900DA21C4 /* MapPanel.swift */,
+				2ED86C692962B2A900DA21C4 /* EvaluationPanel.swift */,
+				2ED86C6A2962B2A900DA21C4 /* Notebook.swift */,
+				2ED86C6B2962B2A900DA21C4 /* StartPanel.swift */,
+				2ED86C6C2962B2A900DA21C4 /* MicropolisView.swift */,
+				2ED86C6D2962B2A900DA21C4 /* XMLUtilities.swift */,
+				2ED86C6E2962B2A900DA21C4 /* HistoryView.swift */,
+				2ED86C6F2962B2A900DA21C4 /* EvaluationView.swift */,
+				2ED86C702962B2A900DA21C4 /* MessagesPanel.swift */,
+				2ED86C712962B2A900DA21C4 /* Robot.swift */,
+				2ED86C722962B2A900DA21C4 /* DrawingArea.swift */,
+				2ED86C732962B2A900DA21C4 /* MicropolisWindow.swift */,
+			);
+			path = BaseApp;
+			sourceTree = "<group>";
+		};
+		2ED86C742962B2A900DA21C4 /* CellEngine */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C752962B2A900DA21C4 /* cellconfigurations.py */,
+				2ED86C762962B2A900DA21C4 /* cellmodel.py */,
+				2ED86C772962B2A900DA21C4 /* cellwindow.py */,
+				2ED86C782962B2A900DA21C4 /* __init__.py */,
+				2ED86C792962B2A900DA21C4 /* celltool.py */,
+				2ED86C7A2962B2A900DA21C4 /* celldrawingarea.py */,
+				2ED86C7B2962B2A900DA21C4 /* cellpiemenus.py */,
+				2ED86C7C2962B2A900DA21C4 /* cellrulecompiler.py */,
+				2ED86C7D2962B2A900DA21C4 /* cellengine.py */,
+			);
+			path = CellEngine;
+			sourceTree = "<group>";
+		};
+		2ED86C7E2962B2A900DA21C4 /* TileEngine */ = {
+			isa = PBXGroup;
+			children = (
+				2ED86C7F2962B2A900DA21C4 /* __init__.py */,
+				2ED86C802962B2A900DA21C4 /* tiledrawingarea.py */,
+				2ED86C812962B2A900DA21C4 /* tiletool.py */,
+				2ED86C822962B2A900DA21C4 /* tilewindow.py */,
+			);
+			path = TileEngine;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2ED86C412962B13900DA21C4 /* Micropolis-swui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ED86C512962B13D00DA21C4 /* Build configuration list for PBXNativeTarget "Micropolis-swui" */;
+			buildPhases = (
+				2ED86C3E2962B13900DA21C4 /* Sources */,
+				2ED86C3F2962B13900DA21C4 /* Frameworks */,
+				2ED86C402962B13900DA21C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Micropolis-swui";
+			productName = "Micropolis-swui";
+			productReference = 2ED86C422962B13900DA21C4 /* Micropolis-swui.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2ED86C3A2962B13800DA21C4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					2ED86C412962B13900DA21C4 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 2ED86C3D2962B13800DA21C4 /* Build configuration list for PBXProject "Micropolis-swui" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2ED86C392962B13800DA21C4;
+			productRefGroup = 2ED86C432962B13900DA21C4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2ED86C412962B13900DA21C4 /* Micropolis-swui */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2ED86C402962B13900DA21C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2ED86C4D2962B13D00DA21C4 /* Preview Assets.xcassets in Resources */,
+				2ED86CA22962B2AA00DA21C4 /* cellwindow.py in Resources */,
+				2ED86CA02962B2AA00DA21C4 /* cellconfigurations.py in Resources */,
+				2ED86C852962B2A900DA21C4 /* main.py in Resources */,
+				2ED86CA92962B2AA00DA21C4 /* __init__.py in Resources */,
+				2ED86C4A2962B13D00DA21C4 /* Assets.xcassets in Resources */,
+				2ED86CA12962B2AA00DA21C4 /* cellmodel.py in Resources */,
+				2ED86CA52962B2AA00DA21C4 /* celldrawingarea.py in Resources */,
+				2ED86C832962B2A900DA21C4 /* GTKEngine.py in Resources */,
+				2ED86C882962B2A900DA21C4 /* piemenu.py in Resources */,
+				2ED86CAB2962B2AA00DA21C4 /* tiletool.py in Resources */,
+				2ED86C872962B2A900DA21C4 /* pie.py in Resources */,
+				2ED86C862962B2A900DA21C4 /* __init__.py in Resources */,
+				2ED86CAC2962B2AA00DA21C4 /* tilewindow.py in Resources */,
+				2ED86CAA2962B2AA00DA21C4 /* tiledrawingarea.py in Resources */,
+				2ED86CA32962B2AA00DA21C4 /* __init__.py in Resources */,
+				2ED86CA62962B2AA00DA21C4 /* cellpiemenus.py in Resources */,
+				2ED86CA72962B2AA00DA21C4 /* cellrulecompiler.py in Resources */,
+				2ED86CA42962B2AA00DA21C4 /* celltool.py in Resources */,
+				2ED86C842962B2A900DA21C4 /* maincell.py in Resources */,
+				2ED86CA82962B2AA00DA21C4 /* cellengine.py in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2ED86C3E2962B13900DA21C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2ED86C8B2962B2A900DA21C4 /* GaugeView.swift in Sources */,
+				2ED86C8E2962B2A900DA21C4 /* GenericEngine.swift in Sources */,
+				2ED86C8D2962B2A900DA21C4 /* BudgetPanel.swift in Sources */,
+				2ED86C982962B2AA00DA21C4 /* MicropolisView.swift in Sources */,
+				2ED86C902962B2A900DA21C4 /* PieMenus.swift in Sources */,
+				2ED86C8F2962B2A900DA21C4 /* NoticeView.swift in Sources */,
+				2ED86C9C2962B2AA00DA21C4 /* MessagesPanel.swift in Sources */,
+				2ED86C9D2962B2AA00DA21C4 /* Robot.swift in Sources */,
+				2ED86C942962B2A900DA21C4 /* MapPanel.swift in Sources */,
+				2ED86C482962B13900DA21C4 /* ContentView.swift in Sources */,
+				2ED86C992962B2AA00DA21C4 /* XMLUtilities.swift in Sources */,
+				2ED86C922962B2A900DA21C4 /* ControlPanel.swift in Sources */,
+				2ED86C912962B2A900DA21C4 /* NoticePanel.swift in Sources */,
+				2ED86C952962B2A900DA21C4 /* EvaluationPanel.swift in Sources */,
+				2ED86C962962B2AA00DA21C4 /* Notebook.swift in Sources */,
+				2ED86C462962B13900DA21C4 /* Micropolis_swuiApp.swift in Sources */,
+				2ED86C8C2962B2A900DA21C4 /* Tool.swift in Sources */,
+				2ED86C9F2962B2AA00DA21C4 /* MicropolisWindow.swift in Sources */,
+				2ED86C9E2962B2AA00DA21C4 /* DrawingArea.swift in Sources */,
+				2ED86C892962B2A900DA21C4 /* DisastersPanel.swift in Sources */,
+				2ED86C8A2962B2A900DA21C4 /* HistoryPanel.swift in Sources */,
+				2ED86C9A2962B2AA00DA21C4 /* HistoryView.swift in Sources */,
+				2ED86C932962B2A900DA21C4 /* Zone.swift in Sources */,
+				2ED86C972962B2AA00DA21C4 /* StartPanel.swift in Sources */,
+				2ED86C9B2962B2AA00DA21C4 /* EvaluationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2ED86C4F2962B13D00DA21C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2ED86C502962B13D00DA21C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		2ED86C522962B13D00DA21C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Micropolis-swui/Micropolis_swui.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Micropolis-swui/Preview Content\"";
+				DEVELOPMENT_TEAM = MYU6NE7WY6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.appel-rockhold.Micropolis-swui";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2ED86C532962B13D00DA21C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Micropolis-swui/Micropolis_swui.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Micropolis-swui/Preview Content\"";
+				DEVELOPMENT_TEAM = MYU6NE7WY6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.appel-rockhold.Micropolis-swui";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2ED86C3D2962B13800DA21C4 /* Build configuration list for PBXProject "Micropolis-swui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED86C4F2962B13D00DA21C4 /* Debug */,
+				2ED86C502962B13D00DA21C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2ED86C512962B13D00DA21C4 /* Build configuration list for PBXNativeTarget "Micropolis-swui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED86C522962B13D00DA21C4 /* Debug */,
+				2ED86C532962B13D00DA21C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2ED86C3A2962B13800DA21C4 /* Project object */;
+}
