@@ -321,7 +321,7 @@ bool Micropolis::loadFile(const char *filename)
 
     // Set the scenario id to 0.
     initWillStuff();
-    scenario = SC_NONE;
+    scenario = NULL;
     initSimLoad = SIMLOADER_FROMFILE;
     doInitialEval = false;
     doSimInit();
@@ -397,91 +397,23 @@ bool Micropolis::saveFile(const char *filename)
 
 /**
  * Load a scenario.
- * @param s Scenario to load.
+ * @param scenario Scenario to load.
  * @note \a s cannot be \c SC_NONE.
  */
-void Micropolis::loadScenario(Scenario s)
+void Micropolis::loadScenario(Scenario* scenario)
 {
-    const char *name = NULL;
-    const char *fname = NULL;
-
     cityFileName = "";
 
     setGameLevel(LEVEL_EASY);
 
-    if (s < SC_DULLSVILLE || s > SC_RIO) {
-        s = SC_DULLSVILLE;
-    }
+    cityTime = scenario->cityTime;
+    setFunds(scenario->funds);
 
-    switch (s) {
-        case SC_DULLSVILLE:
-            name = "Dullsville";
-            fname = "snro.111";
-            scenario = SC_DULLSVILLE;
-            cityTime = ((1900 - 1900) * 48) + 2;
-            setFunds(5000);
-            break;
-        case SC_SAN_FRANCISCO:
-            name = "San Francisco";
-            fname = "snro.222";
-            scenario = SC_SAN_FRANCISCO;
-            cityTime = ((1906 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        case SC_HAMBURG:
-            name = "Hamburg";
-            fname = "snro.333";
-            scenario = SC_HAMBURG;
-            cityTime = ((1944 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        case SC_BERN:
-            name = "Bern";
-            fname = "snro.444";
-            scenario = SC_BERN;
-            cityTime = ((1965 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        case SC_TOKYO:
-            name = "Tokyo";
-            fname = "snro.555";
-            scenario = SC_TOKYO;
-            cityTime = ((1957 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        case SC_DETROIT:
-            name = "Detroit";
-            fname = "snro.666";
-            scenario = SC_DETROIT;
-            cityTime = ((1972 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        case SC_BOSTON:
-            name = "Boston";
-            fname = "snro.777";
-            scenario = SC_BOSTON;
-            cityTime = ((2010 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        case SC_RIO:
-            name = "Rio de Janeiro";
-            fname = "snro.888";
-            scenario = SC_RIO;
-            cityTime = ((2047 - 1900) * 48) + 2;
-            setFunds(20000);
-            break;
-        default:
-            NOT_REACHED();
-            break;
-    }
-
-    setCleanCityName(name);
+    setCleanCityName(scenario->name);
     setSpeed(3);
     setCityTax(7);
 
-    loadFileDir(
-        fname,
-        resourceDir.c_str());
+    loadFileDir(scenario->filename, resourceDir.c_str());
 
     initWillStuff();
     initFundingLevel();
@@ -493,6 +425,9 @@ void Micropolis::loadScenario(Scenario s)
     didLoadScenario();
 }
 
+void Micropolis::loadScenario(int scenarioIndex) {
+    
+}
 
 /** Report to the front-end that the scenario was loaded. */
 void Micropolis::didLoadScenario()

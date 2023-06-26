@@ -421,32 +421,6 @@ void Micropolis::initSimMemory()
 /* comefrom: doSimInit */
 void Micropolis::simLoadInit()
 {
-    // Disaster delay table for each scenario
-    static const short disasterWaitTable[SC_COUNT] = {
-        0,          // No scenario (free playing)
-        2,          // Dullsville (boredom)
-        10,         // San francisco (earth quake)
-        4 * 10,     // Hamburg (fire bombs)
-        20,         // Bern (traffic)
-        3,          // Tokyo (scary monster)
-        5,          // Detroit (crime)
-        5,          // Boston (nuclear meltdown)
-        2 * 48,     // Rio (flooding)
-    };
-
-    // Time to wait before score calculation for each scenario
-    static const short scoreWaitTable[SC_COUNT] = {
-        0,          // No scenario (free playing)
-        30 * 48,    // Dullsville (boredom)
-        5 * 48,     // San francisco (earth quake)
-        5 * 48,     // Hamburg (fire bombs)
-        10 * 48,    // Bern (traffic)
-        5 * 48,     // Tokyo (scary monster)
-        10 * 48,    // Detroit (crime)
-        5 * 48,     // Boston (nuclear meltdown)
-        10 * 48,    // Rio (flooding)
-    };
-
     externalMarket = (float)miscHist[1];
     resPop = miscHist[2];
     comPop = miscHist[3];
@@ -500,16 +474,9 @@ void Micropolis::simLoadInit()
 
     doNilPower();
 
-    if (scenario >= SC_COUNT) {
-        scenario = SC_NONE;
-    }
-
-    if (scenario != SC_NONE) {
-        assert(LENGTH_OF(disasterWaitTable) == SC_COUNT);
-        assert(LENGTH_OF(scoreWaitTable) == SC_COUNT);
-
-        disasterWait = disasterWaitTable[scenario];
-        scoreWait = scoreWaitTable[scenario];
+    if (scenario != NULL) {
+        disasterWait = scenario->disasterWait;
+        scoreWait = scenario->scoreWait;
     } else {
         disasterWait = 0;
         scoreWait = 0;

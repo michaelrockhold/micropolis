@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "34CB180F-4A4E-4BC7-99BD-7D937831AAFA"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FAA3B243-EC64-43F0-880E-3CE72C833641"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MicropolisSpriteView/MicropolisSpriteViewApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "handle(event:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FAA3B243-EC64-43F0-880E-3CE72C833641 - 28e0f920f8942b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MicropolisSpriteView.CityObservable.handle(event: MicropolisKit.CityModel.Event) -&gt; ()"
+                  moduleName = "MicropolisSpriteView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mr/Developer/Projects/micropolis/MicropolisSpriteView/MicropolisSpriteViewApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  uuid = "FAA3B243-EC64-43F0-880E-3CE72C833641 - 28e0f920f8942b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MicropolisSpriteView.CityObservable.handle(event: MicropolisKit.CityModel.Event) -&gt; ()"
+                  moduleName = "MicropolisSpriteView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mr/Developer/Projects/micropolis/MicropolisSpriteView/MicropolisSpriteViewApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "708">
+               </Location>
+               <Location
+                  uuid = "FAA3B243-EC64-43F0-880E-3CE72C833641 - 28e0f920f8942b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MicropolisSpriteView.CityObservable.handle(event: MicropolisKit.CityModel.Event) -&gt; ()"
+                  moduleName = "MicropolisSpriteView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mr/Developer/Projects/micropolis/MicropolisSpriteView/MicropolisSpriteViewApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "2118">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F5211DD7-A695-425A-A916-D3D5AF0BCA69"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MicropolisKit/src/fileio.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "Micropolis::loadScenario(scenarioIndex)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -124,10 +124,6 @@ public class CityModel {
         
     }
     
-    public func run() {
-        self.run(scenarioID: .BOSTON)
-    }
-    
     public func run(scenarioID: ScenarioID) {
         Task.detached {
             self.loadScenario(id: scenarioID)

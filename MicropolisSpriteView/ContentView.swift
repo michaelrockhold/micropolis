@@ -6,33 +6,62 @@
 //
 
 import SwiftUI
-import CoreData
 import SpriteKit
+import MicropolisKit
 
 class GameScene: SKScene {
 }
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var cityObservable : CityObservable
+    @State private var dateString: String = ""
+    @State private var statusMessage: String = ""
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    private var gameScene: GameScene
+    private var dateFormatter: DateFormatter
+    
+    init(cityObservable: CityObservable) {
+        
+        self.cityObservable = cityObservable
+        
+        var gameScene = GameScene()
+        gameScene.size = CGSize(width: 1920, height: 1600)
+        gameScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        gameScene.scaleMode = .fill
+        cityObservable.tileMapNode.removeFromParent()
+        gameScene.addChild(cityObservable.tileMapNode)
 
+        self.gameScene = gameScene
+        
+        self.dateFormatter = DateFormatter();
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .medium
+
+    }
+    
     var scene: SKScene {
-        let scene = GameScene()
-        scene.size = CGSize(width: 1200, height: 100)
-        scene.scaleMode = .fill
-        return scene
+        return gameScene
     }
 
     var body: some View {
-        SpriteView(scene: scene)
-            .frame(width: 1200, height: 1000)
-            .ignoresSafeArea()
-    }
+        HStack {
+            Text(statusMessage)
+            Text(dateString)
+        }.onChange(of: cityObservable.cityDate) { newValue in
+            dateString = self.dateFormatter.string(from:newValue)
+        }.onChange(of: cityObservable.message) { newValue in
+            statusMessage = newValue
+        }
 
+        ScrollView(Axis.Set(arrayLiteral: .horizontal, .vertical), showsIndicators: true) {
+            VStack {
+                
+                SpriteView(scene: scene)
+                    .frame(width: 1920, height: 1600)
+                    .ignoresSafeArea()
+            }
+        }
+    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -44,6 +73,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(cityObservable: CityObservable(cityModel: CityModel(), worldWidth: 32, worldHeight: 32))
     }
 }

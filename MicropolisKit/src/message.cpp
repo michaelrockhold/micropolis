@@ -80,7 +80,7 @@ void Micropolis::sendMessages()
     float TM;
 
     // Running a scenario, and waiting it to 'end' so we can give a score
-    if (scenario > SC_NONE && /* scoreType > SC_NONE && */ scoreWait > 0) {
+    if (scenario != NULL && scoreWait > 0) {
         scoreWait--;
         if (scoreWait == 0) {
             doScenarioScore(scenario);
@@ -297,65 +297,41 @@ void Micropolis::checkGrowth()
 
 /**
  * Compute score for each scenario
- * @param type Scenario used
+ * @param scenario Scenario used
  * @note Parameter \a type may not be \c SC_NONE
  */
-void Micropolis::doScenarioScore(Scenario type)
+void Micropolis::doScenarioScore(Scenario* scenario)
 {
     enum MessageNumber z = MESSAGE_SCENARIO_LOST;     /* you lose */
 
-    switch (type) {
+    switch (scenario->winCriterion) {
 
-    case SC_DULLSVILLE:
+    case WINCRITERION_METROPOLIS:
         if (cityClass >= CC_METROPOLIS) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;
 
-    case SC_SAN_FRANCISCO:
-        if (cityClass >= CC_METROPOLIS) {
+    case WINCRITERION_TRAFFIC:
+        if (trafficAverage < scenario->winCriterionArg) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;
 
-    case SC_HAMBURG:
-        if (cityClass >= CC_METROPOLIS) {
+    case WINCRITERION_CITYSCORE:
+        if (cityScore > scenario->winCriterionArg) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;
 
-    case SC_BERN:
-        if (trafficAverage < 80) {
+    case WINCRITERION_CRIME:
+        if (crimeAverage < scenario->winCriterionArg) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;
 
-    case SC_TOKYO:
-        if (cityScore > 500) {
-            z = MESSAGE_SCENARIO_WON;
-        }
-        break;
-
-    case SC_DETROIT:
-        if (crimeAverage < 60) {
-            z = MESSAGE_SCENARIO_WON;
-        }
-        break;
-
-    case SC_BOSTON:
-        if (cityScore > 500) {
-            z = MESSAGE_SCENARIO_WON;
-        }
-        break;
-
-    case SC_RIO:
-        if (cityScore > 500) {
-            z = MESSAGE_SCENARIO_WON;
-        }
-        break;
 
     default:
-        NOT_REACHED();
         break;
 
     }

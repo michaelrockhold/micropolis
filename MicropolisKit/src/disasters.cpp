@@ -93,8 +93,10 @@ void Micropolis::doDisasters()
         floodCount--;
     }
 
-    if (scenario != SC_NONE) {
-        scenarioDisaster();
+    if (scenario != NULL) {
+        if (scenarioDisaster(scenario)) {
+            scenario = NULL; // done disastering in this scenario
+        }
     }
 
     if (!enableDisasters) { // Disasters have been disabled
@@ -145,48 +147,51 @@ void Micropolis::doDisasters()
 
 
 /** Let disasters of the scenario happen */
-void Micropolis::scenarioDisaster()
+bool Micropolis::scenarioDisaster(Scenario* s)
 {
-    if (disasterWait < 0) return;
+    if (disasterWait < 0) return true;
     
-    switch (scenario) {
-        case SC_DULLSVILLE:
+    bool disasterNow = false;
+    
+    switch (scenario->crisisTimeMode) {
+        case CRISIS_TIME_DEADLINE:
             break;
-
-        case SC_SAN_FRANCISCO:
-            if (disasterWait == 1) {
-                makeEarthquake();
+        case CRISIS_TIME_AT:
+            if (disasterWait == scenario->crisisTime) {
+                disasterNow = true;
             }
             break;
-
-        case SC_HAMBURG:
-            if (disasterWait % 10 == 0) {
-                makeFireBombs();
+        case CRISIS_TIME_MODULO:
+            if (disasterWait % scenario->crisisTime == 0) {
+                disasterNow = true;
             }
             break;
+        default:
+            break;
+    }
 
-        case SC_BERN:
+    switch (scenario->crisisType) {
+        case CRISIS_DEADLINE:
             break;
 
-        case SC_TOKYO:
-            if (disasterWait == 1) {
-                makeMonster();
-            }
+        case CRISIS_EARTHQUAKE:
+            if (disasterNow) makeEarthquake();
             break;
 
-        case SC_DETROIT:
+        case CRISIS_FIREBOMBS:
+            if (disasterNow) makeFireBombs();
             break;
 
-        case SC_BOSTON:
-            if (disasterWait == 1) {
-                makeMeltdown();
-            }
+        case CRISIS_MONSTER:
+            if (disasterNow) makeMonster();
             break;
 
-        case SC_RIO:
-            if ((disasterWait % 24) == 0) {
-                makeFlood();
-            }
+        case CRISIS_MELTDOWN:
+            if (disasterNow) makeMeltdown();
+            break;
+
+        case CRISIS_FLOOD:
+            if (disasterNow) makeFlood();
             break;
 
         default:
@@ -196,9 +201,10 @@ void Micropolis::scenarioDisaster()
 
     if (disasterWait > 0) {
         disasterWait--;
-    } else {
-        scenario = SC_NONE;
+        return false; // carry on disastering
     }
+    
+    return true;
 }
 
 

@@ -105,7 +105,7 @@
 #include <data_types.h>
 #include <map_type.h>
 #include <position.h>
-
+#include <Scenario.h>
 #include <MicropolisDelegate.hh>
 
 ////////////////////////////////////////////////////////////////////////
@@ -320,7 +320,7 @@ enum SimLoader {
     SIMLOADER_FROMFILE = 0,
     SIMLOADER_LOADCITY = 1,
     SIMLOADER_GENERATECITY = 2,
-}
+};
 
 #include "SpriteType.h"
 
@@ -1505,7 +1505,7 @@ public:
 
     void doDisasters();
 
-    void scenarioDisaster();
+    bool scenarioDisaster(Scenario* scenario);
 
     bool vulnerable(int tem);
 
@@ -1636,6 +1636,8 @@ private:
     ////////////////////////////////////////////////////////////////////////
     // fileio.cpp
 
+    void loadScenario(Scenario* s);
+
 public:
 
 
@@ -1645,7 +1647,7 @@ public:
 
     bool saveFile(const char *filename);
 
-    void loadScenario(Scenario s);
+    void loadScenario(int scenarioIndex);
 
     void didLoadScenario();
 
@@ -2000,7 +2002,7 @@ public:
 
     void checkGrowth();
 
-    void doScenarioScore(Scenario type);
+    void doScenarioScore(Scenario* scenario);
 
     void sendMessage(
                      enum MessageNumber Mnum,
@@ -2161,7 +2163,6 @@ public:
 
     float externalMarket;
 
-//    Scenario disasterEvent; ///< The disaster for which a count-down is running
     short disasterWait; ///< Count-down timer for the disaster
 
 //    Scenario scoreType; ///< The type of score table to use
@@ -2389,7 +2390,7 @@ public:
 
     enum SimLoader initSimLoad;
 
-//    Scenario scenario; ///< Scenario being played
+    Scenario* scenario; ///< Scenario being played
 
     short simSpeed;
 

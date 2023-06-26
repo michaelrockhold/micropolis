@@ -1,0 +1,15 @@
+{
+    "name": "Bern",
+    "title": "",
+    char description
+    int cityTime
+    int funds;
+    enum CRISIS_TYPE crisisType;
+    enum CRISIS_TIME_MODE crisisTimeMode;
+    int crisisTime;
+    int disasterWait;
+    int scoreWait;
+    enum WINCRITERION winCriterion;
+    int winCriterionArg;
+    "hasFoghorns": false
+}

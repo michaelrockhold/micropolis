@@ -15,7 +15,7 @@
 - (void)simTick;
 - (void)setSimSpeed:(int)newSpeed;
 - (void)generateSomeCity:(int)seed;
-- (void)loadScenario:(int)scenarioID;
+- (void)loadScenario:(int)scenarioIndex;
 - (void)generateMapUpdates;
 
 @end

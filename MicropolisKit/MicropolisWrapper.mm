@@ -161,8 +161,9 @@ public:
     micropolis->generateSomeCity(seed);
 }
 
-- (void)loadScenario:(int)scenarioID {
-    micropolis->loadScenario((Scenario)scenarioID);
+- (void)loadScenario:(int)scenarioIndex {
+    //micropolis->loadScenario(scenarioIndex);
+    micropolis->generateSomeCity(99);
 }
 
 - (void)generateMapUpdates {
