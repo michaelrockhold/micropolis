@@ -55,7 +55,7 @@ class ViewController: NSViewController {
         spriteKitView.showsFPS = true
         spriteKitView.showsNodeCount = true
         
-        (NSApplication.shared.delegate as! AppDelegate).cityModel.run()
+        (NSApplication.shared.delegate as! AppDelegate).cityModel.run(scenarioID: CityModel.ScenarioID.BOSTON)
         
         // TODO: maximize the window, center the view
         spriteKitView.scroll(NSPoint(x: 0, y: 0))

@@ -94,6 +94,7 @@ enum Stri202 {
 
 /** String numbers of messages. */
 enum MessageNumber {
+    MESSAGE_NO_NEWS = 0,
     MESSAGE_NEED_MORE_RESIDENTIAL = 1, ///< More residential zones needed.
     MESSAGE_NEED_MORE_COMMERCIAL, ///< More commercial zones needed.
     MESSAGE_NEED_MORE_INDUSTRIAL, ///< More industrial zones needed.

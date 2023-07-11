@@ -14,8 +14,6 @@
 @protocol MicropolisOutgoing <NSObject>
 
 - (void)doPlayNewCity;
-- (void)doStartLoad;
-- (void)doStartScenario:(int)scenario;
 - (void)doEarthquakeWithStrength:(int)strength;
 - (void)updateTarget:(NSString*)target;
 - (void)updateTime:(int)cityTime;

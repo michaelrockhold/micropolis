@@ -22,12 +22,6 @@ import Combine
     public func doPlayNewCity() {
         eventSubject.send(CityModel.Event.PlayNewCity)
     }
-    public func doStartLoad() {
-        eventSubject.send(CityModel.Event.StartLoad)
-    }
-    public func doStartScenario(_ scenario: Int32) {
-        eventSubject.send(CityModel.Event.StartScenario(Int(scenario)))
-    }
     public func doEarthquake(withStrength strength: Int32) {
         eventSubject.send(CityModel.Event.StartEarthquake(Int(strength)))
     }

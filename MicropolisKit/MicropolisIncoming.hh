@@ -9,13 +9,14 @@
 #define MicropolisIncoming_hh
 
 #import <Foundation/Foundation.h>
+#import <MicropolisKit/Scenario.h>
 
 @protocol MicropolisIncoming <NSObject>
 
 - (void)simTick;
 - (void)setSimSpeed:(int)newSpeed;
 - (void)generateSomeCity:(int)seed;
-- (void)loadScenario:(int)scenarioIndex;
+- (void)loadScenario:(Scenario*)scenario;
 - (void)generateMapUpdates;
 
 @end

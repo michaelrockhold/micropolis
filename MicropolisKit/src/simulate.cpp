@@ -474,14 +474,6 @@ void Micropolis::simLoadInit()
 
     doNilPower();
 
-    if (scenario != NULL) {
-        disasterWait = scenario->disasterWait;
-        scoreWait = scenario->scoreWait;
-    } else {
-        disasterWait = 0;
-        scoreWait = 0;
-    }
-
     roadEffect = MAX_ROAD_EFFECT;
     policeEffect = MAX_POLICE_STATION_EFFECT;
     fireEffect = MAX_FIRE_STATION_EFFECT;

@@ -98,20 +98,6 @@ public class CityModel {
         case DidGenerateMap
         case Tile(Int, Int, Int) // column, row, tileIdx
     }
-
-    public enum ScenarioID: Int {
-        case NONE           ///< No scenario (free playing)
-
-        case DULLSVILLE     ///< Dullsville (boredom)
-        case SAN_FRANCISCO  ///< San francisco (earthquake)
-        case HAMBURG        ///< Hamburg (fire bombs)
-        case BERN           ///< Bern (traffic)
-        case TOKYO          ///< Tokyo (scary monster)
-        case DETROIT        ///< Detroit (crime)
-        case BOSTON         ///< Boston (nuclear meltdown)
-        case RIO            ///< Rio (flooding)
-    }
-    
             
     private let cityActor: CityActor
     private let cityEventSender = CityEventSender()
@@ -124,9 +110,9 @@ public class CityModel {
         
     }
     
-    public func run(scenarioID: ScenarioID) {
+    public func run(scenario: SCScenario) {
         Task.detached {
-            self.loadScenario(id: scenarioID)
+            self.load(scenario: scenario)
         }
     }
     
@@ -171,8 +157,35 @@ public class CityModel {
         cityActor.micropolisWrapper.generateSomeCity(Int32(seed))
     }
     
-    public func loadScenario(id: CityModel.ScenarioID) {
-        cityActor.micropolisWrapper.loadScenario(Int32(id.rawValue))
+    public func load(scenario: SCScenario) {
+        
+        scenario.name.withCString { name in
+            scenario.title.withCString { title in
+                scenario.description.withCString { description in
+                    scenario.cityData.withUnsafeBytes { data in
+                        let scenarioParams = newScenario(
+                            /* name */ UnsafeMutablePointer<CChar>(mutating: name),
+                           /* title */ UnsafeMutablePointer<CChar>(mutating: title),
+                           /* description */ UnsafeMutablePointer<CChar>(mutating: description),
+                                       data.baseAddress, // throw away our knowledge of the size of the buffer to placate C/C++ "unsigned char *"
+                           /* cityTime */ Int32(scenario.cityTime),
+                           /* funds */ Int32(scenario.funds),
+                           /* crisisType */ scenario.crisisType,
+                           /* crisisTimeMode */ scenario.crisisTimeMode,
+                           /* crisisTime */ Int32(scenario.crisisTime),
+                           /* disasterWait */ Int32(scenario.disasterWait),
+                           /* scoreWait */ Int32(scenario.scoreWait),
+                           /* winCriterion */ scenario.winCriterion,
+                           /* winCriterionArg */ Int32(scenario.winCriterionArg),
+                           /* hasFoghorns */ scenario.hasFoghorns)
+                        
+                        //withUnsafeMutablePointer(to: scenarioParams) {
+                        cityActor.micropolisWrapper.load(scenarioParams)
+                        //}
+                    }
+                }
+            }
+        }
     }
 
     private func tick() {

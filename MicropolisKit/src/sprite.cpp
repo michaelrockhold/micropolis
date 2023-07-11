@@ -630,7 +630,7 @@ void Micropolis::doShipSprite(SimSprite *sprite)
             int shipX = sprite->x >>4;
             int shipY = sprite->y >>4;
             
-            if (scenario->hasFoghorns && getRandom(10) < 5) {
+            if (scenario.hasFoghorns && getRandom(10) < 5) {
                 makeSound("city", "FogHornLow", shipX, shipY);
             } else {
                 makeSound("city", "HonkHonkLow", shipX, shipY);

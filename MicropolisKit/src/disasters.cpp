@@ -93,11 +93,7 @@ void Micropolis::doDisasters()
         floodCount--;
     }
 
-    if (scenario != NULL) {
-        if (scenarioDisaster(scenario)) {
-            scenario = NULL; // done disastering in this scenario
-        }
-    }
+    scenarioDisaster(); // perform any disasters required by the scenario (if it's time)
 
     if (!enableDisasters) { // Disasters have been disabled
         return;
@@ -147,22 +143,22 @@ void Micropolis::doDisasters()
 
 
 /** Let disasters of the scenario happen */
-bool Micropolis::scenarioDisaster(Scenario* s)
+void Micropolis::scenarioDisaster()
 {
-    if (disasterWait < 0) return true;
+    if (scenario.disasterWait < 0) return; // No longer waiting for scenario-based disasters
     
     bool disasterNow = false;
     
-    switch (scenario->crisisTimeMode) {
-        case CRISIS_TIME_DEADLINE:
+    switch (scenario.crisisTimeMode) {
+        case CRISIS_TIME_MODE_DEADLINE:
             break;
-        case CRISIS_TIME_AT:
-            if (disasterWait == scenario->crisisTime) {
+        case CRISIS_TIME_MODE_AT:
+            if (scenario.disasterWait == scenario.crisisTime) {
                 disasterNow = true;
             }
             break;
-        case CRISIS_TIME_MODULO:
-            if (disasterWait % scenario->crisisTime == 0) {
+        case CRISIS_TIME_MODE_MODULO:
+            if (scenario.disasterWait % scenario.crisisTime == 0) {
                 disasterNow = true;
             }
             break;
@@ -170,27 +166,27 @@ bool Micropolis::scenarioDisaster(Scenario* s)
             break;
     }
 
-    switch (scenario->crisisType) {
-        case CRISIS_DEADLINE:
+    switch (scenario.crisisType) {
+        case CRISIS_TYPE_DEADLINE:
             break;
 
-        case CRISIS_EARTHQUAKE:
+        case CRISIS_TYPE_EARTHQUAKE:
             if (disasterNow) makeEarthquake();
             break;
 
-        case CRISIS_FIREBOMBS:
+        case CRISIS_TYPE_FIREBOMBS:
             if (disasterNow) makeFireBombs();
             break;
 
-        case CRISIS_MONSTER:
+        case CRISIS_TYPE_MONSTER:
             if (disasterNow) makeMonster();
             break;
 
-        case CRISIS_MELTDOWN:
+        case CRISIS_TYPE_MELTDOWN:
             if (disasterNow) makeMeltdown();
             break;
 
-        case CRISIS_FLOOD:
+        case CRISIS_TYPE_FLOOD:
             if (disasterNow) makeFlood();
             break;
 
@@ -199,12 +195,9 @@ bool Micropolis::scenarioDisaster(Scenario* s)
             break; // Never used
     }
 
-    if (disasterWait > 0) {
-        disasterWait--;
-        return false; // carry on disastering
+    if (scenario.disasterWait > 0) {
+        scenario.disasterWait--;
     }
-    
-    return true;
 }
 
 

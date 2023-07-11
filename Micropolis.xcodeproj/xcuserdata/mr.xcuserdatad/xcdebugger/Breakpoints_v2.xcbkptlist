@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A6169F2F-3BF0-4C8C-B320-77A86426C717"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MicropolisApp/MicropolisKit/src/micropolis.cpp"
@@ -21,7 +21,7 @@
             <Locations>
                <Location
                   uuid = "A6169F2F-3BF0-4C8C-B320-77A86426C717 - 7a0f9ac9785ac6f4"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Micropolis::environmentInit()"
@@ -36,7 +36,7 @@
                </Location>
                <Location
                   uuid = "A6169F2F-3BF0-4C8C-B320-77A86426C717 - 7a0f9ac9785ac72a"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Micropolis::environmentInit()"
@@ -56,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "26457E50-613C-4922-ACAA-319FF9E38DD8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MicropolisKit/src/resource.cpp"
@@ -88,7 +88,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "10A10C4F-4878-4B6E-8022-25A433641F4C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MicropolisKit/src/stubs.cpp"
@@ -103,68 +103,36 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "96C1F556-5B75-4AC8-97AC-32A7632530E6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MicropolisKit/src/stubs.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "FrontendMessageMakeSound::sendMessage(sim)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1B30D4AD-53BC-441F-A7FA-DC3535D8B455"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MicropolisKit/src/message.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
-            landmarkName = "Micropolis::doScenarioScore(scenario)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F9A4C09D-4CCB-4D10-84A6-39F718CFE4C2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MicropolisKit/CityEventSender.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "updateMap()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F9A4C09D-4CCB-4D10-84A6-39F718CFE4C2 - 56c05786cb7e0f85"
-                  shouldBeEnabled = "Yes"
+                  uuid = "F9A4C09D-4CCB-4D10-84A6-39F718CFE4C2 - 4723498e6c4a8562"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "MicropolisKit.CityEventSender.updateTileAt(x: Swift.Int32, andY: Swift.Int32, tileIdx: Swift.Int32) -&gt; ()"
+                  symbolName = "MicropolisKit.CityEventSender.didGenerateMap() -&gt; ()"
                   moduleName = "MicropolisKit"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mr/Developer/Projects/micropolis/MicropolisKit/CityEventSender.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "73">
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "153">
                </Location>
                <Location
-                  uuid = "F9A4C09D-4CCB-4D10-84A6-39F718CFE4C2 - 31a7eafd7a9536c4"
-                  shouldBeEnabled = "Yes"
+                  uuid = "F9A4C09D-4CCB-4D10-84A6-39F718CFE4C2 - 31a7eafd7a95498e"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "MicropolisKit.CityEventSender.updateMap() -&gt; ()"
@@ -173,27 +141,11 @@
                   urlString = "file:///Users/mr/Developer/Projects/micropolis/MicropolisKit/CityEventSender.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4F1EA4BF-B23B-4F3C-8DE4-8644F99646F9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MicropolisKit/src/stubs.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "Micropolis::doPlayNewCity()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

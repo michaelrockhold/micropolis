@@ -30,12 +30,6 @@ public:
     virtual void doPlayNewCity(Micropolis* micropolis) {
         [micropolisOutgoing doPlayNewCity];
     }
-    virtual void doStartLoad(Micropolis* micropolis) {
-        [micropolisOutgoing doStartLoad];
-    }
-    virtual void doStartScenario(Micropolis* micropolis, int scenario) {
-        [micropolisOutgoing doStartScenario:scenario];
-    }
     virtual void doEarthquake(Micropolis* micropolis, int strength) {
         [micropolisOutgoing doEarthquakeWithStrength:strength];
     }
@@ -161,9 +155,8 @@ public:
     micropolis->generateSomeCity(seed);
 }
 
-- (void)loadScenario:(int)scenarioIndex {
-    //micropolis->loadScenario(scenarioIndex);
-    micropolis->generateSomeCity(99);
+- (void)loadScenario:(Scenario*)scenario {
+    micropolis->loadScenario(scenario);
 }
 
 - (void)generateMapUpdates {

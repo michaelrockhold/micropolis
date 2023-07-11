@@ -1505,7 +1505,7 @@ public:
 
     void doDisasters();
 
-    bool scenarioDisaster(Scenario* scenario);
+    void scenarioDisaster();
 
     bool vulnerable(int tem);
 
@@ -1633,13 +1633,9 @@ private:
 
     void doVotes();
 
-    ////////////////////////////////////////////////////////////////////////
-    // fileio.cpp
-
-    void loadScenario(Scenario* s);
-
 public:
 
+    void loadCityFromData(const unsigned short * cityData);
 
     bool loadFileDir(const char *filename, const char *dir);
 
@@ -1647,7 +1643,7 @@ public:
 
     bool saveFile(const char *filename);
 
-    void loadScenario(int scenarioIndex);
+    void loadScenario(Scenario* s);
 
     void didLoadScenario();
 
@@ -2002,7 +1998,7 @@ public:
 
     void checkGrowth();
 
-    void doScenarioScore(Scenario* scenario);
+    void doScenarioScore();
 
     void sendMessage(
                      enum MessageNumber Mnum,
@@ -2162,11 +2158,6 @@ public:
     short cashFlow;
 
     float externalMarket;
-
-    short disasterWait; ///< Count-down timer for the disaster
-
-//    Scenario scoreType; ///< The type of score table to use
-    short scoreWait; ///< Time to wait before computing the score
 
     short poweredZoneCount; ///< Number of powered tiles in all zone
     short unpoweredZoneCount; ///< Number of unpowered tiles in all zones
@@ -2390,7 +2381,7 @@ public:
 
     enum SimLoader initSimLoad;
 
-    Scenario* scenario; ///< Scenario being played
+    Scenario scenario; ///< Scenario being played
 
     short simSpeed;
 
@@ -2433,10 +2424,6 @@ public:
     Quad tickCount();
 
     void doPlayNewCity();
-
-    void doStartLoad();
-
-    void doStartScenario(int scenario);
 
     void initGame();
 

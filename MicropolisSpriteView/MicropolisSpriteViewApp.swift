@@ -9,6 +9,7 @@ import SwiftUI
 import MicropolisKit
 import SpriteKit
 import Combine
+import CoreGraphics
 
 @main
 struct MicropolisSpriteViewApp: App {
@@ -28,7 +29,6 @@ struct MicropolisSpriteViewApp: App {
     }
 }
 
-
 class CityObservable: ObservableObject {
     
     @Published var cityDate: Date = Date()
@@ -42,11 +42,14 @@ class CityObservable: ObservableObject {
     private let referenceDate: Date
             
     private var cityEventSubscription: AnyCancellable? = nil
+    private let scenarios: [SCScenario]
     
     
     public init(cityModel: CityModel, worldWidth: Int, worldHeight: Int) {
         
         self.cityModel = cityModel
+        
+        scenarios = MicropolisKit.SCScenario.loadScenarioResources()
         
         let calendar = Calendar(identifier: .gregorian)
         let dateCompenents = DateComponents( year: 1900, month: 1, day: 1)
@@ -68,7 +71,7 @@ class CityObservable: ObservableObject {
             .receive(on: RunLoop.main)
             .sink { (event: CityModel.Event) in self.handle(event: event) }
         
-        cityModel.run(scenarioID: CityModel.ScenarioID.BOSTON)
+        cityModel.run(scenario: scenarios[0])
     }
     
     private func setTile(forColumn column: Int, row: Int, tileIdx: Int) {

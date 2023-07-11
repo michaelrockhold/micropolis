@@ -20,8 +20,6 @@ class Micropolis;
 class MicropolisDelegate {
 public:
     virtual void doPlayNewCity(Micropolis* sender) = 0;
-    virtual void doStartLoad(Micropolis* sender) = 0;
-    virtual void doStartScenario(Micropolis* sender, int scenario) = 0;
     virtual void doEarthquake(Micropolis* sender, int strength) = 0;
     virtual void update(Micropolis* sender, const char * target) = 0;
     virtual void makeSound(Micropolis* sender, const char *channel, const char *sound,int x, int y) = 0;

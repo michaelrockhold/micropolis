@@ -80,10 +80,10 @@ void Micropolis::sendMessages()
     float TM;
 
     // Running a scenario, and waiting it to 'end' so we can give a score
-    if (scenario != NULL && scoreWait > 0) {
-        scoreWait--;
-        if (scoreWait == 0) {
-            doScenarioScore(scenario);
+    if (scenario.scoreWait > 0) {
+        scenario.scoreWait--;
+        if (scenario.scoreWait == 0) {
+            doScenarioScore();
         }
     }
 
@@ -240,7 +240,7 @@ void Micropolis::sendMessages()
 void Micropolis::checkGrowth()
 {
     if ((cityTime & 3) == 0) {
-        enum MessageNumber category = MESSAGE_SCENARIO_LOST;
+        enum MessageNumber category = MESSAGE_NO_NEWS;
         Quad thisCityPop = getPopulation();
 
         if (cityPopLast > 0) {
@@ -285,7 +285,7 @@ void Micropolis::checkGrowth()
             }
         }
 
-        if (category > 0 && category != categoryLast) {
+        if (category > MESSAGE_NO_NEWS && category != categoryLast) {
             sendMessage(category, NOWHERE, NOWHERE, true);
             categoryLast = category;
         }
@@ -297,14 +297,12 @@ void Micropolis::checkGrowth()
 
 /**
  * Compute score for each scenario
- * @param scenario Scenario used
- * @note Parameter \a type may not be \c SC_NONE
  */
-void Micropolis::doScenarioScore(Scenario* scenario)
+void Micropolis::doScenarioScore()
 {
     enum MessageNumber z = MESSAGE_SCENARIO_LOST;     /* you lose */
 
-    switch (scenario->winCriterion) {
+    switch (scenario.winCriterion) {
 
     case WINCRITERION_METROPOLIS:
         if (cityClass >= CC_METROPOLIS) {
@@ -313,19 +311,19 @@ void Micropolis::doScenarioScore(Scenario* scenario)
         break;
 
     case WINCRITERION_TRAFFIC:
-        if (trafficAverage < scenario->winCriterionArg) {
+        if (trafficAverage < scenario.winCriterionArg) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;
 
     case WINCRITERION_CITYSCORE:
-        if (cityScore > scenario->winCriterionArg) {
+        if (cityScore > scenario.winCriterionArg) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;
 
     case WINCRITERION_CRIME:
-        if (crimeAverage < scenario->winCriterionArg) {
+        if (crimeAverage < scenario.winCriterionArg) {
             z = MESSAGE_SCENARIO_WON;
         }
         break;

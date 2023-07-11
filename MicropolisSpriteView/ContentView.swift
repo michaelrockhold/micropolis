@@ -24,7 +24,7 @@ struct ContentView: View {
         
         self.cityObservable = cityObservable
         
-        var gameScene = GameScene()
+        let gameScene = GameScene()
         gameScene.size = CGSize(width: 1920, height: 1600)
         gameScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         gameScene.scaleMode = .fill
@@ -39,14 +39,9 @@ struct ContentView: View {
 
     }
     
-    var scene: SKScene {
-        return gameScene
-    }
-
     var body: some View {
         HStack {
-            Text(statusMessage)
-            Text(dateString)
+            Text(statusMessage); Spacer(); Text(dateString)
         }.onChange(of: cityObservable.cityDate) { newValue in
             dateString = self.dateFormatter.string(from:newValue)
         }.onChange(of: cityObservable.message) { newValue in
@@ -56,7 +51,7 @@ struct ContentView: View {
         ScrollView(Axis.Set(arrayLiteral: .horizontal, .vertical), showsIndicators: true) {
             VStack {
                 
-                SpriteView(scene: scene)
+                SpriteView(scene: gameScene)
                     .frame(width: 1920, height: 1600)
                     .ignoresSafeArea()
             }

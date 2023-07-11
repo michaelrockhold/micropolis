@@ -183,25 +183,6 @@ void Micropolis::doPlayNewCity()
     if (delegate) delegate->doPlayNewCity(this);
 }
 
-/** @bug Function is never called. */
-void Micropolis::doStartLoad()
-{
-    if (delegate) delegate->doStartLoad(this);
-}
-
-
-/**
- * Tell the front-end a scenario is started.
- * @param scenario The scenario being started.
- * @see Scenario.
- * @bug Function is never called.
- */
-void Micropolis::doStartScenario(int scenario)
-{
-    if (delegate) delegate->doStartScenario(this, scenario);
-}
-
-
 /**
  * Initialize the game.
  * This is called from the scripting language.

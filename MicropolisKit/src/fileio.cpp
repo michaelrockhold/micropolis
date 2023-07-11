@@ -71,7 +71,6 @@
 
 ////////////////////////////////////////////////////////////////////////
 
-
 #ifdef IS_INTEL
 
 /**
@@ -169,6 +168,12 @@ static bool load_short(short *buf, int len, FILE *f)
     return true;
 }
 
+static void load_shorts_from_buffer(short *buf, size_t len, const unsigned short *src)
+{
+    memcpy(buf, src, sizeof(short) * len);
+    SWAP_SHORTS(buf, len);        /* to intel */ // TODO: Use conventional ntoh functions
+}
+
 
 /**
  * Save an array of short values from memory to file.
@@ -190,6 +195,37 @@ static bool save_short(short *buf, int len, FILE *f)
     SWAP_SHORTS(buf, len);        /* back to intel */
 
     return true;
+}
+
+void Micropolis::loadCityFromData(const unsigned short * cityData) {
+    
+    size_t sz = HISTORY_LENGTH / sizeof(short);
+    size_t offset = 0;
+    load_shorts_from_buffer(resHist, sz, cityData+offset);
+    offset += sz;
+    
+    load_shorts_from_buffer(comHist, sz, cityData+offset);
+    offset += sz;
+    
+    load_shorts_from_buffer(indHist, sz, cityData+offset);
+    offset += sz;
+    
+    load_shorts_from_buffer(crimeHist, sz, cityData+offset);
+    offset += sz;
+    
+    load_shorts_from_buffer(pollutionHist, sz, cityData+offset);
+    offset += sz;
+    
+    load_shorts_from_buffer(moneyHist, sz, cityData+offset);
+    offset += sz;
+    
+    sz = MISC_HISTORY_LENGTH / sizeof(short);
+    load_shorts_from_buffer(miscHist, sz, cityData+offset);
+    offset += sz;
+    
+    sz = WORLD_W * WORLD_H;
+    load_shorts_from_buffer(((short *)&map[0][0]), sz, cityData+offset);
+    offset += sz;
 }
 
 /**
@@ -321,7 +357,6 @@ bool Micropolis::loadFile(const char *filename)
 
     // Set the scenario id to 0.
     initWillStuff();
-    scenario = NULL;
     initSimLoad = SIMLOADER_FROMFILE;
     doInitialEval = false;
     doSimInit();
@@ -402,6 +437,7 @@ bool Micropolis::saveFile(const char *filename)
  */
 void Micropolis::loadScenario(Scenario* scenario)
 {
+    this->scenario = *scenario;
     cityFileName = "";
 
     setGameLevel(LEVEL_EASY);
@@ -413,7 +449,7 @@ void Micropolis::loadScenario(Scenario* scenario)
     setSpeed(3);
     setCityTax(7);
 
-    loadFileDir(scenario->filename, resourceDir.c_str());
+    loadCityFromData((const unsigned short*)scenario->cityData);
 
     initWillStuff();
     initFundingLevel();
@@ -423,10 +459,6 @@ void Micropolis::loadScenario(Scenario* scenario)
     doInitialEval = false;
     doSimInit();
     didLoadScenario();
-}
-
-void Micropolis::loadScenario(int scenarioIndex) {
-    
 }
 
 /** Report to the front-end that the scenario was loaded. */

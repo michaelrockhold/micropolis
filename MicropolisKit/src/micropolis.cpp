@@ -299,8 +299,6 @@ Micropolis::Micropolis(MicropolisDelegate* micropolisDelegate) :
 
     cashFlow = 0;
     externalMarket = (float)4.0;
-    disasterWait = 0;
-    scoreWait = 0;
     poweredZoneCount = 0;
     unpoweredZoneCount = 0;
     newPower = false;
@@ -324,7 +322,6 @@ Micropolis::Micropolis(MicropolisDelegate* micropolisDelegate) :
     autoBudget = true;
 
     gameLevel = LEVEL_EASY;
-    scenario = NULL;
     simSpeed = 0;
     simSpeedMeta = 0;
     enableSound = false;
