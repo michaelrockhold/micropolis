@@ -29,10 +29,16 @@ struct MicropolisSpriteViewApp: App {
     }
 }
 
+//struct DisplayableMessage: Equatable {
+//    let isImportant: Bool
+//    let messageString: String
+//}
+
 class CityObservable: ObservableObject {
     
     @Published var cityDate: Date = Date()
-    @Published var message: String = ""
+    @Published var message = "" // DisplayableMessage(isImportant: false, messageString: "")
+    var isImportantMessage = false
     
     public let cityModel: CityModel!
     public let tileMapNode: SKTileMapNode
@@ -70,8 +76,6 @@ class CityObservable: ObservableObject {
         cityEventSubscription = cityModel.cityEventPublisher
             .receive(on: RunLoop.main)
             .sink { (event: CityModel.Event) in self.handle(event: event) }
-        
-        cityModel.run(scenario: scenarios[0])
     }
     
     private func setTile(forColumn column: Int, row: Int, tileIdx: Int) {
@@ -174,28 +178,16 @@ class CityObservable: ObservableObject {
             }
             
         case .SendMessage(let msgNum, let x, let y, let isPicture, let isImportant):
-            if isImportant  {
-                print("The next message is important")
-            }
-            message = NSLocalizedString("\(msgNum.rawValue)",
+            let str = NSLocalizedString("\(msgNum.rawValue)",
                                                   tableName: "Messages",
                                                   bundle:  CityModel.bundle,
                                                   value: "-error-",
                                                   comment: "msg")
+            isImportantMessage = isImportant
+            message = str //DisplayableMessage(isImportant: isImportant, messageString: str)
             
         case .Update(let kind):
-            switch kind {
-            case .Map:
-                print("MAP UPDATE")
-            case .History:
-                print("History Update")
-            case .Tick:
-                print("Tick update")
-            case .CityName:
-                print("City Update")
-            default:
-                print("UNHANDLED UPDATE \(kind)")
-            }
+            createUpdateHandler(kind: kind)()
             
         case .Tile(let column, let row, let tileIdx):
             self.setTile(forColumn: column, row: row, tileIdx: tileIdx)
@@ -209,8 +201,55 @@ class CityObservable: ObservableObject {
         case .DidGenerateMap:
             cityModel.startClock()
             
+        case .CreatedSprite(let spriteID):
+            print("created sprite with ID \(spriteID)")
+        case .DestroyedSprite(let spriteID):
+            print("destroyed sprite with ID \(spriteID)")
+        case .UpdatedSprite(let spriteID):
+            print("updated sprite with ID \(spriteID)")
+
         default:
             break
+        }
+    }
+    
+    func run() {
+        cityModel.run(scenario: scenarios[0])
+    }
+    func go() {
+        cityModel.startClock()
+    }
+    func pause() {
+        cityModel.stopClock()
+    }
+    
+    func createUpdateHandler(kind: CityModel.Interest) -> (()->Void) {
+        switch kind {
+        case .Map:
+            return { print("MAP UPDATE") }
+        case .History:
+            return { print("History Update") }
+        case .Tick:
+            return { print("Tick update") }
+        case .CityName:
+            return { print("City Update") }
+        case .Speed:
+            return { print("Speed Update") }
+        case .GameLevel:
+            return { print("GameLevel Update") }
+        case .TaxRate:
+            return { print("TaxRate Update") }
+        case .Demand:
+            return { print("Demand Update") }
+        case .Funds:
+            return { print("Funds Update") }
+        case .Budget:
+            return { print("Budget Update") }
+        case .Evaluation:
+            return { print("Evaluation Update") }
+
+        default:
+            return { print("UPDATE (OTHER: \(kind))") }
         }
     }
 }

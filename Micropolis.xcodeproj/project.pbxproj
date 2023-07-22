@@ -179,9 +179,16 @@
 		2E082FD229C3026200A0ED2B /* MicropolisSpriteView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E082FD029C3026200A0ED2B /* MicropolisSpriteView.xcdatamodeld */; };
 		2E082FD729C3027B00A0ED2B /* MicropolisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED86BD4295E8C1A00DA21C4 /* MicropolisKit.framework */; };
 		2E09076E29B44D770021F7F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E09076C29B44D770021F7F1 /* Assets.xcassets */; };
+		2E1223782A663602004DDDD8 /* HAMBURG.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223712A663601004DDDD8 /* HAMBURG.scenario */; };
+		2E1223792A663602004DDDD8 /* BERN.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223722A663601004DDDD8 /* BERN.scenario */; };
+		2E12237A2A663602004DDDD8 /* DULLSVILLE.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223732A663601004DDDD8 /* DULLSVILLE.scenario */; };
+		2E12237B2A663602004DDDD8 /* SAN_FRANCISCO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223742A663601004DDDD8 /* SAN_FRANCISCO.scenario */; };
+		2E12237C2A663602004DDDD8 /* DETROIT.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223752A663601004DDDD8 /* DETROIT.scenario */; };
+		2E12237D2A663602004DDDD8 /* RIO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223762A663601004DDDD8 /* RIO.scenario */; };
+		2E12237E2A663602004DDDD8 /* TOKYO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223772A663601004DDDD8 /* TOKYO.scenario */; };
 		2E18AACB29D8E6E1000245B3 /* MicropolisOutgoing.hh in Headers */ = {isa = PBXBuildFile; fileRef = 2E18AAC929D8E6E1000245B3 /* MicropolisOutgoing.hh */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E18AACC29D8E6E1000245B3 /* MicropolisIncoming.hh in Headers */ = {isa = PBXBuildFile; fileRef = 2E18AACA29D8E6E1000245B3 /* MicropolisIncoming.hh */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E26FD6D2A4D199500275A67 /* SEATTLE.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E26FD6C2A4D199500275A67 /* SEATTLE.scenario */; };
+		2E26FD6D2A4D199500275A67 /* BOSTON.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E26FD6C2A4D199500275A67 /* BOSTON.scenario */; };
 		2E26FD702A53720E00275A67 /* SCScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E26FD6E2A53695C00275A67 /* SCScenario.swift */; };
 		2E26FD742A58B7C300275A67 /* Scenario.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E26FD732A58B7C300275A67 /* Scenario.cpp */; };
 		2E367B572A273C3F00CB4ADA /* SpriteType.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E367B562A273BCB00CB4ADA /* SpriteType.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -500,9 +507,16 @@
 		2E082FD129C3026200A0ED2B /* MicropolisSpriteView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MicropolisSpriteView.xcdatamodel; sourceTree = "<group>"; };
 		2E082FD329C3026200A0ED2B /* MicropolisSpriteView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MicropolisSpriteView.entitlements; sourceTree = "<group>"; };
 		2E09076C29B44D770021F7F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2E1223712A663601004DDDD8 /* HAMBURG.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = HAMBURG.scenario; sourceTree = SOURCE_ROOT; };
+		2E1223722A663601004DDDD8 /* BERN.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = BERN.scenario; sourceTree = SOURCE_ROOT; };
+		2E1223732A663601004DDDD8 /* DULLSVILLE.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = DULLSVILLE.scenario; sourceTree = SOURCE_ROOT; };
+		2E1223742A663601004DDDD8 /* SAN_FRANCISCO.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = SAN_FRANCISCO.scenario; sourceTree = SOURCE_ROOT; };
+		2E1223752A663601004DDDD8 /* DETROIT.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = DETROIT.scenario; sourceTree = SOURCE_ROOT; };
+		2E1223762A663601004DDDD8 /* RIO.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = RIO.scenario; sourceTree = SOURCE_ROOT; };
+		2E1223772A663601004DDDD8 /* TOKYO.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = TOKYO.scenario; sourceTree = SOURCE_ROOT; };
 		2E18AAC929D8E6E1000245B3 /* MicropolisOutgoing.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MicropolisOutgoing.hh; sourceTree = "<group>"; };
 		2E18AACA29D8E6E1000245B3 /* MicropolisIncoming.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MicropolisIncoming.hh; sourceTree = "<group>"; };
-		2E26FD6C2A4D199500275A67 /* SEATTLE.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = SEATTLE.scenario; sourceTree = SOURCE_ROOT; };
+		2E26FD6C2A4D199500275A67 /* BOSTON.scenario */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; path = BOSTON.scenario; sourceTree = SOURCE_ROOT; };
 		2E26FD6E2A53695C00275A67 /* SCScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCScenario.swift; sourceTree = "<group>"; };
 		2E26FD732A58B7C300275A67 /* Scenario.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scenario.cpp; sourceTree = "<group>"; };
 		2E367B562A273BCB00CB4ADA /* SpriteType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteType.h; sourceTree = "<group>"; };
@@ -968,7 +982,14 @@
 		2E26FD692A4C2E9700275A67 /* Scenarios */ = {
 			isa = PBXGroup;
 			children = (
-				2E26FD6C2A4D199500275A67 /* SEATTLE.scenario */,
+				2E26FD6C2A4D199500275A67 /* BOSTON.scenario */,
+				2E1223722A663601004DDDD8 /* BERN.scenario */,
+				2E1223752A663601004DDDD8 /* DETROIT.scenario */,
+				2E1223732A663601004DDDD8 /* DULLSVILLE.scenario */,
+				2E1223712A663601004DDDD8 /* HAMBURG.scenario */,
+				2E1223762A663601004DDDD8 /* RIO.scenario */,
+				2E1223742A663601004DDDD8 /* SAN_FRANCISCO.scenario */,
+				2E1223772A663601004DDDD8 /* TOKYO.scenario */,
 			);
 			path = Scenarios;
 			sourceTree = "<group>";
@@ -1276,9 +1297,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E26FD6D2A4D199500275A67 /* SEATTLE.scenario in Resources */,
+				2E1223792A663602004DDDD8 /* BERN.scenario in Resources */,
+				2E12237A2A663602004DDDD8 /* DULLSVILLE.scenario in Resources */,
+				2E12237B2A663602004DDDD8 /* SAN_FRANCISCO.scenario in Resources */,
+				2E1223782A663602004DDDD8 /* HAMBURG.scenario in Resources */,
+				2E26FD6D2A4D199500275A67 /* BOSTON.scenario in Resources */,
+				2E12237C2A663602004DDDD8 /* DETROIT.scenario in Resources */,
+				2E12237E2A663602004DDDD8 /* TOKYO.scenario in Resources */,
 				2ED152562A42C2F2003EC7D9 /* Assets.xcassets in Resources */,
 				2E082FCD29C3026200A0ED2B /* Preview Assets.xcassets in Resources */,
+				2E12237D2A663602004DDDD8 /* RIO.scenario in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

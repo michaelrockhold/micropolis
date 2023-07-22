@@ -36,6 +36,10 @@
 - (void)didToolWithName:(NSString*)name atX:(int)x andY:(int)y;
 - (void)didGenerateMap;
 - (void)updateTileAtX:(int)x andY:(int)y tileIdx:(int)tIdx;
+
+- (void)didCreateSprite:(int)spriteID;
+- (void)didDestroySprite:(int)spriteID;
+- (void)didUpdateSprite:(int)spriteID;
 @end
 
 #endif /* MicropolisOutgoing_h */

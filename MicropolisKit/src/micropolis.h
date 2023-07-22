@@ -2055,7 +2055,10 @@ private:
 
     short getRandom(short range);
 
+public: // TODO: back to private, but with Sprite classes befriended
     int getRandom16();
+    
+private:
 
     int getRandom16Signed();
 
@@ -2264,7 +2267,7 @@ private:
     int nextSpriteID;
 
     SimSprite *newSprite(enum SpriteType type, int x, int y);
-    
+        
     SimSprite *globalSprites[SPRITE_COUNT];
 
 public:
@@ -2277,13 +2280,14 @@ public:
 
     SimSprite *makeSprite(enum SpriteType type, int x, int y);
 
+    void didUpdateSprite(int sprite_id);
 
 private:
 
     int absDist;
 
+public: // TODO: make private, but let the Sprite classes be friends
     short spriteCycle;
-
 
 public:
 

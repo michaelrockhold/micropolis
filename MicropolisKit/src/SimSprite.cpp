@@ -22,14 +22,87 @@ public:
         this->dir = 4;
     }
     virtual enum SpriteType type() { return SPRITE_TRAIN; }
+    
+    /**
+     * Move train sprite.
+     * @param mp Micropolis context.
+     */
     virtual void doMove(Micropolis* mp) {
-        mp->doTrainSprite(this);
+                
+        /* Offset in pixels of sprite x and y to map tile */
+        static const short Cx[4] = {   0,  16,   0, -16 };
+        static const short Cy[4] = { -16,   0,  16,   0 };
+        /* X and Y movement of the sprite in pixels */
+        static const short Dx[5] = {   0,   4,   0,  -4,   0 };
+        static const short Dy[5] = {  -4,   0,   4,   0,   0 };
+        
+        static const short TrainPic2[5] = { 1, 2, 1, 2, 5 };
+        short z, dir, dir2;
+        short c;
+        
+        if (this->frame == 3 || this->frame == 4) {
+            this->frame = TrainPic2[this->dir];
+        }
+        
+        this->x += Dx[this->dir];
+        this->y += Dy[this->dir];
+        
+        if ((mp->spriteCycle & 3) == 0) {
+            
+            dir = mp->getRandom16() & 3;
+            for (z = dir; z < dir + 4; z++) {
+                dir2 = z & 3;
+                
+                if (this->dir != 4) {
+                    if (dir2 == ((this->dir + 2) & 3)) {
+                        continue;
+                    }
+                }
+                
+                c = mp->getChar(this->x + Cx[dir2] + 48, this->y + Cy[dir2]);
+                
+                if ((c >= RAILBASE && c <= LASTRAIL) /* track? */
+                    || c == RAILVPOWERH || c == RAILHPOWERV) {
+                    
+                    if (this->dir != dir2 && this->dir != 4) {
+                        
+                        if (this->dir + dir2 == 3) {
+                            this->frame = 3;
+                        } else {
+                            this->frame = 4;
+                        }
+                        
+                    } else {
+                        this->frame = TrainPic2[dir2];
+                    }
+                    
+                    if (c == HRAIL || c == VRAIL) {
+                        this->frame = 5;
+                    }
+                    
+                    this->dir = dir2;
+                    return;
+                }
+            }
+            
+            if (this->dir == 4) {
+                this->frame = 0;
+                return;
+            }
+            
+            this->dir = 4;
+        }
+        
+        mp->didUpdateSprite(this->spriteID);
     }
-    enum MessageNumber crashMsgNum() { return MESSAGE_TRAIN_CRASHED; }
+
+
+
+enum MessageNumber crashMsgNum() { return MESSAGE_TRAIN_CRASHED; }
 };
 
 class ShipSprite: public SimSprite {
-    public:
+public:
     ShipSprite(Micropolis* context, int id, int x, int y) : SimSprite(context, id, x, y) {
         this->width = 48;
         this->height = 48;
@@ -147,7 +220,7 @@ public:
         mp->doAirplaneSprite(this);
     }
     enum MessageNumber crashMsgNum() { return MESSAGE_PLANE_CRASHED; }
-
+    
     virtual bool canCrash(SimSprite* other) {
         return other->type() == SPRITE_HELICOPTER || other->type() == SPRITE_AIRPLANE;
     }
@@ -187,7 +260,7 @@ public:
         this->frame = 1;
     }
     virtual ~ExplosionSprite() {
-        printf("deleting ExplosionSprite");
+        printf("deleting ExplosionSprite\n");
     }
     virtual enum SpriteType type() { return SPRITE_EXPLOSION; }
     virtual void doMove(Micropolis* mp) {
@@ -302,7 +375,7 @@ bool SimSprite::checkSpriteCollision(SimSprite *other)
     return this->frame != 0 && other && other->frame != 0
     && this->canCrash(other)
     && SimSprite::getDistance(this->x + this->xHot, this->y + this->yHot,
-                other->x + other->xHot, other->y + other->yHot) < 30;
+                              other->x + other->xHot, other->y + other->yHot) < 30;
 }
 
 enum MessageNumber SimSprite::crashMsgNum() {

@@ -167,6 +167,10 @@ SimSprite *Micropolis::makeSprite(enum SpriteType type, int x, int y) {
     return newSprite(type, x, y);
 }
 
+void Micropolis::didUpdateSprite(int sprite_id) {
+    delegate->didUpdateSprite(this, sprite_id);
+}
+
 
 /**
  * Get character from the map.

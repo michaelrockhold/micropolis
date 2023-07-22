@@ -100,12 +100,14 @@ public:
     }
     
     virtual void newSprite(Micropolis* sender, int sprite_id) {
-        NSLog(@"creating a sprite");
+        [micropolisOutgoing didCreateSprite:sprite_id];
     }
     virtual void destroySprite(Micropolis* sender, int sprite_id) {
-        NSLog(@"destroying a sprite");
+        [micropolisOutgoing didDestroySprite:sprite_id];
     }
-
+    virtual void didUpdateSprite(Micropolis* sender, int sprite_id) {
+        [micropolisOutgoing didUpdateSprite:sprite_id];
+    }
 };
 
 

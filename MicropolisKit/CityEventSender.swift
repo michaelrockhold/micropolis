@@ -115,4 +115,16 @@ import Combine
     public func updateTileAt(x: Int32, andY y: Int32, tileIdx t: Int32) {
         eventSubject.send(CityModel.Event.Tile(Int(x), Int(y), Int(t)))
     }
+    
+    public func didCreateSprite(_ spriteID: Int32) {
+        eventSubject.send(CityModel.Event.CreatedSprite(Int(spriteID)));
+    }
+    
+    public func didDestroySprite(_ spriteID: Int32) {
+        eventSubject.send(CityModel.Event.DestroyedSprite(Int(spriteID)));
+    }
+
+    public func didUpdateSprite(_ spriteID: Int32) {
+        eventSubject.send(CityModel.Event.UpdatedSprite(Int(spriteID)));
+    }
 }

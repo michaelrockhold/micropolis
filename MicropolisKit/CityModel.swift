@@ -97,6 +97,11 @@ public class CityModel {
         case DidTool(String /* name */, Int /* x */, Int /* y */)
         case DidGenerateMap
         case Tile(Int, Int, Int) // column, row, tileIdx
+        
+        case CreatedSprite(Int) // sprite ID
+        case DestroyedSprite(Int) // sprite ID
+        case UpdatedSprite(Int) // sprite ID
+        
     }
             
     private let cityActor: CityActor

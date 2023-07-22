@@ -16,6 +16,7 @@ struct ContentView: View {
     @ObservedObject var cityObservable : CityObservable
     @State private var dateString: String = ""
     @State private var statusMessage: String = ""
+    @State private var isImportantMessage = false
 
     private var gameScene: GameScene
     private var dateFormatter: DateFormatter
@@ -36,7 +37,11 @@ struct ContentView: View {
         self.dateFormatter = DateFormatter();
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = .medium
-
+        
+        Task.detached {
+            try! await Task.sleep(for: Duration.seconds(1))
+            cityObservable.run()
+        }
     }
     
     var body: some View {
@@ -45,8 +50,24 @@ struct ContentView: View {
         }.onChange(of: cityObservable.cityDate) { newValue in
             dateString = self.dateFormatter.string(from:newValue)
         }.onChange(of: cityObservable.message) { newValue in
+            if cityObservable.isImportantMessage {
+                isImportantMessage = true
+                cityObservable.pause()
+            }
             statusMessage = newValue
         }
+        .alert(
+            "Important Message",
+            isPresented: $isImportantMessage,
+            presenting: cityObservable.message
+        ) { details in
+            Button("Whatever") {
+                cityObservable.go()
+            }
+        } message: { details in
+            Text(statusMessage)
+        }
+        
 
         ScrollView(Axis.Set(arrayLiteral: .horizontal, .vertical), showsIndicators: true) {
             VStack {

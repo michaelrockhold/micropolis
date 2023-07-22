@@ -157,6 +157,7 @@ You have 5 years to get the situation under control.""",
 You have 10 years to turn this swamp back into a city again.""",
         },
 
+// RENAME cityTime to cityStartTime
 void Micropolis::loadScenario(Scenario s)
 {
     const char *name = NULL;
@@ -234,6 +235,7 @@ void Micropolis::loadScenario(Scenario s)
 
 
     // Disaster delay table for each scenario
+    // RENAME disasterWait to disasterCountdown
     static const short disasterWaitTable[SC_COUNT] = {
         0,          // No scenario (free playing)
         2,          // Dullsville (boredom)
@@ -247,6 +249,7 @@ void Micropolis::loadScenario(Scenario s)
     };
 
     // Time to wait before score calculation for each scenario
+    // RENAME SCOREWAIT to evaluationDeadline
     static const short scoreWaitTable[SC_COUNT] = {
         0,          // No scenario (free playing)
         30 * 48,    // Dullsville (boredom)
@@ -268,7 +271,7 @@ doShipSprite() etc
             }
 
 
-
+// CrisisTimeMode
 /** Let disasters of the scenario happen */
 void Micropolis::scenarioDisaster()
 {
@@ -397,3 +400,9 @@ void Micropolis::doScenarioScore(Scenario type)
         doLoseGame();
     }
 }
+
+RENAME
+// RENAME cityTime to cityStartTime
+    crisisTimeMode => disasterTimeMode
+    crisisType => disasterType
+    crisisTime => disasterTime

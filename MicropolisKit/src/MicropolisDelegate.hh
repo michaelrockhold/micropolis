@@ -43,6 +43,7 @@ public:
     
     virtual void newSprite(Micropolis* sender, int sprite_id) = 0;
     virtual void destroySprite(Micropolis* sender, int sprite_id) = 0;
+    virtual void didUpdateSprite(Micropolis* sender, int sprite_id) = 0;
 };
 
 #endif /* MicropolisDelegate_hh */
