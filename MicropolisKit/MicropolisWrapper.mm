@@ -99,7 +99,7 @@ public:
         [micropolisOutgoing didGenerateMap];
     }
     
-    virtual void newSprite(Micropolis* sender, int sprite_id) {
+    virtual void didCreateSprite(Micropolis* sender, int sprite_id) {
         [micropolisOutgoing didCreateSprite:sprite_id];
     }
     virtual void destroySprite(Micropolis* sender, int sprite_id) {

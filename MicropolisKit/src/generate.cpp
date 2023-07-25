@@ -107,7 +107,7 @@ void Micropolis::generateSomeCity(int seed)
 
     simUpdate();
 
-    if (delegate) delegate->didGenerateMap(this);
+    delegate->didGenerateMap(this);
 }
 
 

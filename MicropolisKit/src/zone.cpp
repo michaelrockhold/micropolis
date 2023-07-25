@@ -209,7 +209,7 @@ void Micropolis::doHospitalChurch(const Position &pos)
 		    break;
 	    }
 
-            if (delegate) delegate->doSimulateChurch(this, pos.posX, pos.posY, churchNumber);
+            delegate->doSimulateChurch(this, pos.posX, pos.posY, churchNumber);
         }
 
     }

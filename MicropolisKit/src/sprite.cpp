@@ -82,43 +82,19 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-
-/**
- * Create and initialize a sprite.
- * @param type Type pf the sprite. @see SpriteType.
- * @param x X coordinate of the sprite (in pixels).
- * @param y Y coordinate of the sprite (in pixels).
- * @return New sprite object.
- */
-SimSprite *Micropolis::newSprite(enum SpriteType type, int x, int y)
-{
-    SimSprite * oldSprite = globalSprites[type];
-    if (oldSprite) {
-        destroySprite(oldSprite);
-    }
-    SimSprite * sprite = SimSprite::make(this, type, nextSpriteID++, x, y);
-    globalSprites[type] = sprite;
-    
-    delegate->newSprite(this, sprite->spriteID);
-    return sprite;
-}
-
-
 /**
  * Destroy all sprites by de-activating them all (setting their
  * SimSprite::frame to 0).
  */
 void Micropolis::destroyAllSprites()
 {
-    for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-        
-        SimSprite *sprite = globalSprites[sprite_type_idx];
-        if (sprite) {
-            destroySprite(sprite);
-        }
-    }
+    SimSprite::doForEach([this](SimSprite* s) { destroySprite(s); });
 }
 
+
+void Micropolis::didCreateSprite(SimSprite* s) {
+    delegate->didCreateSprite(this, s->spriteID);
+}
 
 /**
  * Destroy the sprite by taking it out of the active list.
@@ -127,45 +103,10 @@ void Micropolis::destroyAllSprites()
  */
 void Micropolis::destroySprite(SimSprite *sprite)
 {
-    if (globalSprites[sprite->type()] == sprite) {
-        globalSprites[sprite->type()] = (SimSprite *)NULL;
-    }
     delegate->destroySprite(this, sprite->spriteID);
     delete sprite;
 }
 
-
-/**
- * Return the sprite of the give type, if available.
- * @param type Type of the sprite.
- * @return Pointer to the active sprite if avaiable, else \c NULL.
- */
-SimSprite *Micropolis::getSprite(enum SpriteType type)
-{
-    SimSprite *sprite = globalSprites[type];
-    if (sprite == NULL || sprite->frame == 0) {
-        return (SimSprite *)NULL;
-    } else {
-        return sprite;
-    }
-}
-
-
-/**
- * Make a sprite either by re-using the old one, or by making a new one.
- * @param type Sprite type of the new sprite.
- * @param x    X coordinate of the new sprite.
- * @param y    Y coordinate of the new sprite.
- */
-SimSprite *Micropolis::makeSprite(enum SpriteType type, int x, int y) {
-    
-    SimSprite *sprite = globalSprites[type];
-    if (sprite) {
-        destroySprite(sprite);
-        globalSprites[type] = NULL;
-    }
-    return newSprite(type, x, y);
-}
 
 void Micropolis::didUpdateSprite(int sprite_id) {
     delegate->didUpdateSprite(this, sprite_id);
@@ -334,8 +275,6 @@ int Micropolis::getDistance(int x1, int y1, int x2, int y2)
 }
 
 
-
-
 /**
  * Move all sprites.
  *
@@ -348,1013 +287,14 @@ void Micropolis::moveObjects() {
     }
     
     spriteCycle++;
-    for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-        
-        SimSprite *sprite = globalSprites[sprite_type_idx];
-        if (!sprite) {
-            continue;
-        }
-        
-        if (sprite->frame <= 0) {
-            destroySprite(sprite);
+
+    SimSprite::doForEach([this](SimSprite* s) mutable {
+        if (s->frame <= 0) {
+            this->destroySprite(s);
         } else {
-            sprite->doMove(this);
+            s->doMove();
         }
-    }
-}
-
-
-/**
- * Move train sprite.
- * @param sprite Train sprite.
- * @todo Remove local magic constants and document the code.
- */
-void Micropolis::doTrainSprite(SimSprite *sprite) {
-    /* Offset in pixels of sprite x and y to map tile */
-    static const short Cx[4] = {   0,  16,   0, -16 };
-    static const short Cy[4] = { -16,   0,  16,   0 };
-    /* X and Y movement of the sprite in pixels */
-    static const short Dx[5] = {   0,   4,   0,  -4,   0 };
-    static const short Dy[5] = {  -4,   0,   4,   0,   0 };
-    
-    static const short TrainPic2[5] = { 1, 2, 1, 2, 5 };
-    short z, dir, dir2;
-    short c;
-    
-    if (sprite->frame == 3 || sprite->frame == 4) {
-        sprite->frame = TrainPic2[sprite->dir];
-    }
-    
-    sprite->x += Dx[sprite->dir];
-    sprite->y += Dy[sprite->dir];
-    
-    if ((spriteCycle & 3) == 0) {
-        
-        dir = getRandom16() & 3;
-        for (z = dir; z < dir + 4; z++) {
-            dir2 = z & 3;
-            
-            if (sprite->dir != 4) {
-                if (dir2 == ((sprite->dir + 2) & 3)) {
-                    continue;
-                }
-            }
-            
-            c = getChar(sprite->x + Cx[dir2] + 48, sprite->y + Cy[dir2]);
-            
-            if ((c >= RAILBASE && c <= LASTRAIL) /* track? */
-                || c == RAILVPOWERH || c == RAILHPOWERV) {
-                
-                if (sprite->dir != dir2 && sprite->dir != 4) {
-                    
-                    if (sprite->dir + dir2 == 3) {
-                        sprite->frame = 3;
-                    } else {
-                        sprite->frame = 4;
-                    }
-                    
-                } else {
-                    sprite->frame = TrainPic2[dir2];
-                }
-                
-                if (c == HRAIL || c == VRAIL) {
-                    sprite->frame = 5;
-                }
-                
-                sprite->dir = dir2;
-                return;
-            }
-        }
-        
-        if (sprite->dir == 4) {
-            sprite->frame = 0;
-            return;
-        }
-        
-        sprite->dir = 4;
-    }
-}
-
-/**
- * Move helicopter sprite.
- * @param sprite Helicopter sprite.
- * @todo Remove local magic constants and document the code.
- */
-void Micropolis::doCopterSprite(SimSprite *sprite)
-{
-    static const short CDx[9] = { 0,  0,  3,  5,  3,  0, -3, -5, -3 };
-    static const short CDy[9] = { 0, -5, -3,  0,  3,  5,  3,  0, -3 };
-    
-    if (sprite->soundCount > 0) {
-        sprite->soundCount--;
-    }
-    
-    if (sprite->control < 0) {
-        
-        if (sprite->count > 0) {
-            sprite->count--;
-        }
-        
-        if (sprite->count == 0) {
-            
-            /* Attract copter to monster so it blows up more often */
-            SimSprite *s = getSprite(SPRITE_MONSTER);
-            
-            if (s != NULL) {
-                sprite->destX = s->x;
-                sprite->destY = s->y;
-            } else {
-                
-                /* Attract copter to tornado so it blows up more often */
-                s = getSprite(SPRITE_TORNADO);
-                
-                if (s != NULL) {
-                    sprite->destX = s->x;
-                    sprite->destY = s->y;
-                } else {
-                    sprite->destX = sprite->origX;
-                    sprite->destY = sprite->origY;
-                }
-                
-            }
-        }
-        
-        if (sprite->count == 0) { /* land */
-            getDir(sprite->x, sprite->y, sprite->origX, sprite->origY);
-            
-            if (absDist < 30) {
-                sprite->frame = 0;
-                return;
-            }
-            
-        }
-        
-    } else {
-        
-        getDir(sprite->x, sprite->y, sprite->destX, sprite->destY);
-        
-        if (absDist < 16) {
-            sprite->destX = sprite->origX;
-            sprite->destY = sprite->origY;
-            sprite->control = -1;
-        }
-        
-    }
-    
-    if (sprite->soundCount == 0) { /* send report  */
-        
-        // Convert sprite coordinates to world coordinates.
-        short x = (sprite->x + 48) / 16;
-        short y = sprite->y / 16;
-        
-        if (x >= 0 && x < WORLD_W && y >= 0 && y < WORLD_H) {
-            
-            /* Don changed from 160 to 170 to shut the #$%#$% thing up! */
-            
-            int chopperX = x + 1;
-            int chopperY = y + 1;
-            if (trafficDensityMap.worldGet(x, y) > 170 && (getRandom16() & 7) == 0) {
-                sendMessage(MESSAGE_HEAVY_TRAFFIC, chopperX, chopperY, true);
-                makeSound("city", "HeavyTraffic", chopperX, chopperY); /* chopper */
-                sprite->soundCount = 200;
-            }
-            
-        }
-        
-    }
-    
-    short z = sprite->frame;
-    
-    if ((spriteCycle & 3) == 0) {
-        short d = getDir(sprite->x, sprite->y, sprite->destX, sprite->destY);
-        z = turnTo(z, d);
-        sprite->frame = z;
-    }
-    
-    sprite->x += CDx[z];
-    sprite->y += CDy[z];
-}
-
-
-/**
- * Move airplane sprite.
- * @param sprite Airplane sprite.
- * @todo Remove local magic constants and document the code.
- * @todo absDist gets updated by Micropolis::getDir(), which is not always
- *       called before reading it (or worse, we just turned towards the old
- *       destination).
- */
-void Micropolis::doAirplaneSprite(
-                                  SimSprite *sprite)
-{
-    static const short CDx[12] = { 0,  0,  6, 8, 6, 0, -6, -8, -6, 8, 8, 8 };
-    static const short CDy[12] = { 0, -8, -6, 0, 6, 8,  6,  0, -6, 0, 0, 0 };
-    
-    short z = sprite->frame;
-    
-    if ((spriteCycle % 5) == 0) {
-        
-        if (z > 8) { /* TakeOff  */
-            z--;
-            if (z < 9) {
-                z = 3;
-            }
-            sprite->frame = z;
-        } else { /* goto destination */
-            short d = getDir(sprite->x, sprite->y, sprite->destX, sprite->destY);
-            z = turnTo(z, d);
-            sprite->frame = z;
-        }
-        
-    }
-    
-    if (absDist < 50) { /* at destination  */
-        sprite->destX = getRandom((WORLD_W * 16) + 100) - 50;
-        sprite->destY = getRandom((WORLD_H * 16) + 100) - 50;
-    }
-    
-    /* deh added test for enableDisasters */
-    if (enableDisasters) {
-        bool explode = false;
-        
-        /* Check whether another sprite is near enough to collide with */
-        for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-            
-            SimSprite *s = globalSprites[sprite_type_idx];
-            if (!s || s->frame == 0 || s == sprite) {
-                /* Non-active sprite, or self: skip */
-                continue;
-            }
-            
-            if (sprite->checkSpriteCollision(s)) {
-                explodeSprite(s);
-                explode = true;
-            }
-        }
-        
-        if (explode) {
-            explodeSprite(sprite);
-        }
-    }
-    
-    sprite->x += CDx[z];
-    sprite->y += CDy[z];
-    
-    if (spriteNotInBounds(sprite)) {
-        sprite->frame = 0;
-    }
-}
-
-
-/**
- * Move ship sprite.
- * @param sprite Ship sprite.
- * @todo Remove local magic constants and document the code.
- */
-void Micropolis::doShipSprite(SimSprite *sprite)
-{
-    static const short BDx[9] = { 0,  0,  1,  1,  1,  0, -1, -1, -1 };
-    static const short BDy[9] = { 0, -1, -1,  0,  1,  1,  1,  0, -1 };
-    static const short BPx[9] = { 0,  0,  2,  2,  2,  0, -2, -2, -2 };
-    static const short BPy[9] = { 0, -2, -2,  0,  2,  2,  2,  0, -2 };
-    static const short BtClrTab[8] = { RIVER, CHANNEL, POWERBASE, POWERBASE + 1,
-        RAILBASE, RAILBASE + 1, BRWH, BRWV };
-    short x, y, z, t = RIVER;
-    short tem, pem;
-    
-    if (sprite->soundCount > 0) {
-        sprite->soundCount--;
-    }
-    
-    if (!sprite->soundCount) {
-        
-        if ((getRandom16() & 3) == 1) {
-            
-            // Convert sprite coordinates to tile coordinates.
-            int shipX = sprite->x >>4;
-            int shipY = sprite->y >>4;
-            
-            if (scenario.hasFoghorns && getRandom(10) < 5) {
-                makeSound("city", "FogHornLow", shipX, shipY);
-            } else {
-                makeSound("city", "HonkHonkLow", shipX, shipY);
-            }
-            
-        }
-        
-        sprite->soundCount = 200;
-    }
-    
-    if (sprite->count > 0) {
-        sprite->count--;
-    }
-    
-    if (sprite->count == 0) {
-        
-        sprite->count = 9;
-        
-        if (sprite->frame != sprite->newDir) {
-            sprite->frame = turnTo(sprite->frame, sprite->newDir);
-            return;
-        }
-        
-        tem = getRandom16() & 7;
-        
-        for (pem = tem; pem < (tem + 8); pem++) {
-            
-            z = (pem & 7) + 1;
-            
-            if (z == sprite->dir) {
-                continue;
-            }
-            
-            x = ((sprite->x + (48 - 1)) >>4) + BDx[z];
-            y = (sprite->y >>4) + BDy[z];
-            
-            if (testBounds(x, y)) {
-                
-                t = map[x][y] & LOMASK;
-                
-                if (t == CHANNEL || t == BRWH || t == BRWV
-                    || tryOther(t, sprite->dir, z)) {
-                    
-                    sprite->newDir = z;
-                    sprite->frame = turnTo(sprite->frame, sprite->newDir);
-                    sprite->dir = z + 4;
-                    
-                    if (sprite->dir > 8) {
-                        sprite->dir -= 8;
-                    }
-                    
-                    break;
-                }
-            }
-        }
-        
-        if (pem == (tem + 8)) {
-            sprite->dir = 10;
-            sprite->newDir = (getRandom16() & 7) + 1;
-        }
-        
-    } else {
-        
-        z = sprite->frame;
-        
-        if (z == sprite->newDir)  {
-            sprite->x += BPx[z];
-            sprite->y += BPy[z];
-        }
-    }
-    
-    if (spriteNotInBounds(sprite)) {
-        sprite->frame = 0;
-        return;
-    }
-    
-    for (z = 0; z < 8; z++) {
-        
-        if (t == BtClrTab[z]) {
-            break;
-        }
-        
-        if (z == 7) {
-            explodeSprite(sprite);
-            destroyMapTile(sprite->x + 48, sprite->y);
-        }
-        
-    }
-}
-
-
-/**
- * Move monster sprite.
- *
- * There are 16 monster sprite frames:
- *
- * Frame 0: NorthEast Left Foot
- * Frame 1: NorthEast Both Feet
- * Frame 2: NorthEast Right Foot
- * Frame 3: SouthEast Right Foot
- * Frame 4: SouthEast Both Feet
- * Frame 5: SouthEast Left Foot
- * Frame 6: SouthWest Right Foot
- * Frame 7: SouthWest Both Feet
- * Frame 8: SouthWest Left Foot
- * Frame 9: NorthWest Left Foot
- * Frame 10: NorthWest Both Feet
- * Frame 11: NorthWest Right Foot
- * Frame 12: North Left Foot
- * Frame 13: East Left Foot
- * Frame 14: South Right Foot
- * Frame 15: West Right Foot
- *
- * @param sprite Monster sprite.
- * @todo Remove local magic constants and document the code.
- */
-void Micropolis::doMonsterSprite(SimSprite *sprite)
-{
-    static const short Gx[5] = {  2,  2, -2, -2,  0 };
-    static const short Gy[5] = { -2,  2,  2, -2,  0 };
-    static const short ND1[4] = {  0,  1,  2,  3 };
-    static const short ND2[4] = {  1,  2,  3,  0 };
-    static const short nn1[4] = {  2,  5,  8, 11 };
-    static const short nn2[4] = { 11,  2,  5,  8 };
-    short d, z, c;
-    
-    if (sprite->soundCount > 0) {
-        sprite->soundCount--;
-    }
-    
-    if (sprite->control < 0) {
-        /* business as usual */
-        
-        if (sprite->control == -2) {
-            
-            d = (sprite->frame - 1) / 3;
-            z = (sprite->frame - 1) % 3;
-            
-            if (z == 2) {
-                sprite->step = 0;
-            }
-            
-            if (z == 0) {
-                sprite->step = 1;
-            }
-            
-            if (sprite->step) {
-                z++;
-            } else {
-                z--;
-            }
-            
-            c = getDir(sprite->x, sprite->y, sprite->destX, sprite->destY);
-            
-            if (absDist < 18) {
-                
-                sprite->control = -1;
-                sprite->count = 1000;
-                sprite->flag = 1;
-                sprite->destX = sprite->origX;
-                sprite->destY = sprite->origY;
-                
-            } else {
-                
-                c = (c - 1) / 2;
-                
-                if ((c != d && getRandom(5) == 0) || getRandom(20) == 0) {
-                    
-                    int diff = (c - d) & 3;
-                    
-                    if (diff == 1 || diff == 3) {
-                        d = c;
-                    } else {
-                        
-                        if (getRandom16() & 1) {
-                            d++;
-                        } else {
-                            d--;
-                        }
-                        
-                        d &= 3;
-                    }
-                } else {
-                    
-                    if (getRandom(20) == 0) {
-                        
-                        if (getRandom16() & 1) {
-                            d++;
-                        } else {
-                            d--;
-                        }
-                        
-                        d &= 3;
-                    }
-                }
-            }
-        } else {
-            
-            d = (sprite->frame - 1) / 3;
-            
-            if (d < 4) { /* turn n s e w */
-                
-                z = (sprite->frame - 1) % 3;
-                
-                if (z == 2) {
-                    sprite->step = 0;
-                }
-                
-                if (z == 0) {
-                    sprite->step = 1;
-                }
-                
-                if (sprite->step) {
-                    z++;
-                } else {
-                    z--;
-                }
-                
-                getDir(sprite->x, sprite->y, sprite->destX, sprite->destY);
-                
-                if (absDist < 60) {
-                    
-                    if (sprite->flag == 0) {
-                        
-                        sprite->flag = 1;
-                        sprite->destX = sprite->origX;
-                        sprite->destY = sprite->origY;
-                        
-                    } else {
-                        
-                        sprite->frame = 0;
-                        return;
-                        
-                    }
-                    
-                }
-                
-                c = getDir(sprite->x, sprite->y, sprite->destX, sprite->destY);
-                c = (c - 1) / 2;
-                
-                if ((c != d) && (!getRandom(10))) {
-                    
-                    if (getRandom16() & 1) {
-                        z = ND1[d];
-                    } else {
-                        z = ND2[d];
-                    }
-                    
-                    d = 4;
-                    
-                    if (!sprite->soundCount) {
-                        // Convert sprite coordinates to tile coordinates.
-                        int monsterX = sprite->x >>4;
-                        int monsterY = sprite->y >>4;
-                        makeSound("city", "Monster", monsterX, monsterY); /* monster */
-                        sprite->soundCount = 50 + getRandom(100);
-                    }
-                    
-                }
-                
-            } else {
-                
-                d = 4;
-                c = sprite->frame;
-                z = (c - 13) & 3;
-                
-                if (!(getRandom16() & 3)) {
-                    
-                    if (getRandom16() & 1) {
-                        z = nn1[z];
-                    } else {
-                        z = nn2[z];
-                    }
-                    
-                    d = (z - 1) / 3;
-                    z = (z - 1) % 3;
-                    
-                }
-                
-            }
-            
-        }
-        
-    } else {
-        
-        /* somebody's taken control of the monster */
-        
-        d = sprite->control;
-        z = (sprite->frame - 1) % 3;
-        
-        if (z == 2) {
-            sprite->step = 0;
-        }
-        
-        if (z == 0) {
-            sprite->step = 1;
-        }
-        
-        if (sprite->step) {
-            z++;
-        } else {
-            z--;
-        }
-        
-    }
-    
-    z = d * 3 + z + 1;
-    
-    if (z > 16) {
-        z = 16;
-    }
-    
-    sprite->frame = z;
-    
-    sprite->x += Gx[d];
-    sprite->y += Gy[d];
-    
-    if (sprite->count > 0) {
-        sprite->count--;
-    }
-    
-    c = getChar(sprite->x + sprite->xHot, sprite->y + sprite->yHot);
-    
-    if (c == -1
-        || (c == RIVER && sprite->count != 0 && sprite->control == -1)) {
-        sprite->frame = 0; /* kill scary monster */
-    }
-    
-    {
-        for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-            
-            SimSprite *s = globalSprites[sprite_type_idx];
-            if (sprite->checkSpriteCollision(s)) {
-                explodeSprite(s);
-            }
-        }
-    }
-    
-    destroyMapTile(sprite->x + 48, sprite->y + 16);
-}
-
-/**
- * Move tornado.
- * @param sprite Tornado sprite to move.
- * @todo Remove local magic constants and document the code.
- */
-void Micropolis::doTornadoSprite(SimSprite *sprite)
-{
-    static const short CDx[9] = {  2,  3,  2,  0, -2, -3 };
-    static const short CDy[9] = { -2,  0,  2,  3,  2,  0 };
-    short z;
-    
-    z = sprite->frame;
-    
-    if (z == 2) {
-        
-        /* cycle animation... post Rel */
-        
-        if (sprite->flag) {
-            z = 3;
-        } else {
-            z = 1;
-        }
-        
-    } else {
-        
-        if (z == 1) {
-            sprite->flag = 1;
-        } else {
-            sprite->flag = 0;
-        }
-        
-        z = 2;
-    }
-    
-    if (sprite->count > 0) {
-        sprite->count--;
-    }
-    
-    sprite->frame = z;
-    
-    {
-        for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-            
-            SimSprite *s = globalSprites[sprite_type_idx];
-            if (sprite->checkSpriteCollision(s)) {
-                explodeSprite(s);
-            }
-        }
-    }
-    
-    z = getRandom(5);
-    sprite->x += CDx[z];
-    sprite->y += CDy[z];
-    
-    if (spriteNotInBounds(sprite)) {
-        sprite->frame = 0;
-    }
-    
-    if (sprite->count != 0 && getRandom(500) == 0) {
-        sprite->frame = 0;
-    }
-    
-    destroyMapTile(sprite->x + 48, sprite->y + 40);
-}
-
-
-/**
- * 'Move' fire sprite.
- * @param sprite Fire sprite.
- */
-void Micropolis::doExplosionSprite(SimSprite *sprite)
-{
-    short x, y;
-    
-    if ((spriteCycle & 1) == 0) {
-        
-        if (sprite->frame == 1) {
-            // Convert sprite coordinates to tile coordinates.
-            int explosionX = sprite->x >>4;
-            int explosionY = sprite->y >>4;
-            makeSound("city", "ExplosionHigh", explosionX, explosionY); /* explosion */
-            x = (sprite->x >>4) + 3;
-            y = (sprite->y >>4);
-            sendMessage(MESSAGE_EXPLOSION_REPORTED, x, y);
-        }
-        
-        sprite->frame++;
-    }
-    
-    if (sprite->frame > 6) {
-        sprite->frame = 0;
-        
-        startFire(sprite->x + 48 - 8, sprite->y + 16);
-        startFire(sprite->x + 48 - 24, sprite->y);
-        startFire(sprite->x + 48 + 8, sprite->y);
-        startFire(sprite->x + 48 - 24, sprite->y + 32);
-        startFire(sprite->x + 48 + 8, sprite->y + 32);
-    }
-}
-
-
-/**
- * Move bus sprite.
- * @param sprite Bus sprite.
- * @todo Remove local magic constants and document the code.
- */
-void Micropolis::doBusSprite(SimSprite *sprite)
-{
-    static const short Dx[5] = {   0,   1,   0,  -1,   0 };
-    static const short Dy[5] = {  -1,   0,   1,   0,   0 };
-    static const short Dir2Frame[4] = { 1, 2, 1, 2 };
-    int dx, dy, tx, ty, otx, oty;
-    int turned = 0;
-    int speed = 0;
-    int z;
-    
-#ifdef DEBUGBUS
-    printf("Bus dir %d turn %d frame %d\n",
-           sprite->dir, sprite->turn, sprite->frame);
-#endif
-    
-    if (sprite->turn) {
-        
-        if (sprite->turn < 0) { /* ccw */
-            
-            if (sprite->dir & 1) { /* up or down */
-                sprite->frame = 4;
-            } else { /* left or right */
-                sprite->frame = 3;
-            }
-            
-            sprite->turn++;
-            sprite->dir = (sprite->dir - 1) & 3;
-            
-        } else { /* cw */
-            
-            if (sprite->dir & 1) { /* up or down */
-                sprite->frame = 3;
-            } else { /* left or right */
-                sprite->frame = 4;
-            }
-            
-            sprite->turn--;
-            sprite->dir = (sprite->dir + 1) & 3;
-            
-        }
-        
-        turned = 1;
-        
-    } else {
-        
-        /* finish turn */
-        if ((sprite->frame == 3) ||
-            (sprite->frame == 4)) {
-            turned = 1;
-            sprite->frame = Dir2Frame[sprite->dir];
-        }
-    }
-    
-    if (sprite->speed == 0) {
-        
-        /* brake */
-        dx = 0; dy = 0;
-        
-    } else { /* cruise at traffic speed */
-        
-        tx = (sprite->x + sprite->xHot) >>5;
-        ty = (sprite->y + sprite->yHot) >>5;
-        
-        if (tx >= 0 && tx < WORLD_W_2 && ty >= 0 && ty < WORLD_H_2) {
-            
-            z = trafficDensityMap.worldGet(tx << 1, ty << 1) >>6;
-            
-            if (z > 1) {
-                z--;
-            }
-            
-        } else {
-            
-            z = 0;
-            
-        }
-        
-        switch (z) {
-                
-            case 0:
-                speed = 8;
-                break;
-                
-            case 1:
-                speed = 4;
-                break;
-                
-            case 2:
-                speed = 1;
-                break;
-                
-        }
-        
-        /* govern speed */
-        if (speed > sprite->speed) {
-            speed = sprite->speed;
-        }
-        
-        if (turned) {
-            
-#ifdef DEBUGBUS
-            printf("turned\n");
-#endif
-            
-            if (speed > 1) {
-                speed = 1;
-            }
-            
-            dx = Dx[sprite->dir] * speed;
-            dy = Dy[sprite->dir] * speed;
-            
-        } else {
-            
-            dx = Dx[sprite->dir] * speed;
-            dy = Dy[sprite->dir] * speed;
-            
-            tx = (sprite->x + sprite->xHot) >>4;
-            ty = (sprite->y + sprite->yHot) >>4;
-            
-            /* drift into the right lane */
-            switch (sprite->dir) {
-                    
-                case 0: /* up */
-                    
-                    z = ((tx <<4) + 4) - (sprite->x + sprite->xHot);
-                    
-                    if (z < 0) {
-                        dx = -1;
-                    } else if (z > 0) {
-                        dx = 1;
-                    }
-                    
-#ifdef DEBUGBUS
-                    printf("moving up x %x z %d dx %d\n", sprite->x + sprite->xHot, z, dx);
-#endif
-                    
-                    break;
-                    
-                case 1: /* right */
-                    
-                    z = ((ty <<4) + 4) - (sprite->y + sprite->yHot);
-                    
-                    if (z < 0) {
-                        dy = -1;
-                    } else if (z > 0) {
-                        dy = 1;
-                    }
-                    
-#ifdef DEBUGBUS
-                    printf("moving right y %x z %d dy %d\n", sprite->y + sprite->yHot, z, dy);
-#endif
-                    
-                    break;
-                    
-                case 2: /* down */
-                    
-                    z = (tx <<4) - (sprite->x + sprite->xHot);
-                    
-                    if (z < 0) {
-                        dx = -1;
-                    } else if (z > 0) {
-                        dx = 1;
-                    }
-                    
-#ifdef DEBUGBUS
-                    printf("moving down x %x z %d dx %d\n", sprite->x + sprite->xHot, z, dx);
-#endif
-                    
-                    break;
-                    
-                case 3: /* left */
-                    
-                    z = (ty <<4) - (sprite->y + sprite->yHot);
-                    
-                    if (z < 0) {
-                        dy = -1;
-                    } else if (z > 0) {
-                        dy = 1;
-                    }
-                    
-#ifdef DEBUGBUS
-                    printf("moving left y %x z %d dy %d\n", sprite->y + sprite->yHot, z, dy);
-#endif
-                    
-                    break;
-            }
-        }
-    }
-    
-#ifdef DEBUGBUS
-    printf("speed dx %d dy %d\n", dx, dy);
-#endif
-    
-#define AHEAD 8
-    
-    otx = (sprite->x + sprite->xHot + (Dx[sprite->dir] * AHEAD)) >>4;
-    oty = (sprite->y + sprite->yHot + (Dy[sprite->dir] * AHEAD)) >>4;
-    
-    otx = clamp(otx, 0, WORLD_W - 1);
-    oty = clamp(oty, 0, WORLD_H - 1);
-    
-    tx = (sprite->x + sprite->xHot + dx + (Dx[sprite->dir] * AHEAD)) >>4;
-    ty = (sprite->y + sprite->yHot + dy + (Dy[sprite->dir] * AHEAD)) >>4;
-    
-    tx = clamp(tx, 0, WORLD_W - 1);
-    ty = clamp(ty, 0, WORLD_H - 1);
-    
-    if (tx != otx || ty != oty) {
-        
-#ifdef DEBUGBUS
-        printf("drive from tile %d %d to %d %d\n",
-               otx, oty, tx, ty);
-#endif
-        
-        z = canDriveOn(tx, ty);
-        
-        if (z == 0) {
-            
-            /* can't drive forward into a new tile */
-            if (speed == 8) {
-                bulldozerTool(tx, ty);
-            } else {
-            }
-            
-        } else {
-            
-            /* drive forward into a new tile */
-            if (z > 0) {
-                /* smooth */
-            } else {
-                /* bumpy */
-                dx /= 2;
-                dy /= 2;
-            }
-            
-        }
-    }
-    
-    tx = (sprite->x + sprite->xHot + dx) >>4;
-    ty = (sprite->y + sprite->yHot + dy) >>4;
-    
-    z = canDriveOn(tx, ty);
-    
-    if (z > 0) {
-        /* cool, cruise along */
-    } else {
-        if (z < 0) {
-            /* bumpy */
-        } else {
-            /* something in the way */
-        }
-    }
-    
-    sprite->x += dx;
-    sprite->y += dy;
-    
-    if (enableDisasters) {
-        int explode = 0;
-        
-        for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-            
-            SimSprite *s = globalSprites[sprite_type_idx];
-            if (sprite != s && sprite->checkSpriteCollision(s)) {
-                explodeSprite(s);
-                explode = 1;
-            }
-        }
-        
-        if (explode) {
-            explodeSprite(sprite);
-        }
-        
-    }
+    });
 }
 
 
@@ -1384,36 +324,6 @@ int Micropolis::canDriveOn(int x, int y)
     }
     
     return 0;
-}
-
-
-/**
- * Handle explosion of sprite (mostly due to collision?).
- * @param sprite that should explode.
- * @todo Add a 'bus crashed' message to #MessageNumber.
- */
-void Micropolis::explodeSprite(SimSprite *sprite)
-{
-    int x, y;
-    
-    sprite->frame = 0;
-    
-    x = sprite->x + sprite->xHot;
-    y = sprite->y + sprite->yHot;
-    makeExplosionAt(x, y);
-    
-    x = (x >>4);
-    y = (y >>4);
-    
-    enum MessageNumber crashMsgNum = sprite->crashMsgNum();
-    if (crashMsgNum >= 0) {
-        sendMessage(crashMsgNum, x, y, true);
-    }
-
-    // Convert sprite coordinates to tile coordinates.
-    makeSound("city", "ExplosionHigh", x, y); /* explosion */
-    
-    return;
 }
 
 
@@ -1557,8 +467,8 @@ void Micropolis::startFire(int x, int y)
  */
 void Micropolis::generateTrain(int x, int y)
 {
-    if (totalPop > 20 && getSprite(SPRITE_TRAIN) == NULL && getRandom(25) == 0) {
-        makeSprite(SPRITE_TRAIN, (x <<4) + TRA_GROOVE_X, (y <<4) + TRA_GROOVE_Y);
+    if (totalPop > 20 && this->trainSprite == NULL && getRandom(25) == 0) {
+        this->trainSprite = new TrainSprite(this, (x <<4) + TRA_GROOVE_X, (y <<4) + TRA_GROOVE_Y);
     }
 }
 
@@ -1570,8 +480,8 @@ void Micropolis::generateTrain(int x, int y)
  */
 void Micropolis::generateBus(int x, int y)
 {
-    if (getSprite(SPRITE_BUS) == NULL && getRandom(25) == 0) {
-        makeSprite(SPRITE_BUS, (x <<4) + BUS_GROOVE_X, (y <<4) + BUS_GROOVE_Y);
+    if (this->busSprite == NULL && getRandom(25) == 0) {
+        this->busSprite = new BusSprite(this, (x <<4) + BUS_GROOVE_X, (y <<4) + BUS_GROOVE_Y);
     }
 }
 
@@ -1626,7 +536,7 @@ void Micropolis::generateShip()
  */
 void Micropolis::makeShipHere(int x, int y)
 {
-    makeSprite(SPRITE_SHIP, (x <<4) - (48 - 1), (y <<4));
+    this->shipSprite = new ShipSprite(this, (x <<4) - (48 - 1), (y <<4));
 }
 
 
@@ -1636,18 +546,18 @@ void Micropolis::makeShipHere(int x, int y)
  *       Better yet make monster not disappear for a while after it's created,
  *       over land or water. Should never disappear prematurely.
  */
-void Micropolis::makeMonster()
+MonsterSprite* Micropolis::makeMonster()
 {
     int x, y, z, done = 0;
-    SimSprite *sprite;
+    MonsterSprite* sprite;
     
-    sprite = getSprite(SPRITE_MONSTER);
+    sprite = this->monsterSprite;
     if (sprite != NULL) {
         sprite->soundCount = 1;
         sprite->count = 1000;
         sprite->destX = pollutionMaxX <<4;
         sprite->destY = pollutionMaxY <<4;
-        return;
+        return sprite;
     }
     
     for (z = 0; z < 300; z++)  {
@@ -1656,7 +566,7 @@ void Micropolis::makeMonster()
         y = getRandom(WORLD_H - 10) + 5;
         
         if (map[x][y] == RIVER || map[x][y] == RIVER + BULLBIT) {
-            makeMonsterAt(x, y);
+            this->monsterSprite = makeMonsterAt(x, y);
             done = 1;
             break;
         }
@@ -1664,9 +574,9 @@ void Micropolis::makeMonster()
     }
     
     if (!done) {
-        makeMonsterAt(60, 50);
+        this->monsterSprite = makeMonsterAt(60, 50);
     }
-    
+    return this->monsterSprite;
 }
 
 
@@ -1675,10 +585,11 @@ void Micropolis::makeMonster()
  * @param x X coordinate in map coordinate.
  * @param y Y coordinate in map coordinate.
  */
-void Micropolis::makeMonsterAt(int x, int y)
+MonsterSprite* Micropolis::makeMonsterAt(int x, int y)
 {
-    makeSprite(SPRITE_MONSTER, (x << 4) + 48, (y << 4));
+    MonsterSprite* ms = new MonsterSprite(this, (x << 4) + 48, (y << 4));
     sendMessage(MESSAGE_MONSTER_SIGHTED, x + 5, y, true, true);
+    return ms;
 }
 
 
@@ -1690,11 +601,11 @@ void Micropolis::makeMonsterAt(int x, int y)
  */
 void Micropolis::generateCopter(const Position &pos)
 {
-    if (getSprite(SPRITE_HELICOPTER) != NULL) {
+    if (this->helicopterSprite != NULL) {
         return;
     }
     
-    makeSprite(SPRITE_HELICOPTER, (pos.posX << 4), (pos.posY << 4) + 30);
+    this->helicopterSprite = new HelicopterSprite(this, (pos.posX << 4), (pos.posY << 4) + 30);
 }
 
 
@@ -1706,11 +617,11 @@ void Micropolis::generateCopter(const Position &pos)
  */
 void Micropolis::generatePlane(const Position &pos)
 {
-    if (getSprite(SPRITE_AIRPLANE) != NULL) {
+    if (this->airplaneSprite != NULL) {
         return;
     }
     
-    makeSprite(SPRITE_AIRPLANE, (pos.posX <<4) + 48, (pos.posY <<4) + 12);
+    this->airplaneSprite = new AirplaneSprite(this, (pos.posX <<4) + 48, (pos.posY <<4) + 12);
 }
 
 
@@ -1720,7 +631,7 @@ void Micropolis::makeTornado()
     short x, y;
     SimSprite *sprite;
     
-    sprite = getSprite(SPRITE_TORNADO);
+    sprite = this->tornadoSprite;
     if (sprite != NULL) {
         sprite->count = 200;
         return;
@@ -1729,7 +640,7 @@ void Micropolis::makeTornado()
     x = getRandom((WORLD_W <<4) - 800) + 400;
     y = getRandom((WORLD_H <<4) - 200) + 100;
     
-    makeSprite(SPRITE_TORNADO, x, y);
+    this->tornadoSprite = new TornadoSprite(this, x, y);
     sendMessage(MESSAGE_TORNADO_SIGHTED, (x >>4) + 3, (y >>4) + 2, true, true);
 }
 
@@ -1754,7 +665,7 @@ void Micropolis::makeExplosion(int x, int y)
  */
 void Micropolis::makeExplosionAt( int x, int y)
 {
-    makeSprite(SPRITE_EXPLOSION, x - 40, y - 16);
+    new ExplosionSprite(this, x - 40, y - 16);
 }
 
 

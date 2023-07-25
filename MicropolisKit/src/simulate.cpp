@@ -70,6 +70,8 @@
 #include "text.h"
 #include "SimSprite.hpp"
 
+class ShipSprite;
+
 ////////////////////////////////////////////////////////////////////////
 // Constants
 
@@ -283,6 +285,8 @@ void Micropolis::doSimInit()
             break;
         case SIMLOADER_LOADCITY: /* if city just loaded */
             simLoadInit();
+            break;
+        default:
             break;
     }
 
@@ -1203,10 +1207,8 @@ int Micropolis::getBoatDistance(const Position &pos)
     int dist = 99999;
     int mx = pos.posX * 16 + 8;
     int my = pos.posY * 16 + 8;
-
-    for (int sprite_type_idx = MIN_SPRITE_TYPE_IDX; sprite_type_idx <= MAX_SPRITE_TYPE_IDX; sprite_type_idx++) {
-        
-        SimSprite *sprite = globalSprites[sprite_type_idx];
+    
+    auto spriteFn = [this, mx, my, dist](SimSprite * sprite) mutable {
         if (sprite && sprite->isShip()) {
 
             int sprDist = absoluteValue(sprite->x + sprite->xHot - mx)
@@ -1214,7 +1216,8 @@ int Micropolis::getBoatDistance(const Position &pos)
 
             dist = min(dist, sprDist);
         }
-    }
+    };
+    SimSprite::doForEach(spriteFn);
     return dist;
 }
 
@@ -1541,7 +1544,7 @@ void Micropolis::doSpecialZone(const Position &pos, bool powerOn)
             }
 
             // If port has power and there is no ship, generate one
-            if (powerOn && getSprite(SPRITE_SHIP) == NULL) {
+            if (powerOn && this->shipSprite == NULL) {
                 generateShip();
             }
 

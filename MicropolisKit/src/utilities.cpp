@@ -67,7 +67,7 @@
 
 #include "stdafx.h"
 #include "micropolis.h"
-
+#include "SimSprite.hpp"
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -146,7 +146,7 @@ void Micropolis::pause()
     }
 
     // Call back even if the state did not change.
-    if (delegate) delegate->update(this, "paused");
+    delegate->update(this, "paused");
 }
 
 /**
@@ -161,7 +161,7 @@ void Micropolis::resume()
     }
 
     // Call back even if the state did not change.
-    if (delegate) delegate->update(this, "paused");
+    delegate->update(this, "paused");
 }
 
 
@@ -182,7 +182,7 @@ void Micropolis::setSpeed(short speed)
 
     simSpeed = speed;
 
-    if (delegate) delegate->update(this, "speed");
+    delegate->update(this, "speed");
 }
 
 
@@ -190,7 +190,7 @@ void Micropolis::setPasses(int passes)
 {
     simPasses = passes;
     simPass = 0;
-    if (delegate) delegate->update(this, "passes");
+    delegate->update(this, "passes");
 }
 
 /**
@@ -235,7 +235,7 @@ void Micropolis::setGameLevel(GameLevel level)
 /** Report to the front-end that a new game level has been set. */
 void Micropolis::updateGameLevel()
 {
-    if (delegate) delegate->update(this, "gameLevel");
+    delegate->update(this, "gameLevel");
 }
 
 
@@ -264,7 +264,7 @@ void Micropolis::setCleanCityName(const std::string &name)
 {
     cityName = name;
 
-    if (delegate) delegate->update(this, "cityName");
+    delegate->update(this, "cityName");
 }
 
 
@@ -296,7 +296,7 @@ int Micropolis::currentYear()
  */
 void Micropolis::doNewGame()
 {
-    if (delegate) delegate->doNewGame(this);
+    delegate->doNewGame(this);
 }
 
 

@@ -76,21 +76,27 @@ public struct SCScenario: Codable {
         let plistDecoder = PropertyListDecoder()
         var loadedScenarios = [SCScenario]()
         
-        do {
-            guard let plistURLs = Bundle.main.urls(forResourcesWithExtension: "scenario", subdirectory: nil) else {
-                throw ScenarioLoadingError.NO_SUCH_RESOURCE
-            }
-            for url in plistURLs {
-                guard let data = try? Data.init(contentsOf: url) else {
-                    print("error loading \(url)")
-                    continue
+        var bundles = [Bundle]()
+        bundles.append(Bundle.main)
+        bundles.append(contentsOf: Bundle.allBundles)
+        bundles.append(contentsOf: Bundle.allFrameworks)
+        for b in bundles {
+            do {
+                guard let plistURLs = b.urls(forResourcesWithExtension: "scenario", subdirectory: nil) else {
+                    throw ScenarioLoadingError.NO_SUCH_RESOURCE
                 }
-                
-                let value = try plistDecoder.decode(SCScenario.self, from: data)
-                loadedScenarios.append(value)
+                for url in plistURLs {
+                    guard let data = try? Data.init(contentsOf: url) else {
+                        print("error loading \(url)")
+                        continue
+                    }
+                    
+                    let value = try plistDecoder.decode(SCScenario.self, from: data)
+                    loadedScenarios.append(value)
+                }
+            } catch {
+                print("Unexpected error: \(error).")
             }
-        } catch {
-            print("Unexpected error: \(error).")
         }
         
         return loadedScenarios

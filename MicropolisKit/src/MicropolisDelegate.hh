@@ -41,7 +41,7 @@ public:
     virtual void didTool(Micropolis* sender, const char *name, short x, short y) = 0;
     virtual void didGenerateMap(Micropolis* sender) = 0;
     
-    virtual void newSprite(Micropolis* sender, int sprite_id) = 0;
+    virtual void didCreateSprite(Micropolis* sender, int sprite_id) = 0;
     virtual void destroySprite(Micropolis* sender, int sprite_id) = 0;
     virtual void didUpdateSprite(Micropolis* sender, int sprite_id) = 0;
 };

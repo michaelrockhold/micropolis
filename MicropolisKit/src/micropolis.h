@@ -904,6 +904,14 @@ class Micropolis;
 class ToolEffects;
 class BuildingProperties;
 
+class MonsterSprite;
+class HelicopterSprite;
+class AirplaneSprite;
+class BusSprite;
+class TrainSprite;
+class TornadoSprite;
+class ShipSprite;
+
 ////////////////////////////////////////////////////////////////////////
 // Classes
 
@@ -933,8 +941,6 @@ public:
 };
 
 class SimSprite;
-class MonsterSprite;
-class HelicopterSprite;
 class MicropolisDelegate;
 
 /**
@@ -2053,9 +2059,10 @@ private:
     
     int simRandom();
 
+public: // TODO: back to private, but with Sprite classes befriended
+
     short getRandom(short range);
 
-public: // TODO: back to private, but with Sprite classes befriended
     int getRandom16();
     
 private:
@@ -2262,31 +2269,31 @@ private:
     void doMeltdown(const Position &pos);
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // sprite.cpp
-    int nextSpriteID;
-
-    SimSprite *newSprite(enum SpriteType type, int x, int y);
-        
-    SimSprite *globalSprites[SPRITE_COUNT];
-
+    
 public:
+
+    void didCreateSprite(SimSprite* s);
 
     void destroyAllSprites();
 
     void destroySprite(SimSprite *sprite);
 
-    SimSprite *getSprite(enum SpriteType type);
-
-    SimSprite *makeSprite(enum SpriteType type, int x, int y);
-
     void didUpdateSprite(int sprite_id);
 
 private:
+    MonsterSprite* monsterSprite;
+    HelicopterSprite* helicopterSprite;
+    TornadoSprite* tornadoSprite;
+    ShipSprite* shipSprite;
+    AirplaneSprite* airplaneSprite;
+    BusSprite* busSprite;
+    TrainSprite* trainSprite;
+
+public: // TODO: make private, but let the Sprite classes be friends
+    int nextSpriteID;
 
     int absDist;
 
-public: // TODO: make private, but let the Sprite classes be friends
     short spriteCycle;
 
 public:
@@ -2305,25 +2312,7 @@ public:
 
     void moveObjects();
 
-    void doTrainSprite(SimSprite *sprite);
-
-    void doCopterSprite(SimSprite *sprite);
-
-    void doAirplaneSprite(SimSprite *sprite);
-
-    void doShipSprite(SimSprite *sprite);
-
-    void doMonsterSprite(SimSprite *sprite);
-
-    void doTornadoSprite(SimSprite *sprite);
-
-    void doExplosionSprite(SimSprite *sprite);
-
-    void doBusSprite(SimSprite *sprite);
-
     int canDriveOn(int x, int y);
-
-    void explodeSprite(SimSprite *sprite);
 
     bool checkWet(int x);
 
@@ -2341,9 +2330,9 @@ public:
 
     void makeShipHere(int x, int y);
 
-    void makeMonster();
+    MonsterSprite* makeMonster();
 
-    void makeMonsterAt(int x, int y);
+    MonsterSprite* makeMonsterAt(int x, int y);
 
     void generateCopter(const Position &pos);
 
@@ -2544,8 +2533,8 @@ public:
 
     void didTool(const char *name, short x, short y);
 
-private:
-
+public: // TODO: make tools available only where necessary
+    
     ToolResult queryTool(short x, short y);
 
     ToolResult bulldozerTool(short x, short y);
@@ -2574,6 +2563,7 @@ private:
 
     ToolResult putDownPark(short mapH, short mapV, ToolEffects *effects);
 
+private:
     ToolResult putDownNetwork(short mapH, short mapV, ToolEffects *effects);
 
     ToolResult putDownWater(short mapH, short mapV, ToolEffects *effects);

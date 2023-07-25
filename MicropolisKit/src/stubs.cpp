@@ -180,7 +180,7 @@ Quad Micropolis::tickCount()
 /** @bug Function is never called. */
 void Micropolis::doPlayNewCity()
 {
-    if (delegate) delegate->doPlayNewCity(this);
+    delegate->doPlayNewCity(this);
 }
 
 /**
@@ -206,7 +206,7 @@ void Micropolis::doEarthquake(int strength)
 {
     makeSound("city", "ExplosionLow"); // Make the sound all over.
 
-    if (delegate) delegate->doEarthquake(this, strength);
+    delegate->doEarthquake(this, strength);
 }
 
 
@@ -214,7 +214,7 @@ void Micropolis::doEarthquake(int strength)
 void Micropolis::invalidateMaps()
 {
     mapSerial++;
-    if (delegate) delegate->update(this, "map");
+    delegate->update(this, "map");
 }
 
 
@@ -232,7 +232,7 @@ void Micropolis::makeSound(const char *channel, const char *sound,
                            int x, int y)
 {
     if (enableSound) {
-        if (delegate) delegate->makeSound(this, channel, sound, x, y);
+        delegate->makeSound(this, channel, sound, x, y);
     }
 }
 

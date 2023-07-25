@@ -121,7 +121,7 @@ void Micropolis::changeCensus()
 void Micropolis::graphDoer()
 {
     if (censusChanged) {
-        if (delegate) delegate->update(this, "history");
+        delegate->update(this, "history");
         censusChanged = false;
     }
 }

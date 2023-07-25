@@ -73,9 +73,11 @@ class CityObservable: ObservableObject {
         
         tileMapNode.fill(with: tileGroups[0])
         
-        cityEventSubscription = cityModel.cityEventPublisher
-            .receive(on: RunLoop.main)
-            .sink { (event: CityModel.Event) in self.handle(event: event) }
+        Task.detached {
+            self.cityEventSubscription = await cityModel.cityEventPublisher
+                .receive(on: RunLoop.main)
+                .sink { (event: CityModel.Event) in self.handle(event: event) }
+        }
     }
     
     private func setTile(forColumn column: Int, row: Int, tileIdx: Int) {
@@ -164,7 +166,7 @@ class CityObservable: ObservableObject {
         ]))
     }
         
-    private func handle(event: CityModel.Event) {
+    public func handle(event: CityModel.Event) {
         switch event {
         case .UpdateTime(let cityTime):
             cityDate = Date(timeInterval: TimeInterval(integerLiteral: Int64(cityTime) * Self.cityTimeUnitSeconds), since: referenceDate)
@@ -193,13 +195,13 @@ class CityObservable: ObservableObject {
             self.setTile(forColumn: column, row: row, tileIdx: tileIdx)
             
         case .DidLoadScenario:
-            cityModel.startClock()
+            go()
             
         case .DidLoadCity:
-            cityModel.startClock()
+            go()
             
         case .DidGenerateMap:
-            cityModel.startClock()
+            go()
             
         case .CreatedSprite(let spriteID):
             print("created sprite with ID \(spriteID)")
@@ -214,13 +216,19 @@ class CityObservable: ObservableObject {
     }
     
     func run() {
-        cityModel.run(scenario: scenarios[0])
+        Task.detached {
+            await self.cityModel.run(scenario: self.scenarios[0])
+        }
     }
     func go() {
-        cityModel.startClock()
+        Task.detached {
+            await self.cityModel.startClock()
+        }
     }
     func pause() {
-        cityModel.stopClock()
+        Task.detached {
+            await self.cityModel.stopClock()
+        }
     }
     
     func createUpdateHandler(kind: CityModel.Interest) -> (()->Void) {

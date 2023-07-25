@@ -129,7 +129,7 @@ void Micropolis::reallyUpdateFunds()
     if (totalFunds != totalFundsLast) {
         totalFundsLast = totalFunds;
 
-        if (delegate) delegate->update(this, "funds");
+        delegate->update(this, "funds");
     }
 
 }
@@ -166,7 +166,7 @@ void Micropolis::updateDate()
         cityYearLast = cityYear;
         cityMonthLast = cityMonth;
 
-        if (delegate) delegate->update(this, "date");
+        delegate->update(this, "date");
     }
 }
 
@@ -229,7 +229,7 @@ void Micropolis::drawValve()
 
 void Micropolis::setDemand(float r, float c, float i)
 {
-    if (delegate) delegate->update(this, "demand");
+    delegate->update(this, "demand");
 }
 
 
@@ -237,7 +237,7 @@ void Micropolis::updateOptions()
 {
     if (mustUpdateOptions) {
         mustUpdateOptions = false;
-        if (delegate) delegate->update(this, "options");
+        delegate->update(this, "options");
     }
 }
 

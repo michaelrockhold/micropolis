@@ -320,7 +320,7 @@ void Micropolis::updateBudget()
     ///       them and pushing them out.
 
     if (mustDrawBudget) {
-        if (delegate) delegate->update(this, "budget");
+        delegate->update(this, "budget");
         mustDrawBudget = 0;
     }
 }
@@ -328,14 +328,14 @@ void Micropolis::updateBudget()
 
 void Micropolis::showBudgetWindowAndStartWaiting()
 {
-    if (delegate) delegate->showBudgetAndWait(this);
+    delegate->showBudgetAndWait(this);
 }
 
 
 void Micropolis::setCityTax(short tax)
 {
     cityTax = tax;
-    if (delegate) delegate->update(this, "taxRate");
+    delegate->update(this, "taxRate");
 }
 
 

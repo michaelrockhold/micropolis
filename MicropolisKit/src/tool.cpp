@@ -896,7 +896,7 @@ void Micropolis::doShowZoneStatus(
     int s0, int s1, int s2, int s3, int s4,
     int x, int y)
 {
-    if (delegate) delegate->doShowZoneStatus(this, tileCategory, s0, s1, s2, s3, s4, x, y);
+    delegate->doShowZoneStatus(this, tileCategory, s0, s1, s2, s3, s4, x, y);
 }
 
 
@@ -932,7 +932,7 @@ void Micropolis::putRubble(int x, int y, int size, ToolEffects *effects)
  */
 void Micropolis::didTool(const char *name, short x, short y)
 {
-    if (delegate) delegate->didTool(this, name, x, y);
+    delegate->didTool(this, name, x, y);
 }
 
 

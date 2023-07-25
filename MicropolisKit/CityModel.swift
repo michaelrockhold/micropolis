@@ -29,7 +29,7 @@ extension Notice: Codable {
     }
 }
 
-public class CityModel {
+public actor CityModel {
         
     public static var bundle: Bundle {
         Bundle(for: NSClassFromString("MicropolisKit.CityModel")!)
@@ -104,20 +104,18 @@ public class CityModel {
         
     }
             
-    private let cityActor: CityActor
+    private let micropolisWrapper: MicropolisWrapper
     private let cityEventSender = CityEventSender()
     public let cityEventPublisher: AnyPublisher<Event, Never>
 
     public init() {
         cityEventPublisher = cityEventSender.cityEventPublisher
-        cityActor = CityActor(wrapper: MicropolisWrapper(cityEventSender))
-        
-        
+        micropolisWrapper = MicropolisWrapper(cityEventSender)
     }
     
     public func run(scenario: SCScenario) {
         Task.detached {
-            self.load(scenario: scenario)
+            await self.load(scenario: scenario)
         }
     }
     
@@ -130,16 +128,16 @@ public class CityModel {
         
         stopClock()
         
-        cityActor.micropolisWrapper.setSimSpeed(3)
+        micropolisWrapper.setSimSpeed(3)
 
         cancellableClockTimer = DispatchQueue
             .global(qos: .utility)
             .schedule(after: DispatchQueue.SchedulerTimeType(.now()),
                       interval: .seconds(refreshInterval),
                       tolerance: .seconds(refreshInterval / 5)) { [weak self] in
-            guard let self else { return }
-                Task.detached { self.tick() }
-        }
+                guard let self else { return }
+                Task.detached { await self.tick() }
+            }
         
         mapUpdateTimer = DispatchQueue
             .global(qos: .utility)
@@ -147,7 +145,7 @@ public class CityModel {
                       interval: .seconds(1.0),
                       tolerance: .seconds(1.0 / 5)) { [weak self] in
             guard let self else { return }
-                Task.detached { self.updateMap() }
+                Task.detached { await self.updateMap() }
         }
     }
     
@@ -159,7 +157,7 @@ public class CityModel {
     }
 
     public func generateSomeCity(with seed: Int) {
-        cityActor.micropolisWrapper.generateSomeCity(Int32(seed))
+        micropolisWrapper.generateSomeCity(Int32(seed))
     }
     
     public func load(scenario: SCScenario) {
@@ -185,7 +183,7 @@ public class CityModel {
                            /* hasFoghorns */ scenario.hasFoghorns)
                         
                         //withUnsafeMutablePointer(to: scenarioParams) {
-                        cityActor.micropolisWrapper.load(scenarioParams)
+                        micropolisWrapper.load(scenarioParams)
                         //}
                     }
                 }
@@ -194,18 +192,10 @@ public class CityModel {
     }
 
     private func tick() {
-        cityActor.micropolisWrapper.simTick()
+        micropolisWrapper.simTick()
     }
     
     private func updateMap() {
-        cityActor.micropolisWrapper.generateMapUpdates()
-    }
-
-}
-
-public actor CityActor {
-    public let micropolisWrapper: MicropolisWrapper
-    public init(wrapper: MicropolisWrapper) {
-        self.micropolisWrapper = wrapper
+        micropolisWrapper.generateMapUpdates()
     }
 }

@@ -111,7 +111,14 @@ Micropolis::Micropolis(MicropolisDelegate* micropolisDelegate) :
         fireStationEffectMap(0),
         policeStationMap(0),
         policeStationEffectMap(0),
-        comRateMap(0)
+        comRateMap(0),
+    helicopterSprite(NULL),
+    monsterSprite(NULL),
+    tornadoSprite(NULL),
+    shipSprite(NULL),
+    trainSprite(NULL),
+    busSprite(NULL),
+    airplaneSprite(NULL)
 {
     roadTotal = 0;
     railTotal = 0;
@@ -313,8 +320,6 @@ Micropolis::Micropolis(MicropolisDelegate* micropolisDelegate) :
     indValve = 0;
     nextSpriteID = 1;
 
-    memset(globalSprites, 0, sizeof(SimSprite *) * SPRITE_COUNT);
-
     absDist = 0;
     spriteCycle = 0;
     totalFunds = 0;
@@ -405,9 +410,7 @@ Micropolis::Micropolis(MicropolisDelegate* micropolisDelegate) :
 
 /** Simulator destructor. */
 Micropolis::~Micropolis()
-{
-    // TODO: release delegate
-    
+{    
     /** Free all map arrays */
 
     if (mapBase != NULL) {
@@ -778,5 +781,5 @@ void Micropolis::simTick()
 
 void Micropolis::simRobots()
 {
-    if (delegate) delegate->doRobots(this);
+    delegate->doRobots(this);
 }

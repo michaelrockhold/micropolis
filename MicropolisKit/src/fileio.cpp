@@ -464,7 +464,7 @@ void Micropolis::loadScenario(Scenario* scenario)
 /** Report to the front-end that the scenario was loaded. */
 void Micropolis::didLoadScenario()
 {
-    if (delegate) delegate->didLoadScenario(this);
+    delegate->didLoadScenario(this);
 }
 
 /**
@@ -508,7 +508,7 @@ bool Micropolis::loadCity(const char *filename)
 /** Report to the frontend that the game was successfully loaded. */
 void Micropolis::didLoadCity()
 {
-    if (delegate) delegate->didLoadCity(this);
+    delegate->didLoadCity(this);
 }
 
 
@@ -518,7 +518,7 @@ void Micropolis::didLoadCity()
  */
 void Micropolis::didntLoadCity(const char *msg)
 {
-    if (delegate) delegate->didntLoadCity(this, msg);
+    delegate->didntLoadCity(this, msg);
 }
 
 
@@ -550,14 +550,14 @@ void Micropolis::saveCity()
 /** Report to the frontend that the city is being saved. */
 void Micropolis::doSaveCityAs()
 {
-    if (delegate) delegate->doSaveCityAs(this);
+    delegate->doSaveCityAs(this);
 }
 
 
 /** Report to the frontend that the city was saved successfully. */
 void Micropolis::didSaveCity()
 {
-    if (delegate) delegate->didSaveCity(this);
+    delegate->didSaveCity(this);
 }
 
 
@@ -567,7 +567,7 @@ void Micropolis::didSaveCity()
  */
 void Micropolis::didntSaveCity(const char *msg)
 {
-    if (delegate) delegate->didntSaveCity(this, msg);
+    delegate->didntSaveCity(this, msg);
 }
 
 

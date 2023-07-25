@@ -353,7 +353,7 @@ void Micropolis::doScenarioScore()
  */
 void Micropolis::sendMessage(enum MessageNumber mesgNum, short x, short y, bool picture, bool important)
 {    
-    if (delegate) delegate->sendMessage(this, mesgNum, x, y, picture, important);
+    delegate->sendMessage(this, mesgNum, x, y, picture, important);
 }
 
 
@@ -421,21 +421,21 @@ void Micropolis::doMakeSound(int mesgNum, int x, int y)
  */
 void Micropolis::doAutoGoto(short x, short y, char *msg)
 {
-    if (delegate) delegate->doAutoGoto(this, x, y, msg);
+    delegate->doAutoGoto(this, x, y, msg);
 }
 
 
 /** Tell the front-end that the player has lost the game */
 void Micropolis::doLoseGame()
 {
-    if (delegate) delegate->doLoseGame(this);
+    delegate->doLoseGame(this);
 }
 
 
 /** Tell the front-end that the player has won the game */
 void Micropolis::doWinGame()
 {
-    if (delegate) delegate->doWinGame(this);
+    delegate->doWinGame(this);
 }
 
 

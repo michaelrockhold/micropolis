@@ -161,7 +161,6 @@ void Micropolis::addToTrafficDensityMap()
             MapTile tile = map[pos.posX][pos.posY] & LOMASK;
 
             if (tile >= ROADBASE && tile < POWERBASE) {
-                SimSprite *sprite;
 
                 // Update traffic density.
                 int traffic = trafficDensityMap.worldGet(pos.posX, pos.posY);
@@ -176,12 +175,15 @@ void Micropolis::addToTrafficDensityMap()
                     trafMaxY = pos.posY;
 
                     /* Direct helicopter towards heavy traffic */
-                    sprite = getSprite(SPRITE_HELICOPTER);
+                    HelicopterSprite* sprite = this->helicopterSprite;
+                    if (sprite == NULL) {
+                        this->helicopterSprite = new HelicopterSprite(this, 0, 0);
+                        sprite = this->helicopterSprite;
+                    }
                     if (sprite != NULL && sprite->control == -1) {
 
                         sprite->destX = trafMaxX * 16;
                         sprite->destY = trafMaxY * 16;
-
                     }
                 }
             }

@@ -179,29 +179,20 @@
 		2E082FD229C3026200A0ED2B /* MicropolisSpriteView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E082FD029C3026200A0ED2B /* MicropolisSpriteView.xcdatamodeld */; };
 		2E082FD729C3027B00A0ED2B /* MicropolisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED86BD4295E8C1A00DA21C4 /* MicropolisKit.framework */; };
 		2E09076E29B44D770021F7F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E09076C29B44D770021F7F1 /* Assets.xcassets */; };
-		2E1223782A663602004DDDD8 /* HAMBURG.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223712A663601004DDDD8 /* HAMBURG.scenario */; };
-		2E1223792A663602004DDDD8 /* BERN.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223722A663601004DDDD8 /* BERN.scenario */; };
-		2E12237A2A663602004DDDD8 /* DULLSVILLE.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223732A663601004DDDD8 /* DULLSVILLE.scenario */; };
-		2E12237B2A663602004DDDD8 /* SAN_FRANCISCO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223742A663601004DDDD8 /* SAN_FRANCISCO.scenario */; };
-		2E12237C2A663602004DDDD8 /* DETROIT.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223752A663601004DDDD8 /* DETROIT.scenario */; };
-		2E12237D2A663602004DDDD8 /* RIO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223762A663601004DDDD8 /* RIO.scenario */; };
-		2E12237E2A663602004DDDD8 /* TOKYO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223772A663601004DDDD8 /* TOKYO.scenario */; };
+		2E10EE3D2A6C98550028EA6E /* DETROIT.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223752A663601004DDDD8 /* DETROIT.scenario */; };
+		2E10EE3E2A6C98550028EA6E /* RIO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223762A663601004DDDD8 /* RIO.scenario */; };
+		2E10EE3F2A6C98550028EA6E /* BERN.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223722A663601004DDDD8 /* BERN.scenario */; };
+		2E10EE402A6C98550028EA6E /* SAN_FRANCISCO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223742A663601004DDDD8 /* SAN_FRANCISCO.scenario */; };
+		2E10EE412A6C98550028EA6E /* DULLSVILLE.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223732A663601004DDDD8 /* DULLSVILLE.scenario */; };
+		2E10EE422A6C98550028EA6E /* HAMBURG.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223712A663601004DDDD8 /* HAMBURG.scenario */; };
+		2E10EE432A6C98550028EA6E /* BOSTON.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E26FD6C2A4D199500275A67 /* BOSTON.scenario */; };
+		2E10EE442A6C98550028EA6E /* TOKYO.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E1223772A663601004DDDD8 /* TOKYO.scenario */; };
 		2E18AACB29D8E6E1000245B3 /* MicropolisOutgoing.hh in Headers */ = {isa = PBXBuildFile; fileRef = 2E18AAC929D8E6E1000245B3 /* MicropolisOutgoing.hh */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E18AACC29D8E6E1000245B3 /* MicropolisIncoming.hh in Headers */ = {isa = PBXBuildFile; fileRef = 2E18AACA29D8E6E1000245B3 /* MicropolisIncoming.hh */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E26FD6D2A4D199500275A67 /* BOSTON.scenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E26FD6C2A4D199500275A67 /* BOSTON.scenario */; };
 		2E26FD702A53720E00275A67 /* SCScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E26FD6E2A53695C00275A67 /* SCScenario.swift */; };
 		2E26FD742A58B7C300275A67 /* Scenario.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E26FD732A58B7C300275A67 /* Scenario.cpp */; };
 		2E367B572A273C3F00CB4ADA /* SpriteType.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E367B562A273BCB00CB4ADA /* SpriteType.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E367B592A29968D00CB4ADA /* Scenarios.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E367B582A29968D00CB4ADA /* Scenarios.plist */; };
 		2E367B5C2A299C8B00CB4ADA /* Scenario.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E367B5B2A299C8B00CB4ADA /* Scenario.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E4A7D182A3AFC400053F483 /* DETROIT.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D102A3AFC400053F483 /* DETROIT.scscenario */; };
-		2E4A7D192A3AFC400053F483 /* BERN.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D112A3AFC400053F483 /* BERN.scscenario */; };
-		2E4A7D1A2A3AFC400053F483 /* RIO.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D122A3AFC400053F483 /* RIO.scscenario */; };
-		2E4A7D1B2A3AFC400053F483 /* TOKYO.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D132A3AFC400053F483 /* TOKYO.scscenario */; };
-		2E4A7D1C2A3AFC400053F483 /* DULLSVILLE.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D142A3AFC400053F483 /* DULLSVILLE.scscenario */; };
-		2E4A7D1D2A3AFC400053F483 /* BOSTON.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D152A3AFC400053F483 /* BOSTON.scscenario */; };
-		2E4A7D1E2A3AFC400053F483 /* HAMBURG.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D162A3AFC400053F483 /* HAMBURG.scscenario */; };
-		2E4A7D1F2A3AFC400053F483 /* SAN_FRANCISCO.scscenario in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D172A3AFC400053F483 /* SAN_FRANCISCO.scscenario */; };
 		2E4A7D3A2A3C47CC0053F483 /* happisle.sccity in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D222A3C47C80053F483 /* happisle.sccity */; };
 		2E4A7D3B2A3C47CC0053F483 /* haight.sccity in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D232A3C47C80053F483 /* haight.sccity */; };
 		2E4A7D3C2A3C47CC0053F483 /* med_isle.sccity in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A7D242A3C47C80053F483 /* med_isle.sccity */; };
@@ -520,18 +511,9 @@
 		2E26FD6E2A53695C00275A67 /* SCScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCScenario.swift; sourceTree = "<group>"; };
 		2E26FD732A58B7C300275A67 /* Scenario.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scenario.cpp; sourceTree = "<group>"; };
 		2E367B562A273BCB00CB4ADA /* SpriteType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteType.h; sourceTree = "<group>"; };
-		2E367B582A29968D00CB4ADA /* Scenarios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Scenarios.plist; sourceTree = "<group>"; };
 		2E367B5A2A29978C00CB4ADA /* ScenarioStuff.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScenarioStuff.txt; sourceTree = "<group>"; };
 		2E367B5B2A299C8B00CB4ADA /* Scenario.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scenario.h; sourceTree = "<group>"; };
 		2E4A7D0B2A39ADC90053F483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2E4A7D102A3AFC400053F483 /* DETROIT.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DETROIT.scscenario; sourceTree = "<group>"; };
-		2E4A7D112A3AFC400053F483 /* BERN.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BERN.scscenario; sourceTree = "<group>"; };
-		2E4A7D122A3AFC400053F483 /* RIO.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RIO.scscenario; sourceTree = "<group>"; };
-		2E4A7D132A3AFC400053F483 /* TOKYO.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TOKYO.scscenario; sourceTree = "<group>"; };
-		2E4A7D142A3AFC400053F483 /* DULLSVILLE.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DULLSVILLE.scscenario; sourceTree = "<group>"; };
-		2E4A7D152A3AFC400053F483 /* BOSTON.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BOSTON.scscenario; sourceTree = "<group>"; };
-		2E4A7D162A3AFC400053F483 /* HAMBURG.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HAMBURG.scscenario; sourceTree = "<group>"; };
-		2E4A7D172A3AFC400053F483 /* SAN_FRANCISCO.scscenario */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SAN_FRANCISCO.scscenario; sourceTree = "<group>"; };
 		2E4A7D212A3C3F240053F483 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2E4A7D222A3C47C80053F483 /* happisle.sccity */ = {isa = PBXFileReference; lastKnownFileType = folder; path = happisle.sccity; sourceTree = "<group>"; };
 		2E4A7D232A3C47C80053F483 /* haight.sccity */ = {isa = PBXFileReference; lastKnownFileType = folder; path = haight.sccity; sourceTree = "<group>"; };
@@ -938,8 +920,6 @@
 				2E4A7D372A3C47CB0053F483 /* splats.sccity */,
 				2E4A7D262A3C47C80053F483 /* wetcity.sccity */,
 				2E4A7D2B2A3C47C90053F483 /* yokohama.sccity */,
-				2E367B582A29968D00CB4ADA /* Scenarios.plist */,
-				2E367B5A2A29978C00CB4ADA /* ScenarioStuff.txt */,
 			);
 			path = cities;
 			sourceTree = "<group>";
@@ -947,7 +927,7 @@
 		2E06DD8129A31F9100E68D90 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2E4A7D202A3AFC8C0053F483 /* SCScenarios */,
+				2E26FD692A4C2E9700275A67 /* Scenarios */,
 				2E06DBB929A31F7A00E68D90 /* sounds */,
 				2E06DC6829A31F7B00E68D90 /* cities */,
 				2E06DBF529A31F7A00E68D90 /* images */,
@@ -959,7 +939,6 @@
 		2E082FC429C3025F00A0ED2B /* MicropolisSpriteView */ = {
 			isa = PBXGroup;
 			children = (
-				2E26FD692A4C2E9700275A67 /* Scenarios */,
 				2ED152552A42C2F2003EC7D9 /* Assets.xcassets */,
 				2E082FC529C3025F00A0ED2B /* MicropolisSpriteViewApp.swift */,
 				2E082FC729C3025F00A0ED2B /* ContentView.swift */,
@@ -982,6 +961,7 @@
 		2E26FD692A4C2E9700275A67 /* Scenarios */ = {
 			isa = PBXGroup;
 			children = (
+				2E367B5A2A29978C00CB4ADA /* ScenarioStuff.txt */,
 				2E26FD6C2A4D199500275A67 /* BOSTON.scenario */,
 				2E1223722A663601004DDDD8 /* BERN.scenario */,
 				2E1223752A663601004DDDD8 /* DETROIT.scenario */,
@@ -992,21 +972,6 @@
 				2E1223772A663601004DDDD8 /* TOKYO.scenario */,
 			);
 			path = Scenarios;
-			sourceTree = "<group>";
-		};
-		2E4A7D202A3AFC8C0053F483 /* SCScenarios */ = {
-			isa = PBXGroup;
-			children = (
-				2E4A7D112A3AFC400053F483 /* BERN.scscenario */,
-				2E4A7D152A3AFC400053F483 /* BOSTON.scscenario */,
-				2E4A7D102A3AFC400053F483 /* DETROIT.scscenario */,
-				2E4A7D142A3AFC400053F483 /* DULLSVILLE.scscenario */,
-				2E4A7D162A3AFC400053F483 /* HAMBURG.scscenario */,
-				2E4A7D122A3AFC400053F483 /* RIO.scscenario */,
-				2E4A7D172A3AFC400053F483 /* SAN_FRANCISCO.scscenario */,
-				2E4A7D132A3AFC400053F483 /* TOKYO.scscenario */,
-			);
-			path = SCScenarios;
 			sourceTree = "<group>";
 		};
 		2E6E626F29A74CDA00D1D919 /* Frameworks */ = {
@@ -1297,16 +1262,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E1223792A663602004DDDD8 /* BERN.scenario in Resources */,
-				2E12237A2A663602004DDDD8 /* DULLSVILLE.scenario in Resources */,
-				2E12237B2A663602004DDDD8 /* SAN_FRANCISCO.scenario in Resources */,
-				2E1223782A663602004DDDD8 /* HAMBURG.scenario in Resources */,
-				2E26FD6D2A4D199500275A67 /* BOSTON.scenario in Resources */,
-				2E12237C2A663602004DDDD8 /* DETROIT.scenario in Resources */,
-				2E12237E2A663602004DDDD8 /* TOKYO.scenario in Resources */,
 				2ED152562A42C2F2003EC7D9 /* Assets.xcassets in Resources */,
 				2E082FCD29C3026200A0ED2B /* Preview Assets.xcassets in Resources */,
-				2E12237D2A663602004DDDD8 /* RIO.scenario in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1334,6 +1291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E06DD2C29A31F7C00E68D90 /* powerGridColorMap.png in Resources */,
+				2E10EE3D2A6C98550028EA6E /* DETROIT.scenario in Resources */,
 				2E06DCF529A31F7C00E68D90 /* obj7-0.png in Resources */,
 				2E4A7D3A2A3C47CC0053F483 /* happisle.sccity in Resources */,
 				2E06DCE629A31F7C00E68D90 /* obj3-6.png in Resources */,
@@ -1345,6 +1303,7 @@
 				2E06DC9E29A31F7B00E68D90 /* hexa.387 in Resources */,
 				2E06DD2D29A31F7C00E68D90 /* obj2-1.png in Resources */,
 				2E06DCCD29A31F7C00E68D90 /* rail.wav in Resources */,
+				2E10EE412A6C98550028EA6E /* DULLSVILLE.scenario in Resources */,
 				2E06DCF929A31F7C00E68D90 /* obj1-2.png in Resources */,
 				2E06DCBD29A31F7C00E68D90 /* seaport.wav in Resources */,
 				2E06DD2029A31F7C00E68D90 /* obj2-3.png in Resources */,
@@ -1361,10 +1320,10 @@
 				2E06DD3229A31F7C00E68D90 /* iccom.png in Resources */,
 				2E06DCF329A31F7C00E68D90 /* obj5-12.png in Resources */,
 				2E06DD0D29A31F7C00E68D90 /* icairphi.png in Resources */,
+				2E10EE432A6C98550028EA6E /* BOSTON.scenario in Resources */,
 				2EF764E02A15DDC800FE38EA /* stri.219 in Resources */,
 				2E06DD0229A31F7C00E68D90 /* obj1-1.png in Resources */,
 				2E06DD2229A31F7C00E68D90 /* obj4-5.png in Resources */,
-				2E4A7D1B2A3AFC400053F483 /* TOKYO.scscenario in Resources */,
 				2E06DD3129A31F7C00E68D90 /* icfire.png in Resources */,
 				2E06DCD629A31F7C00E68D90 /* com.wav in Resources */,
 				2E06DCC629A31F7C00E68D90 /* wire.wav in Resources */,
@@ -1379,6 +1338,7 @@
 				2E4A7D4A2A3C47CC0053F483 /* kamakura.sccity in Resources */,
 				2E06DD3B29A31F7D00E68D90 /* obj8-0.png in Resources */,
 				2E06DD1D29A31F7C00E68D90 /* obj3-10.png in Resources */,
+				2E10EE3F2A6C98550028EA6E /* BERN.scenario in Resources */,
 				2E06DCBB29A31F7C00E68D90 /* uhuh.wav in Resources */,
 				2E06DD4529A31F7D00E68D90 /* icfirehi.png in Resources */,
 				2E4A7D4E2A3C47CC0053F483 /* senri.sccity in Resources */,
@@ -1396,11 +1356,13 @@
 				2E4A7D422A3C47CC0053F483 /* joffburg.sccity in Resources */,
 				2E06DCB229A31F7B00E68D90 /* sorry.wav in Resources */,
 				2E06DCEF29A31F7C00E68D90 /* obj5-3.png in Resources */,
+				2E10EE402A6C98550028EA6E /* SAN_FRANCISCO.scenario in Resources */,
 				2E4A7D472A3C47CC0053F483 /* kowloon.sccity in Resources */,
 				2E06DD2E29A31F7C00E68D90 /* icpark.png in Resources */,
 				2E06DD4929A31F7D00E68D90 /* iccoal.png in Resources */,
 				2E06DCC429A31F7C00E68D90 /* zone.wav in Resources */,
 				2E06DCC929A31F7C00E68D90 /* monster.wav in Resources */,
+				2E10EE3E2A6C98550028EA6E /* RIO.scenario in Resources */,
 				2EF764E32A15DDD400FE38EA /* stri.202 in Resources */,
 				2E4A7D512A3C47CC0053F483 /* southpac.sccity in Resources */,
 				2E06DD1529A31F7C00E68D90 /* icpol.png in Resources */,
@@ -1431,12 +1393,11 @@
 				2E06DCBE29A31F7C00E68D90 /* bop.wav in Resources */,
 				2E06DD4329A31F7D00E68D90 /* icres.png in Resources */,
 				2E06DCDE29A31F7C00E68D90 /* hexa.999 in Resources */,
-				2E4A7D1D2A3AFC400053F483 /* BOSTON.scscenario in Resources */,
 				2E06DCE829A31F7C00E68D90 /* obj5-11.png in Resources */,
 				2E4A7D402A3C47CC0053F483 /* freds.sccity in Resources */,
 				2E06DD2929A31F7C00E68D90 /* icstad.png in Resources */,
 				2E06DCD529A31F7C00E68D90 /* ind.wav in Resources */,
-				2E4A7D1E2A3AFC400053F483 /* HAMBURG.scscenario in Resources */,
+				2E10EE422A6C98550028EA6E /* HAMBURG.scenario in Resources */,
 				2E06DD1129A31F7C00E68D90 /* obj6-0.png in Resources */,
 				2E06DCCC29A31F7C00E68D90 /* police.wav in Resources */,
 				2E06DCAB29A31F7B00E68D90 /* road.wav in Resources */,
@@ -1457,12 +1418,10 @@
 				2E06DCE429A31F7C00E68D90 /* obj1-4.png in Resources */,
 				2E06DCB329A31F7B00E68D90 /* honkhonk-med.wav in Resources */,
 				2E06DCB129A31F7B00E68D90 /* skid.wav in Resources */,
-				2E4A7D1C2A3AFC400053F483 /* DULLSVILLE.scscenario in Resources */,
 				2E4A7D502A3C47CC0053F483 /* kyoto.sccity in Resources */,
 				2E06DD0729A31F7C00E68D90 /* obj5-14.png in Resources */,
 				2E06DD1929A31F7C00E68D90 /* obj4-0.png in Resources */,
 				2E06DCFB29A31F7C00E68D90 /* obj3-1.png in Resources */,
-				2E367B592A29968D00CB4ADA /* Scenarios.plist in Resources */,
 				2E06DD1629A31F7C00E68D90 /* obj2-6.png in Resources */,
 				2E06DD4729A31F7D00E68D90 /* tiles.png in Resources */,
 				2E4A7D492A3C47CC0053F483 /* radial.sccity in Resources */,
@@ -1473,7 +1432,6 @@
 				2E06DD2729A31F7C00E68D90 /* obj2-2.png in Resources */,
 				2E06DCB429A31F7B00E68D90 /* explosion-hi.wav in Resources */,
 				2E06DCFD29A31F7C00E68D90 /* obj7-5.png in Resources */,
-				2E4A7D192A3AFC400053F483 /* BERN.scscenario in Resources */,
 				2E06DCC029A31F7C00E68D90 /* boing.wav in Resources */,
 				2E06DD0629A31F7C00E68D90 /* icwirehi.png in Resources */,
 				2E06DD4C29A31F7D00E68D90 /* obj3-9.png in Resources */,
@@ -1509,17 +1467,14 @@
 				2E06DD2F29A31F7C00E68D90 /* icqryhi.png in Resources */,
 				2E06DD4629A31F7D00E68D90 /* obj5-8.png in Resources */,
 				2E06DCE229A31F7C00E68D90 /* obj5-0.png in Resources */,
-				2E4A7D1F2A3AFC400053F483 /* SAN_FRANCISCO.scscenario in Resources */,
 				2E06DCF429A31F7C00E68D90 /* obj3-4.png in Resources */,
 				2E06DD2329A31F7C00E68D90 /* obj4-4.png in Resources */,
 				2E06DD0429A31F7C00E68D90 /* obj3-3.png in Resources */,
 				2E06DCF229A31F7C00E68D90 /* obj5-13.png in Resources */,
 				2E06DD3A29A31F7D00E68D90 /* icchlk.png in Resources */,
-				2E4A7D182A3AFC400053F483 /* DETROIT.scscenario in Resources */,
 				2E06DD1229A31F7C00E68D90 /* icairp.png in Resources */,
 				2E06DD4129A31F7D00E68D90 /* icind.png in Resources */,
 				2E06DD1C29A31F7C00E68D90 /* iccomhi.png in Resources */,
-				2E4A7D1A2A3AFC400053F483 /* RIO.scscenario in Resources */,
 				2E06DD1B29A31F7C00E68D90 /* obj4-1.png in Resources */,
 				2E4A7D4C2A3C47CC0053F483 /* linecity.sccity in Resources */,
 				2E4A7D4F2A3C47CC0053F483 /* splats.sccity in Resources */,
@@ -1533,6 +1488,7 @@
 				2E06DCAF29A31F7B00E68D90 /* coal.wav in Resources */,
 				2E06DC9A29A31F7B00E68D90 /* hexa.386 in Resources */,
 				2E06DD3529A31F7D00E68D90 /* icersrhi.png in Resources */,
+				2E10EE442A6C98550028EA6E /* TOKYO.scenario in Resources */,
 				2E06DCEC29A31F7C00E68D90 /* obj5-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
