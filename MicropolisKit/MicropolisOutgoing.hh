@@ -38,7 +38,7 @@
 - (void)updateTileAtX:(int)x andY:(int)y tileIdx:(int)tIdx;
 
 - (void)didCreateSprite:(int)spriteID;
-- (void)didDestroySprite:(int)spriteID;
+- (void)willDestroySprite:(int)spriteID;
 - (void)didUpdateSprite:(int)spriteID;
 @end
 

@@ -783,3 +783,7 @@ void Micropolis::simRobots()
 {
     delegate->doRobots(this);
 }
+
+void Micropolis::doForEachSprite(std::function<void(SimSprite*)> f) {
+    std::for_each(allSprites.begin(), allSprites.end(), f);
+}

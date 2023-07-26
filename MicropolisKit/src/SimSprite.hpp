@@ -9,15 +9,12 @@
 #define SimSprite_hpp
 
 #include "micropolis.h"
-#include <functional>
 
 /** Sprite in the simulator.
  * @todo SimSprite::name is never set to anything else than \c "", and only
  *       used to detect a non-removed non-active sprite (in a non-robust way).
  */
 class SimSprite {
-private:
-    static std::vector<SimSprite*> globalSprites;
 
 protected:
     Micropolis* context;
@@ -47,9 +44,7 @@ public:
     int turn;
     int accel;
     int speed;
-            
-    static void doForEach(std::function<void(SimSprite*)> f);
-
+    
     SimSprite(Micropolis* context, int x, int y);
     virtual ~SimSprite();
         
@@ -58,8 +53,13 @@ public:
     virtual bool isShip() const {
         return false;
     }
-    virtual void doMove() = 0;
     
+    void doMove();
+    
+    virtual void preMove();
+    virtual void move() = 0;
+    virtual void postMove();
+
     virtual bool canCrash(SimSprite* other) {
         return false;
     }
@@ -79,14 +79,14 @@ public:
     
     ~ExplosionSprite();
 
-    virtual void doMove();    
+    virtual void move();
 };
 
 class ShipSprite: public SimSprite {
 public:
     ShipSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual bool isShip() const;
 
@@ -97,7 +97,7 @@ class HelicopterSprite: public SimSprite {
 public:
     HelicopterSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual enum MessageNumber crashMsgNum();
 };
@@ -106,7 +106,7 @@ class MonsterSprite: public SimSprite {
 public:
     MonsterSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual bool canCrash(SimSprite* other);
 };
@@ -115,7 +115,7 @@ class TornadoSprite: public SimSprite {
 public:
     TornadoSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual bool canCrash(SimSprite* other);
 };
@@ -124,7 +124,7 @@ class BusSprite: public SimSprite {
 public:
     BusSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual bool canCrash(SimSprite* other);
 
@@ -136,7 +136,7 @@ public:
 
     TrainSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual enum MessageNumber crashMsgNum();
 };
@@ -146,7 +146,7 @@ public:
 
     AirplaneSprite(Micropolis* context, int x, int y);
 
-    virtual void doMove();
+    virtual void move();
     
     virtual bool canCrash(SimSprite* other);
 

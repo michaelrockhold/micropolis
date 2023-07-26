@@ -120,7 +120,7 @@ import Combine
         eventSubject.send(CityModel.Event.CreatedSprite(Int(spriteID)));
     }
     
-    public func didDestroySprite(_ spriteID: Int32) {
+    public func willDestroySprite(_ spriteID: Int32) {
         eventSubject.send(CityModel.Event.DestroyedSprite(Int(spriteID)));
     }
 

@@ -2274,13 +2274,15 @@ public:
 
     void didCreateSprite(SimSprite* s);
 
+    void willDestroySprite(SimSprite* s);
+
+    void didUpdateSprite(SimSprite* s);
+
     void destroyAllSprites();
 
-    void destroySprite(SimSprite *sprite);
-
-    void didUpdateSprite(int sprite_id);
-
 private:
+    std::vector<SimSprite*> allSprites;
+
     MonsterSprite* monsterSprite;
     HelicopterSprite* helicopterSprite;
     TornadoSprite* tornadoSprite;
@@ -2290,6 +2292,8 @@ private:
     TrainSprite* trainSprite;
 
 public: // TODO: make private, but let the Sprite classes be friends
+    void doForEachSprite(std::function<void(SimSprite*)> f);
+    
     int nextSpriteID;
 
     int absDist;

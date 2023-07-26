@@ -70,6 +70,9 @@
 #include "text.h"
 #include "SimSprite.hpp"
 
+#include <algorithm>
+#include <vector>
+
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -88,11 +91,13 @@
  */
 void Micropolis::destroyAllSprites()
 {
-    SimSprite::doForEach([this](SimSprite* s) { destroySprite(s); });
+    // TODO: does this makes sense?
+    doForEachSprite([this](SimSprite* s) { delete s; });
 }
 
 
 void Micropolis::didCreateSprite(SimSprite* s) {
+    allSprites.push_back(s);
     delegate->didCreateSprite(this, s->spriteID);
 }
 
@@ -101,15 +106,14 @@ void Micropolis::didCreateSprite(SimSprite* s) {
  * @param sprite Sprite to destroy.
  * @todo Break the connection between any views that are following this sprite.
  */
-void Micropolis::destroySprite(SimSprite *sprite)
+void Micropolis::willDestroySprite(SimSprite *sprite)
 {
-    delegate->destroySprite(this, sprite->spriteID);
-    delete sprite;
+    delegate->willDestroySprite(this, sprite->spriteID);
+    std::erase_if(allSprites, [sprite](SimSprite* s){ return s->spriteID == sprite->spriteID; });
 }
 
-
-void Micropolis::didUpdateSprite(int sprite_id) {
-    delegate->didUpdateSprite(this, sprite_id);
+void Micropolis::didUpdateSprite(SimSprite *s) {
+    delegate->didUpdateSprite(this, s->spriteID);
 }
 
 
@@ -288,9 +292,9 @@ void Micropolis::moveObjects() {
     
     spriteCycle++;
 
-    SimSprite::doForEach([this](SimSprite* s) mutable {
+    doForEachSprite([this](SimSprite* s) mutable {
         if (s->frame <= 0) {
-            this->destroySprite(s);
+            delete s;
         } else {
             s->doMove();
         }

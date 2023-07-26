@@ -42,7 +42,7 @@ public:
     virtual void didGenerateMap(Micropolis* sender) = 0;
     
     virtual void didCreateSprite(Micropolis* sender, int sprite_id) = 0;
-    virtual void destroySprite(Micropolis* sender, int sprite_id) = 0;
+    virtual void willDestroySprite(Micropolis* sender, int sprite_id) = 0;
     virtual void didUpdateSprite(Micropolis* sender, int sprite_id) = 0;
 };
 

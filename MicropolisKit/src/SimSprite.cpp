@@ -10,15 +10,7 @@
 
 #include <algorithm>
 #include <vector>
-
-std::vector<SimSprite*> SimSprite::globalSprites;
-
-
-void SimSprite::doForEach(std::function<void(SimSprite*)> f) {
-    
-    std::for_each(SimSprite::globalSprites.begin(), SimSprite::globalSprites.end(), f);
-}
-
+#include <functional>
 
 TrainSprite::TrainSprite(Micropolis* context, int x, int y) : SimSprite(context, x, y) {
     this->width = 32;
@@ -34,7 +26,7 @@ TrainSprite::TrainSprite(Micropolis* context, int x, int y) : SimSprite(context,
 /**
  * Move train sprite.
  */
-void TrainSprite::doMove() {
+void TrainSprite::move() {
     
     /* Offset in pixels of sprite x and y to map tile */
     static const short Cx[4] = {   0,  16,   0, -16 };
@@ -99,8 +91,6 @@ void TrainSprite::doMove() {
         
         this->dir = 4;
     }
-    
-    context->didUpdateSprite(this->spriteID);
 }
 
 enum MessageNumber TrainSprite::crashMsgNum() { return MESSAGE_TRAIN_CRASHED; }
@@ -131,7 +121,7 @@ ShipSprite::ShipSprite(Micropolis* context, int x, int y) : SimSprite(context, x
     this->count = 1;
 }
 
-void ShipSprite::doMove() {
+void ShipSprite::move() {
     static const short BDx[9] = { 0,  0,  1,  1,  1,  0, -1, -1, -1 };
     static const short BDy[9] = { 0, -1, -1,  0,  1,  1,  1,  0, -1 };
     static const short BPx[9] = { 0,  0,  2,  2,  2,  0, -2, -2, -2 };
@@ -299,7 +289,7 @@ MonsterSprite::MonsterSprite(Micropolis* context, int x, int y) : SimSprite(cont
  *
  * @todo Remove local magic constants and document the code.
  */
-void MonsterSprite::doMove() {
+void MonsterSprite::move() {
     
     static const short Gx[5] = {  2,  2, -2, -2,  0 };
     static const short Gy[5] = { -2,  2,  2, -2,  0 };
@@ -511,7 +501,7 @@ void MonsterSprite::doMove() {
         this->frame = 0; /* kill scary monster */
     }
     
-    SimSprite::doForEach([this](SimSprite* s) mutable {
+    context->doForEachSprite([this](SimSprite* s) mutable {
         if (s->checkSpriteCollision(s)) {
             s->explode();
         }
@@ -553,7 +543,7 @@ AirplaneSprite::AirplaneSprite(Micropolis* context, int x, int y) : SimSprite(co
  *       called before reading it (or worse, we just turned towards the old
  *       destination).
  */
-void AirplaneSprite::doMove() {
+void AirplaneSprite::move() {
     static const short CDx[12] = { 0,  0,  6, 8, 6, 0, -6, -8, -6, 8, 8, 8 };
     static const short CDy[12] = { 0, -8, -6, 0, 6, 8,  6,  0, -6, 0, 0, 0 };
     
@@ -585,7 +575,7 @@ void AirplaneSprite::doMove() {
         bool explode = false;
         
         /* Check whether another sprite is near enough to collide with */
-        SimSprite::doForEach([this, explode](SimSprite* s) mutable {
+        context->doForEachSprite([this, explode](SimSprite* s) mutable {
             if (s && s->frame == 0 && s == this) {
                 if (this->checkSpriteCollision(s)) {
                     this->explode();
@@ -624,7 +614,7 @@ TornadoSprite::TornadoSprite(Micropolis* context, int x, int y) : SimSprite(cont
     this->count = 200;
 }
 
-void TornadoSprite::doMove() {
+void TornadoSprite::move() {
     static const short CDx[9] = {  2,  3,  2,  0, -2, -3 };
     static const short CDy[9] = { -2,  0,  2,  3,  2,  0 };
     short z;
@@ -658,7 +648,7 @@ void TornadoSprite::doMove() {
     
     this->frame = z;
     
-    SimSprite::doForEach([this](SimSprite* s) mutable {
+    context->doForEachSprite([this](SimSprite* s) mutable {
         if (this->checkSpriteCollision(s)) {
             this->explode();
         }
@@ -700,7 +690,7 @@ ExplosionSprite::~ExplosionSprite() {
     printf("deleting ExplosionSprite\n");
 }
 
-void ExplosionSprite::doMove() {
+void ExplosionSprite::move() {
     short x, y;
     
     if ((context->spriteCycle & 1) == 0) {
@@ -740,7 +730,7 @@ BusSprite::BusSprite(Micropolis* context, int x, int y) : SimSprite(context, x, 
     this->dir = 1;
 }
 
-void BusSprite::doMove() {
+void BusSprite::move() {
     static const short Dx[5] = {   0,   1,   0,  -1,   0 };
     static const short Dy[5] = {  -1,   0,   1,   0,   0 };
     static const short Dir2Frame[4] = { 1, 2, 1, 2 };
@@ -998,7 +988,7 @@ void BusSprite::doMove() {
     if (context->enableDisasters) {
         int explode = 0;
         
-        SimSprite::doForEach([this, explode](SimSprite* s) mutable {
+        context->doForEachSprite([this, explode](SimSprite* s) mutable {
             if (this != s && this->checkSpriteCollision(s)) {
                 this->explode();
                 explode = 1;
@@ -1033,7 +1023,7 @@ HelicopterSprite::HelicopterSprite(Micropolis* context, int x, int y) : SimSprit
     this->origY = y;
 }
 
-void HelicopterSprite::doMove() {
+void HelicopterSprite::move() {
     static const short CDx[9] = { 0,  0,  3,  5,  3,  0, -3, -5, -3 };
     static const short CDy[9] = { 0, -5, -3,  0,  3,  5,  3,  0, -3 };
     
@@ -1156,13 +1146,24 @@ SimSprite::SimSprite(Micropolis* context, int x, int y) {
     this->turn = 0;
     this->accel = 0;
     this->speed = 100;
-    globalSprites.push_back(this);
     context->didCreateSprite(this);
 }
 
 SimSprite::~SimSprite() {
-    int thisID = this->spriteID;
-    std::erase_if(globalSprites, [thisID](SimSprite* s){ return s->spriteID == thisID; });
+    context->willDestroySprite(this);
+}
+
+void SimSprite::doMove() {
+    this->preMove();
+    this->move();
+    this->postMove();
+}
+
+void SimSprite::preMove() {
+}
+
+void SimSprite::postMove() {
+    context->didUpdateSprite(this);
 }
 
 /**

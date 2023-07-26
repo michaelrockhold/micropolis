@@ -1217,7 +1217,7 @@ int Micropolis::getBoatDistance(const Position &pos)
             dist = min(dist, sprDist);
         }
     };
-    SimSprite::doForEach(spriteFn);
+    this->doForEachSprite(spriteFn);
     return dist;
 }
 

@@ -102,8 +102,8 @@ public:
     virtual void didCreateSprite(Micropolis* sender, int sprite_id) {
         [micropolisOutgoing didCreateSprite:sprite_id];
     }
-    virtual void destroySprite(Micropolis* sender, int sprite_id) {
-        [micropolisOutgoing didDestroySprite:sprite_id];
+    virtual void willDestroySprite(Micropolis* sender, int sprite_id) {
+        [micropolisOutgoing willDestroySprite:sprite_id];
     }
     virtual void didUpdateSprite(Micropolis* sender, int sprite_id) {
         [micropolisOutgoing didUpdateSprite:sprite_id];
